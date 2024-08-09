@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstname": "Administrador",
+      "lastname": "Delbar",
+      "mail": "admindelbar@admin.com",
+      "password": "Admin1234",
+      "isAdmin": true
+    }
+  ]
+}
