@@ -1,0 +1,121 @@
+import { Link, NavLink } from "react-router-dom";
+import { useSession } from "../../../stores/useSession";
+import Swal from "sweetalert2";
+
+import "./headerStyle.css";
+import logoBurgerTuc from '../../../assets/logoBurgerTuc.png';
+
+const Header = () => {
+  const { user, isLoggedIn, logout } = useSession();
+
+  const handleLogout = async () => {
+    const action = await Swal.fire({
+      title: "Attention",
+      text: "Are you sure you want to logout?",
+      icon: "info",
+      confirmButtonText: "Logout",
+      showCancelButton: true,
+      cancelButtonText: "Cancel",
+    });
+
+    if (action.isConfirmed) {
+      logout();
+    }
+  };
+
+  return (
+    <nav className="navbar fixed-top">
+      <div className="container-fluid">
+        <button
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+          className="navbarMenu"
+          data-bs-target="#offcanvasNavbar"
+          data-bs-toggle="offcanvas"
+          type="button"
+        >
+          <span>
+            <i className="bi bi-list"></i>
+          </span>
+        </button>
+        <Link className="navbarBrand titleFont" to="/">
+          BURGERTUC
+        </Link>
+        <div
+          aria-labelledby="offcanvasNavbarLabel"
+          className="offcanvas offcanvas-top"
+          data-bs-theme="dark"
+          id="offcanvasNavbar"
+          tabIndex="-1"
+        >
+          <div className="offcanvas-header">
+            <button
+              aria-label="Close"
+              className="btn-close"
+              data-bs-dismiss="offcanvas"
+              type="button"
+            ></button>
+          </div>
+          <div className="ps-4">
+            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li className="nav-item">
+                <NavLink
+                  className={({ isActive }) => {
+                    return isActive
+                      ? "nav-link active titleFont"
+                      : "nav-link titleFont";
+                  }}
+                  to="/"
+                >
+                  Inicio
+                </NavLink>
+              </li>
+              {!isLoggedIn && (
+                <li className="nav-item">
+                  <NavLink
+                    className={({ isActive }) => {
+                      return isActive
+                        ? "nav-link active titleFont"
+                        : "nav-link titleFont";
+                    }}
+                    to="/login"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              )}
+              {isLoggedIn && user.isAdmin && (
+                <li className="nav-item">
+                  <NavLink
+                    className={({ isActive }) => {
+                      return isActive
+                        ? "nav-link active titleFont"
+                        : "nav-link titleFont";
+                    }}
+                    to="/admin"
+                  >
+                    Admin
+                  </NavLink>
+                </li>
+              )}
+              {/* {isLoggedIn && ( */}
+              <li className="nav-item">
+                <button
+                  className="btn btn-danger logoutButton titleFont"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </li>
+              {/* )} */}
+              <div>
+                <img alt="Logo de BurgerTuc" className="logoOffcanvas" src={logoBurgerTuc} />
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+export default Header;

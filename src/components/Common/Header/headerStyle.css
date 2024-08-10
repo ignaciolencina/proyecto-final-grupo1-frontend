@@ -1,0 +1,52 @@
+.navbar {
+  background-color: red;
+
+  .container-fluid {
+    justify-content: start !important;
+  }
+}
+
+.navbarMenu {
+  border: none;
+  background-color: transparent;
+  width: 60px;
+  height: 60px;
+}
+
+.bi.bi-list {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.navbarBrand {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.offcanvas{
+    height: 100vh !important;
+}
+
+.offcanvas-header .btn-close{
+    margin: 0 !important;
+}
+
+.nav-link{
+    color: white !important;
+    font-size: 2rem !important;
+}
+
+.logoutButton {
+    font-size: 2rem !important;
+}
+
+.logoOffcanvas{
+    width: 100%;
+    position: relative;
+    bottom: 100px;
+    z-index: -1;
+    opacity: 50%;
+}
