@@ -26,27 +26,37 @@
   font-size: 1.5rem;
 }
 
-.offcanvas{
-    height: 100vh !important;
+.offcanvas {
+  height: 100vh !important;
 }
 
-.offcanvas-header .btn-close{
-    margin: 0 !important;
+.offcanvas-header .btn-close {
+  margin: 0 !important;
 }
 
-.nav-link{
-    color: white !important;
-    font-size: 2rem !important;
+.nav-link {
+  color: white !important;
+  font-size: 2rem !important;
 }
 
 .logoutButton {
-    font-size: 2rem !important;
+  font-size: 2rem !important;
 }
 
-.logoOffcanvas{
-    width: 100%;
-    position: relative;
-    bottom: 100px;
-    z-index: -1;
-    opacity: 50%;
+.logoOffcanvas {
+  width: 100%;
+  position: relative;
+  bottom: 250px;
+  z-index: -1;
+  opacity: 50%;
+}
+
+.socialNavbar {
+  position: relative;
+  top: 240px;
+  i {
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+  }
 }

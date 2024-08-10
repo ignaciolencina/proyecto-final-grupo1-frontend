@@ -1,9 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSession } from "../../../stores/useSession";
 import Swal from "sweetalert2";
 
 import "./headerStyle.css";
-import logoBurgerTuc from '../../../assets/logoBurgerTuc.png';
+import logoBurgerTuc from "../../../assets/logoBurgerTuc.png";
 
 const Header = () => {
   const { user, isLoggedIn, logout } = useSession();
@@ -59,57 +59,80 @@ const Header = () => {
           <div className="ps-4">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li className="nav-item">
-                <NavLink
-                  className={({ isActive }) => {
-                    return isActive
-                      ? "nav-link active titleFont"
-                      : "nav-link titleFont";
-                  }}
-                  to="/"
-                >
-                  Inicio
-                </NavLink>
+                {/* Es necesario usar el nav link? No se aprecia el isActive */}
+                <Link reloadDocument className="nav-link titleFont" to="/">
+                  VER MENÚ
+                </Link>
               </li>
               {!isLoggedIn && (
                 <li className="nav-item">
-                  <NavLink
-                    className={({ isActive }) => {
-                      return isActive
-                        ? "nav-link active titleFont"
-                        : "nav-link titleFont";
-                    }}
+                  <Link
+                    reloadDocument
+                    className="nav-link titleFont"
                     to="/login"
                   >
-                    Login
-                  </NavLink>
+                    HACER PEDIDO
+                  </Link>
+                </li>
+              )}
+              {!isLoggedIn && (
+                <li className="nav-item">
+                  <Link
+                    reloadDocument
+                    className="nav-link titleFont"
+                    to="/login"
+                  >
+                    INGRESAR
+                  </Link>
                 </li>
               )}
               {isLoggedIn && user.isAdmin && (
                 <li className="nav-item">
-                  <NavLink
-                    className={({ isActive }) => {
-                      return isActive
-                        ? "nav-link active titleFont"
-                        : "nav-link titleFont";
-                    }}
+                  <Link
+                    reloadDocument
+                    className="nav-link titleFont"
                     to="/admin"
                   >
-                    Admin
-                  </NavLink>
+                    ADMIN
+                  </Link>
                 </li>
               )}
-              {/* {isLoggedIn && ( */}
-              <li className="nav-item">
-                <button
-                  className="btn btn-danger logoutButton titleFont"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </li>
-              {/* )} */}
+              {isLoggedIn && (
+                <li className="nav-item">
+                  <button
+                    className="btn btn-danger logoutButton titleFont"
+                    onClick={handleLogout}
+                  >
+                    <span>
+                      <i className="bi bi-box-arrow-right"></i>
+                    </span>{" "}
+                    SALIR
+                  </button>
+                </li>
+              )}
+              <div className="socialNavbar">
+                <li className="nav-item">
+                  <Link reloadDocument to="*">
+                    <i className="bi bi-twitter-x"></i>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link reloadDocument to="*">
+                    <i className="bi bi-instagram"></i>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link reloadDocument to="*">
+                    <i className="bi bi-youtube"></i>
+                  </Link>
+                </li>
+              </div>
               <div>
-                <img alt="Logo de BurgerTuc" className="logoOffcanvas" src={logoBurgerTuc} />
+                <img
+                  alt="Logo de BurgerTuc"
+                  className="logoOffcanvas"
+                  src={logoBurgerTuc}
+                />
               </div>
             </ul>
           </div>
