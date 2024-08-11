@@ -58,12 +58,13 @@ const Header = () => {
           </div>
           <div className="ps-4">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li className="nav-item">
-                {/* Es necesario usar el nav link? No se aprecia el isActive */}
-                <Link reloadDocument className="nav-link titleFont" to="/">
-                  VER MENÚ
-                </Link>
-              </li>
+              {!isLoggedIn && (
+                <li className="nav-item">
+                  <Link reloadDocument className="nav-link titleFont" to="/">
+                    VER MENÚ
+                  </Link>
+                </li>
+              )}
               {!isLoggedIn && (
                 <li className="nav-item">
                   <Link
