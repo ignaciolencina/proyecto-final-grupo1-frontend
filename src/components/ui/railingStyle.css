@@ -1,0 +1,26 @@
+.railing-container {
+    overflow: hidden; /* Oculta el texto que se sale del contenedor */
+    width: 100%; /* Ancho del contenedor */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  }
+  
+  .railing-text {
+    border: solid 2px;
+    display: inline-block;
+    animation: scroll-text 10s linear infinite; /* Animación fluida */
+    font-size: 2rem;
+  }
+  
+  .railing-text span {
+    display: inline-block;
+  }
+  
+  @keyframes scroll-text {
+    0% {
+      transform: translateX(0); /* El texto comienza justo dentro del contenedor */
+    }
+    100% {
+      transform: translateX(-15%); /* El texto se desplaza hasta la mitad, donde comienza la repetición */
+    }
+  }
+  

@@ -3,12 +3,14 @@ import { useSession } from "../../../stores/useSession";
 
 import logoBurgerTuc from "../../../assets/logoBurgerTuc.png";
 import "./footerStyle.css";
+import RailingText from "../../ui/RailingText";
 
 const Footer = () => {
   const { isLoggedIn } = useSession();
 
   return (
-    <footer className="pt-3">
+    <footer className="pt-1">
+      <RailingText/>
       <section className="ps-4 pe-5">
         <div className="d-flex align-items-center justify-content-between">
           <div>
