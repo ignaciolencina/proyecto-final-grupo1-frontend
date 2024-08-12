@@ -3,7 +3,7 @@ import { useSession } from "../../../stores/useSession";
 
 import logoBurgerTuc from "../../../assets/logoBurgerTuc.png";
 import "./footerStyle.css";
-import RailingText from "../../ui/RailingText";
+import RailingText from "../../ui/RailingText/RailingText";
 
 const Footer = () => {
   const { isLoggedIn } = useSession();
