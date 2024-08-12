@@ -1,0 +1,62 @@
+.navbar {
+  background-color: var(--color-detalles);
+
+  .container-fluid {
+    justify-content: start !important;
+  }
+}
+
+.navbarMenu {
+  border: none;
+  background-color: transparent;
+  width: 60px;
+  height: 60px;
+}
+
+.bi.bi-list {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.navbarBrand {
+  text-decoration: none;
+  color: var(--color-fondo);
+  font-size: 1.75rem;
+}
+
+.offcanvas {
+  height: 100vh !important;
+}
+
+.offcanvas-header .btn-close {
+  margin: 0 !important;
+}
+
+.nav-link {
+  color: var(--color-claro) !important;
+  font-size: 2rem !important;
+}
+
+.logoutButton {
+  font-size: 2rem !important;
+}
+
+.logoOffcanvas {
+  width: 100%;
+  position: relative;
+  bottom: 250px;
+  z-index: -1;
+  opacity: 50%;
+}
+
+.socialNavbar {
+  position: relative;
+  top: 240px;
+  i {
+    text-decoration: none;
+    color: var(--color-claro);
+    font-size: 2rem;
+  }
+}
