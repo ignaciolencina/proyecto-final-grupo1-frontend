@@ -1,5 +1,5 @@
 footer {
-  background-color: #212529;
+  background-color: var(--color-fondo);
 }
 
 .logoFooter {
@@ -8,18 +8,18 @@ footer {
 
 .linkFooter {
   text-decoration: none;
-  color: rgb(255, 255, 255);
+  color: var(--color-claro);
   font-weight: lighter;
 }
 
 .socialFooter {
   i {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: var(--color-claro);
     font-size: 1.5rem;
   }
 }
 
-li{
-    list-style-type: none;
+li {
+  list-style-type: none;
 }

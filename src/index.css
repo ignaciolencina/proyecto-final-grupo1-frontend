@@ -1,12 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
+:root {
+  --fuente-cuerpo:'Nunito Sans', sans-serif ;
+  --fuente-titulo:'Bowlby One SC', sans-serif;
+  --color-fondo: #212529;
+  --color-claro: #ffffff;
+  --color-claro-secundario:#ffffff80;
+  --color-detalles: #EE2737;
+  --color-detalles-hover: #ee2738c1;
+}
+
+
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
-  background-color: #ffffff;
+  margin-top: 75px;
+  background-color: var(--color-fondo);
 }
 
 .titleFont{

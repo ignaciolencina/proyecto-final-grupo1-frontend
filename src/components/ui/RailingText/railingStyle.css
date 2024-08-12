@@ -7,7 +7,7 @@
   .railing-text {
     border: solid 2px;
     display: inline-block;
-    animation: scroll-text 10s linear infinite;
+    animation: scroll-text 15s linear infinite;
     font-size: 2rem;
   }
   
@@ -17,10 +17,13 @@
   
   @keyframes scroll-text {
     0% {
-      transform: translateX(0);
+      transform: translateX(0%);
     }
     100% {
-      transform: translateX(-15%);
+      transform: translateX(-50%);
     }
   }
   
+  .textoRojo{
+    color: var(--color-detalles);
+  }

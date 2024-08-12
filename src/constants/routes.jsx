@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
         // RUTAS PÚBLICAS
         {
           path: '',
-          element: <p>Index</p>,
+          element: <p className="text-light">Index</p>,
         },
         // RUTAS DE AUTENTICACION
         {

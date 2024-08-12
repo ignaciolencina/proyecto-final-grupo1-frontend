@@ -1,5 +1,5 @@
 .navbar {
-  background-color: red;
+  background-color: var(--color-detalles);
 
   .container-fluid {
     justify-content: start !important;
@@ -22,8 +22,8 @@
 
 .navbarBrand {
   text-decoration: none;
-  color: black;
-  font-size: 1.5rem;
+  color: var(--color-fondo);
+  font-size: 1.75rem;
 }
 
 .offcanvas {
@@ -35,7 +35,7 @@
 }
 
 .nav-link {
-  color: white !important;
+  color: var(--color-claro) !important;
   font-size: 2rem !important;
 }
 
@@ -56,7 +56,7 @@
   top: 240px;
   i {
     text-decoration: none;
-    color: white;
+    color: var(--color-claro);
     font-size: 2rem;
   }
 }
