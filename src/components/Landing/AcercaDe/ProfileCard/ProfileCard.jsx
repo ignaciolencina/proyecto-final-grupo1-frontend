@@ -5,7 +5,7 @@ const ProfileCard = (props) => {
     const { profileImage, profileName, profileDescription } = props;
   return (
     <section>
-      <div className="profileCard">
+      <div className="profileCard ms-3">
         <div className="profileFrame">
           <div className="profileFront">
             <img
