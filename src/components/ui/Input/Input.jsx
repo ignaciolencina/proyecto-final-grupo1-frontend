@@ -10,17 +10,18 @@ const Input = ({
   options,
   register,
   placeholder = "Ingrese un texto",
-  maxLenght,
-  minLenght,
+  maxLength,
+  minLength,
   textarea = false,
 }) => {
-  
   if (textarea) {
     return (
       <fieldset className={`form-floating ${className}`}>
         <textarea
           className={`form-control inputTextArea ${error ? "is-invalid" : ""}`}
           id={`${name}-input`}
+          maxLength={maxLength}
+          minLength={minLength}
           placeholder={placeholder}
           type={type}
           {...register(name, options)}
@@ -38,8 +39,8 @@ const Input = ({
       <input
         className={`form-control ${error ? "is-invalid" : ""}`}
         id={`${name}-input`}
-        maxLength={maxLenght}
-        minLength={minLenght}
+        maxLength={maxLength}
+        minLength={minLength}
         placeholder={placeholder}
         type={type}
         {...register(name, options)}
@@ -64,7 +65,7 @@ Input.propTypes = {
   register: PropTypes.func.isRequired,
   options: PropTypes.object,
   placeholder: PropTypes.string,
-  maxLenght: PropTypes.number.isRequired,
-  minLenght: PropTypes.number.isRequired,
+  maxLength: PropTypes.number.isRequired,
+  minLength: PropTypes.number.isRequired,
   textarea: PropTypes.bool,
 };

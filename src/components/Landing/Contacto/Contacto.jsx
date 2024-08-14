@@ -1,38 +1,36 @@
 import { useForm } from "react-hook-form";
-import "./contactoStyle.css";
+import { toast } from "sonner";
+import { useMutation } from "@tanstack/react-query";
+
 import Input from "../../ui/Input/Input";
+
+import "./contactoStyle.css";
 
 const Contacto = () => {
   const {
     register,
-    // reset,
+    reset,
     handleSubmit: onSubmitRHF,
     formState: { errors },
   } = useForm();
 
-  //   const { mutate: postLogin } = useMutation({
-  //     mutationFn: postLoginFn,
-  //     onSuccess: (userData) => {
-  //       toast.dismiss();
-  //       toast.success(`Welcome ${userData.firstname}!`);
+  const { mutate: postConsult } = useMutation({
+    // mutationFn: postConsultFn,
+    onSuccess: (userData) => {
+      toast.dismiss();
+      toast.success(`Welcome ${userData.firstname}!`);
 
-  //       reset();
+      reset();
+    },
+    onError: (e) => {
+      toast.dismiss();
+      toast.warning(e.message);
+    },
+  });
 
-  //       login(userData);
-
-  //       setTimeout(() => {
-  //         navigate("/");
-  //       }, 1500);
-  //     },
-  //     onError: (e) => {
-  //     //   toast.dismiss();
-  //     //   toast.warning(e.message);
-  //     },
-  //   });
-
-  const handleSubmit = () => {
-    // toast.loading("Loading...");
-    // postLogin(data);
+  const handleSubmit = (data) => {
+    toast.loading("Loading...");
+    postConsult(data);
   };
 
   return (
@@ -53,28 +51,27 @@ const Contacto = () => {
         <div className="contactoText">
           <h5>¿Necesitas ayuda?</h5>
           <h5>¿Sugerencias?</h5>
-          <h5>
-            No dudes en dejarnos tu mensaje <span>AQUI!</span>
-          </h5>
+          <h5>No dudes en dejarnos tu mensaje AQUI!</h5>
         </div>
       </section>
       <section className="mx-3 contactoForm">
         <form onSubmit={onSubmitRHF(handleSubmit)}>
           <Input
-            className="mt-2"
-            error={errors.username}
+            error={errors.firstname}
             label="Nombre"
-            maxLenght={20}
-            minLenght={3}
-            name="username"
+            maxLength={20}
+            minLength={3}
+            name="firstname"
             options={{
-              required: {
-                value: true,
-                message: "Obligatory field",
+              required: "Campo obligatorio",
+              minLength: {
+                value: 3,
+                message: "El nombre debe tener un mínimo de 3 caracteres",
               },
-              length,
-              minLenght: 3,
-              maxLenght: 20,
+              maxLength: {
+                value: 20,
+                message: "El nombre debe tener un máximo de 20 caracteres",
+              },
             }}
             placeholder="Nombre"
             register={register}
@@ -83,17 +80,19 @@ const Contacto = () => {
             className="mt-2"
             error={errors.lastname}
             label="Apellido"
-            maxLenght={20}
-            minLenght={3}
+            maxLength={20}
+            minLength={3}
             name="lastname"
             options={{
-              required: {
-                value: true,
-                message: "Obligatory field",
+              required: "Campo obligatorio",
+              minLength: {
+                value: 3,
+                message: "El apellido debe tener un mínimo de 3 caracteres",
               },
-              length,
-              minLenght: 3,
-              maxLenght: 20,
+              maxLength: {
+                value: 20,
+                message: "El apellido debe tener un máximo de 20 caracteres",
+              },
             }}
             placeholder="Apellido"
             register={register}
@@ -102,17 +101,23 @@ const Contacto = () => {
             className="mt-2"
             error={errors.email}
             label="Correo electrónico"
-            maxLenght={20}
-            minLenght={3}
+            maxLength={40}
+            minLength={7}
             name="email"
             options={{
-              required: {
-                value: true,
-                message: "Obligatory field",
+              required: "Campo obligatorio",
+              minLength: {
+                value: 7,
+                message: "El correo debe tener un mínimo de 7 caracteres",
               },
-              length,
-              minLenght: 3,
-              maxLenght: 20,
+              maxLength: {
+                value: 40,
+                message: "El correo debe tener un máximo de 40 caracteres",
+              },
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "El correo debe contener @ y un dominio",
+              },
             }}
             placeholder="Correo electrónico"
             register={register}
@@ -123,12 +128,18 @@ const Contacto = () => {
             className="mt-2"
             error={errors.consult}
             label="Detalle su consulta"
+            maxLength={800}
+            minLength={10}
             name="consult"
             options={{
-              required: "Este campo es requerido",
+              required: "Campo obligatorio",
               minLength: {
-                value: 5,
-                message: "El contenido debe tener al menos 5 caracteres",
+                value: 10,
+                message: "El mensaje debe tener un mínimo de 10 caracteres",
+              },
+              maxLength: {
+                value: 800,
+                message: "El mensaje debe tener un máximo de 800 caracteres",
               },
             }}
             placeholder="Escriba aqui su consulta"
@@ -136,7 +147,10 @@ const Contacto = () => {
           />
           <div className="d-flex justify-content-center mt-4">
             <button className="contactoBoton" type="submit">
-              ENVIAR <span><i className="bi bi-arrow-right-short"></i></span> 
+              ENVIAR{" "}
+              <span>
+                <i className="bi bi-arrow-right-short"></i>
+              </span>
             </button>
           </div>
         </form>

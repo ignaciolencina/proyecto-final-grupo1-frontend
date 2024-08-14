@@ -21,6 +21,11 @@ label::after {
   background-color: transparent !important;
 }
 
-.inputTextArea{
+.inputTextArea {
   height: 120px !important;
+}
+
+.invalid-feedback {
+  font-family: var(--fuente-cuerpo) !important;
+  font-size: 17px !important;
 }
