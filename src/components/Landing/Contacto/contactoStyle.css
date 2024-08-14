@@ -1,0 +1,48 @@
+.contactoImage {
+  width: 100%;
+  position: relative;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.contactoSection {
+  position: relative;
+  z-index: 100;
+  bottom: 120px;
+}
+
+.contactoTitle {
+  margin-inline-start: 13px;
+  position: relative;
+  bottom: 140px;
+  h2 {
+    font-size: 2.5rem;
+    font-family: var(--fuente-titulo);
+    color: var(--color-claro);
+  }
+}
+
+.contactoSubTitle {
+    background-color: var(--color-claro);
+    border-radius: 20px 0 20px 0;
+    margin-inline: 13px;
+    margin-bottom: 16px;
+    h2 {
+      font-size: 2rem;
+      font-family: var(--fuente-titulo);
+    }
+  }
+
+  .contactoText{
+    h5{
+        text-align: center;
+        color: var(--color-claro);
+        font-family: var(--fuente-cuerpo);
+        font-weight: 250;
+    }
+    span{
+        color: var(--color-detalles);
+    }
+  }

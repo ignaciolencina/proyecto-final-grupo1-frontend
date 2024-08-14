@@ -1,10 +1,12 @@
-import AcercaDe from "../components/Landing/AcercaDe/AcercaDe"
+import AcercaDe from "../components/Landing/AcercaDe/AcercaDe";
+import Contacto from "../components/Landing/Contacto/Contacto";
 
 const LandingView = () => {
   return (
     <section>
-        <AcercaDe/>
+      <Contacto />
+      <AcercaDe />
     </section>
-  )
-}
-export default LandingView
+  );
+};
+export default LandingView;
