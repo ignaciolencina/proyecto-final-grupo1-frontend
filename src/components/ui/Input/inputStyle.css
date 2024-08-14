@@ -1,8 +1,9 @@
 .form-control {
   background-color: transparent !important;
   color: var(--color-claro) !important;
-  border: solid 2px;
+  border: solid 2px !important;
   border-color: var(--color-detalles) !important;
+  font-family: var(--fuente-cuerpo) !important;
 }
 
 .form-control:focus {
@@ -10,6 +11,7 @@
 }
 
 label {
+  font-family: var(--fuente-cuerpo) !important;
   background-color: transparent !important;
   color: var(--color-claro-secundario) !important;
 }
@@ -17,4 +19,8 @@ label {
 label::after {
   content: "";
   background-color: transparent !important;
+}
+
+.inputTextArea{
+  height: 120px !important;
 }

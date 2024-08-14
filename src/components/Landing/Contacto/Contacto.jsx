@@ -36,14 +36,14 @@ const Contacto = () => {
   };
 
   return (
-    <section>
+    <section className="contactoSection mb-5">
       <div className="contactoImage">
         <img
           alt="Cartel Luminoso"
           src="https://pageneon.com/cdn/shop/products/Beer-Me-Up-Led-Light-Beer-Neon-Sign-Red_1024x.jpg?v=1677664988"
         />
       </div>
-      <section className="contactoSection">
+      <section className="contactoInfo">
         <div className="contactoTitle">
           <h2 className="text-start p-0 m-0">CONTACTO</h2>
         </div>
@@ -58,7 +58,7 @@ const Contacto = () => {
           </h5>
         </div>
       </section>
-      <section className="mx-3">
+      <section className="mx-3 contactoForm">
         <form onSubmit={onSubmitRHF(handleSubmit)}>
           <Input
             className="mt-2"
@@ -118,10 +118,25 @@ const Contacto = () => {
             register={register}
             type="email"
           />
-
-          <div className="text-center mt-4">
-            <button className="btn text-light contactoBoton" type="submit">
-              ENVIAR
+          <Input
+            textarea
+            className="mt-2"
+            error={errors.consult}
+            label="Detalle su consulta"
+            name="consult"
+            options={{
+              required: "Este campo es requerido",
+              minLength: {
+                value: 5,
+                message: "El contenido debe tener al menos 5 caracteres",
+              },
+            }}
+            placeholder="Escriba aqui su consulta"
+            register={register}
+          />
+          <div className="d-flex justify-content-center mt-4">
+            <button className="contactoBoton" type="submit">
+              ENVIAR <span><i className="bi bi-arrow-right-short"></i></span> 
             </button>
           </div>
         </form>
