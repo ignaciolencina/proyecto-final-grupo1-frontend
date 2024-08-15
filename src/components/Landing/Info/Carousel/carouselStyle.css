@@ -20,7 +20,7 @@
   }
   .verMasCarousel {
     font-family: var(--fuente-titulo);
-    text-decoration: none;
+    text-decoration: underline 3px;
     color: var(--color-claro);
     font-size: 1.2rem;
   }
