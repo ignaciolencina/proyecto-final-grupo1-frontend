@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
+import { postConsultFn } from "../../../api/consults";
+
 import Input from "../../ui/Input/Input";
 
 import "./contactoStyle.css";
@@ -15,10 +17,10 @@ const Contacto = () => {
   } = useForm();
 
   const { mutate: postConsult } = useMutation({
-    // mutationFn: postConsultFn,
-    onSuccess: (userData) => {
+    mutationFn: postConsultFn,
+    onSuccess: () => {
       toast.dismiss();
-      toast.success(`Welcome ${userData.firstname}!`);
+      toast.success("Mensaje enviado");
 
       reset();
     },
