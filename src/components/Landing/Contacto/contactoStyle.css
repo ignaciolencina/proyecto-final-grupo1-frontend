@@ -1,17 +1,31 @@
+.contacto{
+  height: 1160px;
+}
+
 .contactoImage {
   width: 100%;
   position: relative;
-  top: 100px;
   img {
     width: 100%;
     object-fit: cover;
   }
 }
 
-.contactoInfo {
+.contactoImage::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(transparent, #212529);
+  pointer-events: none;
+}
+
+.contactoSection {
   position: relative;
   z-index: 100;
-  bottom: 20px;
+  bottom: 100px;
 }
 
 .contactoTitle {
@@ -51,9 +65,6 @@
         color: var(--color-claro);
         font-family: var(--fuente-cuerpo);
         font-weight: 250;
-    }
-    span{
-        color: var(--color-detalles);
     }
   }
 

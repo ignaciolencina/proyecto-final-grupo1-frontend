@@ -1,0 +1,10 @@
+.carousel {
+  border-top: solid 2px var(--color-claro);
+}
+
+.carouselImage {
+  height: 500px;
+  object-fit: cover;
+  opacity: 50%;
+}
+
