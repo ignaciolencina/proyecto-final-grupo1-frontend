@@ -36,6 +36,15 @@
     }
   }
 
+  .contactoMap{
+    width: calc(100% - 26px);
+    height: 200px;
+    margin-inline: 13px;
+    margin-bottom: 13px;
+    position: relative;
+    overflow: hidden;
+  }
+
   .contactoText{
     h5{
         text-align: center;

@@ -7,6 +7,7 @@ import { postConsultFn } from "../../../api/consults";
 import Input from "../../ui/Input/Input";
 
 import "./contactoStyle.css";
+import Map from "../../ui/Map/Map";
 
 const Contacto = () => {
   const {
@@ -49,6 +50,9 @@ const Contacto = () => {
         </div>
         <div className="contactoSubTitle">
           <h2>CONTACTA CON NOSOTROS</h2>
+        </div>
+        <div className="contactoMap">
+          <Map />
         </div>
         <div className="contactoText">
           <h5>¿Necesitas ayuda?</h5>
