@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import "./carouselStyle.css";
 
 const Carousel = () => {
   return (
-    <div className="carousel slide my-4" id="carouselCaptions">
+    <div className="carousel slide" id="carouselCaptions">
       <div className="carousel-inner">
         <div className="carousel-item active">
           <img
@@ -11,8 +12,13 @@ const Carousel = () => {
             src="	https://www.goiko.com/es/wp-content/uploads/2024/07/NOVEDADES_CARRUSEL_1.jpg"
           />
           <div className="carousel-caption">
-            <h5>First slide label</h5>
-            <p>Some representative placeholder content for the first slide.</p>
+            <h5>NUEVO!</h5>
+            <p>
+              Descubrí las novedades{" "}
+              <span>
+                <i className="bi bi-arrow-up-right-circle"></i>
+              </span>
+            </p>
           </div>
         </div>
         <div className="carousel-item">
@@ -22,8 +28,14 @@ const Carousel = () => {
             src="https://alafresca.com.ar/wp-content/uploads/2023/06/cerveza-negra.jpg"
           />
           <div className="carousel-caption">
-            <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
+            <h5>HAPPY HOUR</h5>
+            <p>2x1 desde que salis de la ofi!</p>
+            <Link className="verMasCarousel" to="*">
+              VER MAS{" "}
+              <span>
+                <i className="bi bi-arrow-up-right-circle"></i>
+              </span>
+            </Link>
           </div>
         </div>
         <div className="carousel-item">
@@ -33,8 +45,14 @@ const Carousel = () => {
             src="https://www.goiko.com/es/wp-content/uploads/2023/10/LandingMetoverso_01-1.png"
           />
           <div className="carousel-caption">
-            <h5>Third slide label</h5>
-            <p>Some representative placeholder content for the third slide.</p>
+            <h5>DIETA METO</h5>
+            <p>Le meto cheddar, le meto bacon...</p>
+            <Link className="verMasCarousel" to="*">
+              VER MAS{" "}
+              <span>
+                <i className="bi bi-arrow-up-right-circle"></i>
+              </span>
+            </Link>
           </div>
         </div>
         <div className="carousel-item">
@@ -44,8 +62,14 @@ const Carousel = () => {
             src="https://www.goiko.com/es/wp-content/uploads/2023/10/CARRUSEL_MENU_NEW_V3.png"
           />
           <div className="carousel-caption">
-            <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
+            <h5>MENÚ BURGERTUC</h5>
+            <p>Combiná como quieras!</p>
+            <Link className="verMasCarousel" to="/login">
+              VER MAS{" "}
+              <span>
+                <i className="bi bi-arrow-up-right-circle"></i>
+              </span>
+            </Link>
           </div>
         </div>
         <div className="carousel-item">
@@ -55,29 +79,43 @@ const Carousel = () => {
             src="https://www.goiko.com/es/wp-content/uploads/2023/10/CARRUSEL_YESYOUCAN__NEW_V2.png"
           />
           <div className="carousel-caption">
-            <h5>Third slide label</h5>
-            <p>Some representative placeholder content for the third slide.</p>
+            <h5>SI SE PUEDE</h5>
+            <p>Somos pet friendly y tenemos una sopresa para ellos!</p>
+            <Link className="verMasCarousel" to="*">
+              VER MAS{" "}
+              <span>
+                <i className="bi bi-arrow-up-right-circle"></i>
+              </span>
+            </Link>
           </div>
         </div>
       </div>
-      <button
-        className="carousel-control-prev"
-        data-bs-slide="prev"
-        data-bs-target="#carouselCaptions"
-        type="button"
-      >
-        <span aria-hidden="true" className="carousel-control-prev-icon"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        data-bs-slide="next"
-        data-bs-target="#carouselCaptions"
-        type="button"
-      >
-        <span aria-hidden="true" className="carousel-control-next-icon"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
+      <div className="carouselButtons">
+        <button
+          className="carousel-control-prev"
+          data-bs-slide="prev"
+          data-bs-target="#carouselCaptions"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            className="carouselArrow"
+          ><i className="bi bi-arrow-left-short"></i></span>
+          <span className="visually-hidden">Anterior</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          data-bs-slide="next"
+          data-bs-target="#carouselCaptions"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            className="carouselArrow"
+          ><i className="bi bi-arrow-right-short"></i></span>
+          <span className="visually-hidden">Siguiente</span>
+        </button>
+      </div>
     </div>
   );
 };
