@@ -1,0 +1,33 @@
+.infoMenu {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.menuImage {
+  width: 240px;
+  height: 240px;
+  border: solid 2px var(--color-claro);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.menuImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menuText {
+  h5 {
+    font-family: var(--fuente-titulo);
+    color: var(--color-claro);
+  }
+  p {
+    font-family: var(--fuente-cuerpo);
+    color: var(--color-claro-secundario);
+  }
+}

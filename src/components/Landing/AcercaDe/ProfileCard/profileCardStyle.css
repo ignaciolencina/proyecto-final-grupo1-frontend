@@ -1,0 +1,46 @@
+.aboutProfiles{
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.profileCard {
+  max-width: fit-content;
+  height: 502px;
+  padding: 15px;
+  background-color: transparent;
+  border: solid 2px var(--color-claro);
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.profileFrame {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  overflow: hidden;
+  border: solid 5px var(--color-claro);
+  margin-bottom: 10px;
+}
+
+
+.profilePicture {
+  width: 250px;
+}
+
+h2{
+  text-wrap: wrap;
+  text-align: center;
+}
+
+.profileDescription {
+  width: 250px;
+  white-space: wrap;
+}

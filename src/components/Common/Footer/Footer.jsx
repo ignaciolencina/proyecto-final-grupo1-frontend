@@ -10,8 +10,8 @@ const Footer = () => {
 
   return (
     <footer className="pt-1">
-      <RailingText/>
-      <section className="ps-4 pe-5">
+      <RailingText text="BURGERTUC"/>
+      <section className="ps-4 pe-5 mt-3">
         <div className="d-flex align-items-center justify-content-between">
           <div>
             <img

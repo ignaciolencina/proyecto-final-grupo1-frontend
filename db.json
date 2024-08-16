@@ -8,5 +8,21 @@
       "password": "Admin1234",
       "isAdmin": true
     }
+  ],
+  "consults": [
+    {
+      "id": "7819",
+      "firstname": "Ignacio",
+      "lastname": "Lencina",
+      "email": "nacholencina60@gmail.com",
+      "consult": "Hola buenas! Muy rico todo! Felicidades!"
+    },
+    {
+      "id": "4eb9",
+      "firstname": "Daniel",
+      "lastname": "Lencina",
+      "email": "dalencina@gmail.com",
+      "consult": "Una cagada che, la pagina mas linda que el mismo lugar."
+    }
   ]
 }
