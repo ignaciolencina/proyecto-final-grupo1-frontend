@@ -1,0 +1,85 @@
+
+
+.login-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--fuente-cuerpo);
+    padding: 10px;
+  }
+  
+  .login-titulo{
+    font-family: var(--fuente-titulo);
+  }
+
+  .login-card {
+    border-radius: 0.75rem;
+    box-shadow: 0 0 0.5rem 0.5rem var(--color-claro);
+    width: 90%;
+    position: relative;
+    overflow: hidden; /* Ocultar contenido que sobrepase los bordes */
+    margin: 20px auto; 
+    padding: 20px;
+    box-sizing: border-box;
+
+  }
+  
+  /*
+  .login-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 50%;
+  }
+  */
+
+  .login-content {
+    position: relative; /* Asegura que el contenido esté por encima de la imagen */
+    z-index: 1; /* Trae el contenido al frente */
+    color: var(--color-claro);
+    padding: 1rem;
+  }
+  
+  .register-content {
+  color: var(--color-detalles);
+  }
+
+  .form-control {
+    background-color: transparent !important;
+    color: var(--color-claro) !important;
+  }
+  
+  .form-control:focus {
+    border-color: var(--color-detalles) !important;
+    box-shadow: 0 0 0.2rem 0.2rem #f8a2ab !important;
+  }
+  
+  label {
+    background-color: transparent !important; /* Hacer el label transparente */
+    color: var(--color-claro) !important; /* Asegúrate de que el texto del label sea visible */
+  }
+  
+  label::after {
+    content: ""; /* Eliminar el fondo del pseudo-elemento */
+    background-color: transparent !important;
+
+  }
+  
+  .login-btn {
+    border: solid 1px var(--color-claro) !important;
+  }
+  
+  .login-btn:hover {
+    border-color: var(--color-detalles-hover) !important;
+    box-shadow: 0 0 0.2rem 0.2rem #f8a2ab !important;
+  }
+
+  @media (max-width: 576px) {
+    .login-card {
+      width: 90%; 
+      padding: 10px;
+    }
+  }
