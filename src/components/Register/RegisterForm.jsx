@@ -8,21 +8,9 @@ import Input from "../ui/Input/Input";
 import { postRegisterFn } from "../../api/auth";
 
 const RegisterForm = () => {
-  // ---------------------------------------------
-  // Zustand
-  // ---------------------------------------------
-
   const { login } = useSession();
 
-  // ---------------------------------------------
-  // RRD
-  // ---------------------------------------------
-
   const navigate = useNavigate();
-
-  // ---------------------------------------------
-  // RHF
-  // ---------------------------------------------
 
   const {
     register,
@@ -31,19 +19,16 @@ const RegisterForm = () => {
     reset,
   } = useForm();
 
-  // ---------------------------------------------
-  // RQ
-  // ---------------------------------------------
-
   const { mutate: postRegister } = useMutation({
     mutationFn: postRegisterFn,
     onSuccess: (userData) => {
       toast.dismiss();
-      toast.success(`Registrado. Bienvenido, ${userData.firstname}`);
+      toast.success(
+        `Nuevo usuario registrado. Bienvenido, ${userData.firstname}`
+      );
 
       reset();
 
-      // Hacer el login en el cliente
       login(userData);
 
       setTimeout(() => {
@@ -56,18 +41,10 @@ const RegisterForm = () => {
     },
   });
 
-  // ---------------------------------------------
-  // HANDLERS
-  // ---------------------------------------------
-
   const handleSubmit = (data) => {
     toast.loading("Guardando nuevo usuario");
     postRegister(data);
   };
-
-  // ---------------------------------------------
-  // RENDERIZADO
-  // ---------------------------------------------
 
   return (
     <form className="row g-2" onSubmit={onSubmitRHF(handleSubmit)}>
@@ -138,7 +115,7 @@ const RegisterForm = () => {
               value:
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
               message:
-                "La contraseña debe tener una minúscula, una mayúscula, un dígito, y un caracter especial, entre 8 y 15 caracteres",
+                "La contraseña debe tener una mayúscula, una minúscula, un dígito, y un caracter especial. Entre 8 y 15 caracteres",
             },
           }}
           register={register}

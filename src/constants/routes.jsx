@@ -3,7 +3,7 @@ import RootView from "../views/routing/RootView";
 import AuthViews from "../views/routing/AuthViews";
 import PrivateViews from "../views/routing/PrivateViews";
 import LoginView from "../views/Login/LoginView";
-import RegisterForm from "../components/Register/RegisterForm";
+import RegisterView from "../views/Register/RegisterView";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "register",
-            element: <RegisterForm />,
+            element: <RegisterView />,
           },
         ],
       },
