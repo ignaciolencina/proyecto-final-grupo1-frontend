@@ -47,7 +47,13 @@
   .login-link{
     color: var(--color-detalles);
   }
+
+  .register-btn {
+    border: solid 1px var(--color-detalles) !important;
+    color: var(--color-detalles);
+  }
   
+  /*
   .alert-block{
       background-color: #23cab969;
       border-radius: 0.5rem;
@@ -65,5 +71,6 @@
     .input-group .btn {
       margin-left: -1px; 
     }
-
+*/
+   
 

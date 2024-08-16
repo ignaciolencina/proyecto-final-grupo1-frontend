@@ -44,7 +44,7 @@
   .register{
     color: var(--color-claro);
   }
-  
+
   .register-link {
   color: var(--color-detalles);
   }
@@ -71,6 +71,7 @@
   
   .login-btn {
     border: solid 1px var(--color-claro) !important;
+    color: var(--color-claro);
   }
   
   .login-btn:hover {

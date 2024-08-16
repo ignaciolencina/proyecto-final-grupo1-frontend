@@ -82,7 +82,7 @@ const LoginForm = () => {
         type="password"
       />
       <div className="text-center mt-4">
-        <button className="btn text-light login-btn" type="submit">
+        <button className="btn login-btn" type="submit">
           Iniciar sesion
         </button>
       </div>

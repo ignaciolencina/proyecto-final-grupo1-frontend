@@ -151,8 +151,8 @@ const RegisterForm = () => {
           type="password"
         />
       </div>
-      <div className="text-end mt-3">
-        <button className="btn btn-danger" type="submit">
+      <div className="text-center mt-3">
+        <button className="btn register-btn" type="submit">
           Registrar
         </button>
       </div>
