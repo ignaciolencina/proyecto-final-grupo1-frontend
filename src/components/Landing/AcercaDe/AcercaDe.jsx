@@ -5,6 +5,7 @@ import "./acercadeStyle.css";
 import profileNacho from "../../../assets/Profile-Nacho.jpeg";
 import profileLu from "../../../assets/Profile-Lucila.jpeg";
 import profileIvan from "../../../assets/Profile-Ivan.png";
+import profileLean from "../../../assets/Profile-Leandro.jpeg";
 
 const AcercaDe = () => {
   return (
@@ -50,7 +51,7 @@ const AcercaDe = () => {
           />
           <ProfileCard
             profileDescription="Hola mi nombre es Leandro, soy estudiante de programación fullstack en Rolling Code School, la cual se encuentra en San Miguel de Tucumán, Tucumán, Argentina."
-            profileImage={profileNacho}
+            profileImage={profileLean}
             profileName="Leandro Vinticol"
           />
         </article>

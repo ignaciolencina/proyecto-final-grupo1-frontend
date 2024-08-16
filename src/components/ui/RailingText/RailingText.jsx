@@ -1,7 +1,8 @@
 import "./railingStyle.css";
+import PropTypes from "prop-types";
 
-const RailingText = () => {
-  const text = "BURGERTUC";
+const RailingText = (props) => {
+  const { text } = props;
   return (
     <div className="railing-container">
       <div className="railing-text text-light titleFont">
@@ -16,3 +17,7 @@ const RailingText = () => {
   );
 };
 export default RailingText;
+
+RailingText.propTypes = {
+  text: PropTypes.string.isRequired,
+};
