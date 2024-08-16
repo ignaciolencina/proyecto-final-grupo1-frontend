@@ -1,5 +1,6 @@
 import RailingText from "../../ui/RailingText/RailingText";
 import Carousel from "./Carousel/Carousel";
+import MenuLanding from "./MenuLanding/MenuLanding";
 
 const Info = () => {
   return (
@@ -7,6 +8,9 @@ const Info = () => {
       <section className="carouselSection">
         <Carousel />
         <RailingText/>
+      </section>
+      <section className="menuSection">
+        <MenuLanding/>
       </section>
     </section>
   );

@@ -3,6 +3,7 @@
 }
 
 .contactoImage {
+  border-top: solid 3px var(--color-claro);
   width: 100%;
   position: relative;
   img {
