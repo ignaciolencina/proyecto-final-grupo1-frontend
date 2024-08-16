@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./inputStyle.css"
+import "./inputStyle.css";
 
 const Input = ({
   name,
@@ -10,16 +10,37 @@ const Input = ({
   options,
   register,
   placeholder = "Ingrese un texto",
-  maxLenght,
-  minLenght,
+  maxLength,
+  minLength,
+  textarea = false,
 }) => {
+  if (textarea) {
+    return (
+      <fieldset className={`form-floating ${className}`}>
+        <textarea
+          className={`form-control inputTextArea ${error ? "is-invalid" : ""}`}
+          id={`${name}-input`}
+          maxLength={maxLength}
+          minLength={minLength}
+          placeholder={placeholder}
+          type={type}
+          {...register(name, options)}
+        />
+        <label htmlFor={`${name}-input`}>{label}</label>
+        <div className="invalid-feedback">
+          <span className="badge text-bg-danger">{error?.message}</span>
+        </div>
+      </fieldset>
+    );
+  }
+
   return (
     <fieldset className={`form-floating ${className}`}>
       <input
         className={`form-control ${error ? "is-invalid" : ""}`}
         id={`${name}-input`}
-        maxLength={maxLenght}
-        minLength={minLenght}
+        maxLength={maxLength}
+        minLength={minLength}
         placeholder={placeholder}
         type={type}
         {...register(name, options)}
@@ -44,6 +65,7 @@ Input.propTypes = {
   register: PropTypes.func.isRequired,
   options: PropTypes.object,
   placeholder: PropTypes.string,
-  maxLenght: PropTypes.number.isRequired,
-  minLenght: PropTypes.number.isRequired,
+  maxLength: PropTypes.number.isRequired,
+  minLength: PropTypes.number.isRequired,
+  textarea: PropTypes.bool,
 };

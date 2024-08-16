@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import RootView from "../views/routing/RootView";
 import AuthViews from "../views/routing/AuthViews";
 import PrivateViews from "../views/routing/PrivateViews";
+import LandingView from "../views/LandingView";
 
 export const router = createBrowserRouter([
     {
@@ -11,7 +12,7 @@ export const router = createBrowserRouter([
         // RUTAS PÚBLICAS
         {
           path: '',
-          element: <p className="text-light">Index</p>,
+          element: <LandingView/>,
         },
         // RUTAS DE AUTENTICACION
         {
