@@ -21,7 +21,7 @@ const LoginView = () => {
             className="text-decoration-none register-link ms-1"
             to="/register"
           >
-            Registrate!
+            REGISTRATE
           </Link>
         </p>
       </article>

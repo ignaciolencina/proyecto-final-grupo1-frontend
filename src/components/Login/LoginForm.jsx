@@ -46,44 +46,59 @@ const LoginForm = () => {
   return (
     <form onSubmit={onSubmitRHF(handleSubmit)}>
       <Input
-        error={errors.username}
+        className="mt-2"
+        error={errors.email}
         label="Correo electrónico"
-        maxLenght={20}
-        minLenght={3}
-        name="username"
+        maxLength={40}
+        minLength={7}
+        name="email"
         options={{
-          required: {
-            value: true,
-            message: "Campo requerido",
+          required: "Campo obligatorio",
+          minLength: {
+            value: 7,
+            message: "El correo debe tener mínimo 7 caracteres",
           },
-          length,
-          minLenght: 3,
-          maxLenght: 20,
+          maxLength: {
+            value: 40,
+            message: "El correo debe tener máximo 40 caracteres",
+          },
+          pattern: {
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message: "El correo debe contener @ y un dominio",
+          },
         }}
+        placeholder="Correo electrónico"
         register={register}
+        type="email"
       />
       <Input
-        className="mt-3"
+        className="mt-2"
         error={errors.password}
         label="Contraseña"
-        maxLenght={20}
-        minLenght={3}
         name="password"
         options={{
           required: {
             value: true,
             message: "Campo requerido",
           },
-          minLenght: 3,
-          maxLenght: 20,
+          minLength: {
+            value: 8,
+            message: "La contraseña debe tener mínimo 8 caracteres",
+          },
+          maxLength: 15,
+          pattern: {
+            value:
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
+            message:
+              "La contraseña debe tener una mayúscula, una minúscula, un dígito, y un caracter especial. Entre 8 y 15 caracteres",
+          },
         }}
-        placeholder=""
         register={register}
         type="password"
       />
-      <div className="text-center mt-4">
-        <button className="btn login-btn" type="submit">
-          Iniciar sesion
+      <div className="d-flex justify-content-center mt-4">
+        <button className="loginBoton" type="submit">
+          INICIAR SESION
         </button>
       </div>
     </form>
