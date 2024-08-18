@@ -1,0 +1,42 @@
+.carousel {
+  border-top: solid 3px var(--color-claro);
+}
+
+.carouselImage {
+  height: 500px;
+  object-fit: cover;
+  opacity: 50%;
+}
+
+.carousel-caption {
+  left: 20px !important;
+  text-align: start !important;
+  h5 {
+    font-family: var(--fuente-titulo);
+    font-size: 3rem;
+  }
+  p {
+    font-family: var(--fuente-cuerpo);
+  }
+  .verMasCarousel {
+    font-family: var(--fuente-titulo);
+    text-decoration: underline 3px;
+    color: var(--color-claro);
+    font-size: 1.2rem;
+  }
+}
+
+.carouselButtons {
+  .carousel-control-prev {
+    left: 65%;
+    bottom: 85%;
+  }
+  .carousel-control-next{
+    right: 5%;
+    bottom: 85%;
+  }
+  .carouselArrow{
+    font-size: 5rem;
+  }
+}
+

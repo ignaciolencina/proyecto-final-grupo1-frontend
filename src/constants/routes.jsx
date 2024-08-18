@@ -4,6 +4,7 @@ import AuthViews from "../views/routing/AuthViews";
 import PrivateViews from "../views/routing/PrivateViews";
 import LoginView from "../views/Login/LoginView";
 import RegisterView from "../views/Register/RegisterView";
+import LandingView from "../views/LandingView";
 
 export const router = createBrowserRouter([
   {
@@ -12,8 +13,8 @@ export const router = createBrowserRouter([
     children: [
       // RUTAS PÚBLICAS
       {
-        path: "",
-        element: <p className="text-light">Index</p>,
+        path: '',
+        element: <LandingView/>,
       },
       // RUTAS DE AUTENTICACION
       {

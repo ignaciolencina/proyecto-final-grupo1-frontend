@@ -1,0 +1,65 @@
+.about{
+  height: 1072px;
+}
+
+.aboutGif{
+  border-top: solid 3px var(--color-claro);
+  width: 100%;
+  position: relative;
+  img{
+    width: 100%;
+    object-fit: cover;
+    opacity: 70%;
+  }
+}
+
+.aboutGif::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(transparent, #212529);
+  pointer-events: none;
+}
+
+.aboutSection{
+  position: relative;
+  z-index: 100;
+  bottom: 120px;
+}
+
+.aboutTitle{
+  margin-inline-start: 13px;
+  position: relative;
+  bottom: 140px;
+  h2 {
+    font-size: 2.5rem;
+    font-family: var(--fuente-titulo);
+    color: var(--color-claro);
+  }
+}
+
+.aboutSubTitle {
+  background-color: var(--color-claro);
+  border-radius: 20px 0 20px 0;
+  margin-inline: 13px;
+  h2 {
+    font-size: 2rem;
+    font-family: var(--fuente-titulo);
+  }
+}
+
+.aboutText {
+  background-color: var(--color-claro);
+  border-radius: 0 20px 0 20px;
+  margin: 13px;
+  padding-top: 10px;
+
+  p {
+    text-align: center;
+    font-weight: 700;
+    padding-bottom: 10px;
+  }
+}
