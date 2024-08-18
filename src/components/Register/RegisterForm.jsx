@@ -17,6 +17,7 @@ const RegisterForm = () => {
     handleSubmit: onSubmitRHF,
     formState: { errors },
     reset,
+    getValues,
   } = useForm();
 
   const { mutate: postRegister } = useMutation({
@@ -131,14 +132,33 @@ const RegisterForm = () => {
             },
             minLength: {
               value: 8,
-              message: "La contraseña debe tener mínimo 8 caracteres",
+              message: (
+                <>
+                  La contraseña debe tener:
+                  <br />
+                  Una mayúscula, una minúscula, un dígito,
+                  <br />
+                  y un caracter especial.
+                  <br />
+                  Entre 8 y 15 caracteres.
+                </>
+              ),
             },
             maxLength: 15,
             pattern: {
               value:
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-              message:
-                "La contraseña debe tener una mayúscula, una minúscula, un dígito, y un caracter especial. Entre 8 y 15 caracteres",
+              message: (
+                <>
+                  La contraseña debe tener:
+                  <br />
+                  Una mayúscula, una minúscula, un dígito,
+                  <br />
+                  y un caracter especial.
+                  <br />
+                  Entre 8 y 15 caracteres.
+                </>
+              ),
             },
           }}
           register={register}
@@ -155,20 +175,12 @@ const RegisterForm = () => {
               value: true,
               message: "Este campo es requerido",
             },
-            minLength: {
-              value: 8,
-              message: "Revisar",
+            validate: (value) => {
+              const password = getValues("password");
+              const isValid = value === password;
+              console.log({ value, password, isValid }); // Añadir este console.log
+              return isValid || "Las contraseñas no coinciden";
             },
-            maxLength: 15,
-            pattern: {
-              value:
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-              message: "Revisar",
-            },
-            // TODO: Revisar que las contraseñas coincidan
-            // validate: (value) => {
-            //     return value === data.password
-            // }
           }}
           register={register}
           type="password"
