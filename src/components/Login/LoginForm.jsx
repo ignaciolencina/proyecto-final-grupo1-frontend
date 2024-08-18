@@ -81,16 +81,11 @@ const LoginForm = () => {
             value: true,
             message: "Campo requerido",
           },
-          minLength: {
-            value: 8,
-            message: "La contraseña debe tener mínimo 8 caracteres",
-          },
+          minLength: 8,
           maxLength: 15,
           pattern: {
             value:
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-            message:
-              "La contraseña debe tener una mayúscula, una minúscula, un dígito, y un caracter especial. Entre 8 y 15 caracteres",
           },
         }}
         register={register}
