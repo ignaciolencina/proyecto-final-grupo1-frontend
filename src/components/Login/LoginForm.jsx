@@ -81,11 +81,11 @@ const LoginForm = () => {
             value: true,
             message: "Campo requerido",
           },
-          minLength: 8,
+          minLength: 6,
           maxLength: 15,
           pattern: {
             value:
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
+              /^(?=(?:.*\d.*\d))(?=(?:.*[a-zA-Z].*[a-zA-Z]))[a-zA-Z\d]{6,15}$/,
           },
         }}
         register={register}

@@ -131,32 +131,26 @@ const RegisterForm = () => {
               message: "Campo requerido",
             },
             minLength: {
-              value: 8,
+              value: 6,
               message: (
                 <>
                   La contraseña debe tener:
                   <br />
-                  Una mayúscula, una minúscula, un dígito,
-                  <br />
-                  y un caracter especial.
-                  <br />
-                  Entre 8 y 15 caracteres.
+                  un mínimo de 2 numeros y 2 letras,
+                  <br />y entre 6 y 15 caracteres.
                 </>
               ),
             },
             maxLength: 15,
             pattern: {
               value:
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
+                /^(?=(?:.*\d.*\d))(?=(?:.*[a-zA-Z].*[a-zA-Z]))[a-zA-Z\d]{6,15}$/,
               message: (
                 <>
                   La contraseña debe tener:
                   <br />
-                  Una mayúscula, una minúscula, un dígito,
-                  <br />
-                  y un caracter especial.
-                  <br />
-                  Entre 8 y 15 caracteres.
+                  un mínimo de 2 numeros y 2 letras,
+                  <br />y entre 6 y 15 caracteres.
                 </>
               ),
             },
@@ -178,7 +172,7 @@ const RegisterForm = () => {
             validate: (value) => {
               const password = getValues("password");
               const isValid = value === password;
-              console.log({ value, password, isValid }); // Añadir este console.log
+              console.log({ value, password, isValid });
               return isValid || "Las contraseñas no coinciden";
             },
           }}
