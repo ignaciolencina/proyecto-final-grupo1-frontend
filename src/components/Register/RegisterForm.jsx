@@ -17,6 +17,7 @@ const RegisterForm = () => {
     handleSubmit: onSubmitRHF,
     formState: { errors },
     reset,
+    getValues,
   } = useForm();
 
   const { mutate: postRegister } = useMutation({
@@ -52,15 +53,21 @@ const RegisterForm = () => {
         <Input
           error={errors.firstname}
           label="Nombre"
+          maxLength={20}
+          minLength={3}
           name="firstname"
           options={{
-            required: {
-              value: true,
-              message: "Campo requerido",
+            required: "Campo obligatorio",
+            minLength: {
+              value: 3,
+              message: "El nombre debe tener mínimo 3 caracteres",
             },
-            minLength: 3,
-            maxLength: 30,
+            maxLength: {
+              value: 20,
+              message: "El nombre debe tener máximo 20 caracteres",
+            },
           }}
+          placeholder="Nombre"
           register={register}
         />
       </div>
@@ -68,32 +75,49 @@ const RegisterForm = () => {
         <Input
           error={errors.lastname}
           label="Apellido"
+          maxLength={20}
+          minLength={3}
           name="lastname"
           options={{
-            required: {
-              value: true,
-              message: "Campo requerido",
+            required: "Campo obligatorio",
+            minLength: {
+              value: 3,
+              message: "El apellido debe tener mínimo 3 caracteres",
             },
-            minLength: 3,
-            maxLength: 30,
+            maxLength: {
+              value: 20,
+              message: "El apellido debe tener máximo 20 caracteres",
+            },
           }}
+          placeholder="Apellido"
           register={register}
         />
       </div>
       <div className="col-12 col-md-4">
         <Input
-          error={errors.username}
+          error={errors.email}
           label="Correo electrónico"
-          name="username"
+          maxLength={40}
+          minLength={7}
+          name="email"
           options={{
-            required: {
-              value: true,
-              message: "Campo requerido",
+            required: "Campo obligatorio",
+            minLength: {
+              value: 7,
+              message: "El correo debe tener mínimo 7 caracteres",
             },
-            minLength: 3,
-            maxLength: 20,
+            maxLength: {
+              value: 40,
+              message: "El correo debe tener máximo 40 caracteres",
+            },
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "El correo debe contener @ y un dominio",
+            },
           }}
+          placeholder="Correo electrónico"
           register={register}
+          type="email"
         />
       </div>
       <div className="col-12 col-md-6 relative">
@@ -107,15 +131,28 @@ const RegisterForm = () => {
               message: "Campo requerido",
             },
             minLength: {
-              value: 8,
-              message: "La contraseña debe tener al menos 8 caracteres",
+              value: 6,
+              message: (
+                <>
+                  La contraseña debe tener:
+                  <br />
+                  un mínimo de 2 numeros y 2 letras,
+                  <br />y entre 6 y 15 caracteres.
+                </>
+              ),
             },
             maxLength: 15,
             pattern: {
               value:
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-              message:
-                "La contraseña debe tener una mayúscula, una minúscula, un dígito, y un caracter especial. Entre 8 y 15 caracteres",
+                /^(?=(?:.*\d.*\d))(?=(?:.*[a-zA-Z].*[a-zA-Z]))[a-zA-Z\d]{6,15}$/,
+              message: (
+                <>
+                  La contraseña debe tener:
+                  <br />
+                  un mínimo de 2 numeros y 2 letras,
+                  <br />y entre 6 y 15 caracteres.
+                </>
+              ),
             },
           }}
           register={register}
@@ -132,28 +169,20 @@ const RegisterForm = () => {
               value: true,
               message: "Este campo es requerido",
             },
-            minLength: {
-              value: 8,
-              message: "Revisar",
+            validate: (value) => {
+              const password = getValues("password");
+              const isValid = value === password;
+              console.log({ value, password, isValid });
+              return isValid || "Las contraseñas no coinciden";
             },
-            maxLength: 15,
-            pattern: {
-              value:
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-              message: "Revisar",
-            },
-            // TODO: Revisar que las contraseñas coincidan
-            // validate: (value) => {
-            //     return value === data.password
-            // }
           }}
           register={register}
           type="password"
         />
       </div>
-      <div className="text-end mt-3">
-        <button className="btn btn-danger" type="submit">
-          Registrar
+      <div className="d-flex justify-content-center mt-4">
+        <button className="registroBoton" type="submit">
+          REGISTRAR
         </button>
       </div>
     </form>

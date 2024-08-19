@@ -19,7 +19,7 @@ const RegisterView = () => {
         <p>
           Ya tenes una cuenta creada?
           <Link className="text-decoration-none login-link ms-1" to="/login">
-            Inicia sesión!
+            INICIA SESIÓN
           </Link>
         </p>
       </article>
