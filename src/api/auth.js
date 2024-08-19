@@ -2,8 +2,10 @@ import { decodeJWT } from "../utilities/decodeJWT";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
+console.log(BACKEND_URL);
+
 export const postLoginFn = async (data) => {
-  // data: { username, password }
+  // data: { email, password }
 
   const res = await fetch(`${BACKEND_URL}/auth/login`, {
     method: "POST",
@@ -12,6 +14,7 @@ export const postLoginFn = async (data) => {
     },
     body: JSON.stringify(data),
   });
+  console.log(data, res);
 
   if (res.status === 204 || res.headers.get("content-length") === "0") {
     throw new Error("Respuesta vacía del servidor");
