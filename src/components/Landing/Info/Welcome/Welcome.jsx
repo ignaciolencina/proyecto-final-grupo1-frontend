@@ -1,23 +1,19 @@
-import burgerWelcome from "../../../../assets/burgerWelcome.png";
 import RailingText from "../../../ui/RailingText/RailingText";
-
 import "./welcomeStyle.css";
 
 const Welcome = () => {
   return (
     <section className="welcome">
-      <div className="mb-5 mt-3">
-        <RailingText text="BIENVENIDO" />
-      </div>
-      <div className="mb-5">
-        <RailingText text="WELCOME" />
-      </div>
-      <div className="mb-5">
-        <RailingText text="BIENVENIDO" />
+      <div className="welcomeTitle">
+        <h1>BEST IN TOWN</h1>
       </div>
       <div className="welcomeImage">
-        <img alt="Burger" src={burgerWelcome} />
+        <img
+          alt="Burger"
+          src="https://www.goiko.com/es/wp-content/uploads/2023/04/CartaPortada_Web_Desktop.jpg"
+        />
       </div>
+      <RailingText text="WELCOME"/>
     </section>
   );
 };
