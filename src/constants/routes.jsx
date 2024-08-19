@@ -5,6 +5,7 @@ import PrivateViews from "../views/routing/PrivateViews";
 import LoginView from "../views/Login/LoginView";
 import RegisterView from "../views/Register/RegisterView";
 import LandingView from "../views/LandingView";
+import Cart from "../views/Carrito/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
       {
         path: '',
         element: <LandingView/>,
+      },
+      {
+        path:"/mi-carrito",
+        element: <Cart/>
       },
       // RUTAS DE AUTENTICACION
       {
