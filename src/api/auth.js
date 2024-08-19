@@ -46,7 +46,7 @@ export const postRegisterFn = async (data) => {
     body: JSON.stringify({
       firstname: data.firstname,
       lastname: data.lastname,
-      username: data.username,
+      email: data.email,
       password: data.password,
     }),
   });
@@ -57,7 +57,7 @@ export const postRegisterFn = async (data) => {
 
   // Token en registro
   const userData = await postLoginFn({
-    username: data.username,
+    email: data.email,
     password: data.password,
   });
 
