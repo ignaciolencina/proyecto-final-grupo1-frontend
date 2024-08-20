@@ -6,6 +6,7 @@ import LoginView from "../views/Login/LoginView";
 import RegisterView from "../views/Register/RegisterView";
 import LandingView from "../views/LandingView";
 import Cart from "../views/Carrito/Cart";
+import ProductListPage from "../components/Lista-Productos/ProductListPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path:"/mi-carrito",
         element: <Cart/>
+      },
+      {
+        path: "/productos",
+        element: <ProductListPage/>
       },
       // RUTAS DE AUTENTICACION
       {
