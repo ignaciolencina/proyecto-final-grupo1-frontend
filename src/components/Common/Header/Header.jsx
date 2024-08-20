@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { useSession } from "../../../stores/useSession";
 import Swal from "sweetalert2";
-
 import "./headerStyle.css";
 import logoBurgerTuc from "../../../assets/logoBurgerTuc.png";
+import ModalMesa from '../../Modal/ModalMesa'
+import { Button } from "react-bootstrap";
+import { useState } from "react";
+
 
 const Header = () => {
   const { user, isLoggedIn, logout } = useSession();
@@ -23,6 +26,16 @@ const Header = () => {
     }
   };
 
+  const [showModal, setShowModal] = useState(false)
+  const [mesa, setMesa] = useState(null)
+
+  const handleClose = () => setShowModal(false)
+  const handleSave = (mesa) => setMesa(mesa);
+    
+
+  
+  const handleOpen = () => setShowModal(true)
+
   return (
     <nav className="navbar fixed-top">
       <div className="container-fluid">
@@ -34,6 +47,7 @@ const Header = () => {
           data-bs-toggle="offcanvas"
           type="button"
         >
+         
           <span>
             <i className="bi bi-list"></i>
           </span>
@@ -41,6 +55,7 @@ const Header = () => {
         <Link className="navbarBrand titleFont" to="/">
           BURGERTUC
         </Link>
+        
         <div
           aria-labelledby="offcanvasNavbarLabel"
           className="offcanvas offcanvas-top"
@@ -67,13 +82,7 @@ const Header = () => {
               )}
               {!isLoggedIn && (
                 <li className="nav-item">
-                  <Link
-                    reloadDocument
-                    className="nav-link titleFont"
-                    to="/login"
-                  >
-                    HACER PEDIDO
-                  </Link>
+                
                 </li>
               )}
               {!isLoggedIn && (
@@ -127,6 +136,7 @@ const Header = () => {
                     <i className="bi bi-youtube"></i>
                   </Link>
                 </li>
+              
               </div>
               <div>
                 <img
@@ -138,6 +148,16 @@ const Header = () => {
             </ul>
           </div>
         </div>
+            <Link reloadDocument className="chart-link bi bi-cart4" to="/mi-carrito">
+                  </Link>
+                  <Button
+                    className="nav-link titleFont"
+                    onClick={handleOpen}
+                  >
+                    HACER PEDIDO
+                  </Button>
+                    <ModalMesa show={showModal} handleClose={handleClose} handleSave={handleSave}/>
+                    {mesa && <h1>Bienvenido, estás en la mesa {mesa}</h1>}
       </div>
     </nav>
   );
