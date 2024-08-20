@@ -1,0 +1,80 @@
+.infoMenu {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.modalTrigger{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.menuImage {
+  width: 200px;
+  height: 200px;
+  border: solid 2px var(--color-claro);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.menuImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.addButton {
+  background-color: transparent;
+  color: var(--color-claro);
+  font-size: 1rem;
+  border: solid 2px var(--color-claro);
+  border-radius: 0.4rem;
+  position: relative;
+  z-index: 100;
+  bottom: 165px;
+  right: 45px;
+}
+
+.menuText {
+  h5 {
+    font-family: var(--fuente-titulo);
+    color: var(--color-claro);
+  }
+  h2 {
+    font-size: 15px;
+    text-align: start;
+    font-family: var(--fuente-cuerpo);
+    color: var(--color-claro-secundario);
+  }
+}
+
+.modal-content{
+    background-color: var(--color-fondo) !important;
+    border: solid 2px var(--color-claro) !important;
+    color: var(--color-claro) !important;
+}
+
+.modal-header{
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    h1{
+        font-family: var(--fuente-titulo);
+        font-size: 1.5rem !important;
+    }
+}
+
+.modal-body p{
+    text-wrap: wrap;
+}
+
+.modal-body img{
+    border: solid 2px;
+    border-radius: 1rem;
+    width: 100%;
+    object-fit: cover;
+}
