@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 import { useSession } from "../../stores/useSession";
 import Input from "../ui/Input/Input";
-import { postRegisterFn } from "../../api/auth";
+import { postRegisterFn, checkEmailExists } from "../../api/auth";
 import { useState } from "react";
 
 const RegisterForm = () => {
@@ -128,6 +128,13 @@ const RegisterForm = () => {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
               message: "El correo debe contener @ y un dominio",
             },
+            validate: async (value) => {
+              const emailExists = await checkEmailExists(value);
+              if (emailExists) {
+                return "Este email ya est registrado";
+              }
+              return true;
+            },
           }}
           placeholder="Correo electrónico"
           register={register}
@@ -181,7 +188,7 @@ const RegisterForm = () => {
             onChange={handleCheckboxChange1}
           />
           <label className="custom-label" htmlFor="showPassword">
-            Show Password
+            Ver contraseña
           </label>
         </div>
       </div>
@@ -212,7 +219,7 @@ const RegisterForm = () => {
             onChange={handleCheckboxChange2}
           />
           <label className="custom-label" htmlFor="showRepeatedPassword">
-            Show Repeated Password
+            Ver contraseña repetida
           </label>
         </div>
       </div>
