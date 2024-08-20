@@ -3,6 +3,7 @@ import { useSession } from "../../../stores/useSession";
 import Swal from "sweetalert2";
 
 import "./headerStyle.css";
+import "../../../index.css";
 import logoBurgerTuc from "../../../assets/logoBurgerTuc.png";
 
 const Header = () => {
@@ -10,18 +11,22 @@ const Header = () => {
 
   const handleLogout = async () => {
     const action = await Swal.fire({
-      title: "Attention",
-      text: "Are you sure you want to logout?",
+      title: "Atención",
+      text: "Estas seguro que deseas cerrar sesión?",
       icon: "info",
-      confirmButtonText: "Logout",
+      confirmButtonText: "CERRAR SESIÓN",
       showCancelButton: true,
-      cancelButtonText: "Cancel",
+      cancelButtonText: "CANCELAR",
     });
 
     if (action.isConfirmed) {
       logout();
     }
   };
+
+  <div className="logoutCard">
+    <handleLogout />
+  </div>;
 
   return (
     <nav className="navbar fixed-top">

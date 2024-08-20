@@ -2,9 +2,7 @@ import { decodeJWT } from "../utilities/decodeJWT";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-// ---------------------------------------------
-// POST
-// ---------------------------------------------
+// POST LOGIN FUNTION
 
 export const postLoginFn = async (data) => {
   const res = await fetch(`${BACKEND_URL}/auth/login`, {
@@ -39,6 +37,8 @@ export const postLoginFn = async (data) => {
 
   return userData;
 };
+
+// POST REGISTER FUNTION
 
 export const postRegisterFn = async (data) => {
   const res = await fetch(`${BACKEND_URL}/users`, {
@@ -131,4 +131,22 @@ export const putRegisterFn = async (data) => {
   });
 
   return userData;
+};
+
+// GET REGISTER FUNTION EMAIL CONTROL
+export const checkEmailExists = async (email) => {
+  const res = await fetch(`${BACKEND_URL}/users/check-email?email=${email}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Error al verificar el correo");
+  }
+
+  const data = await res.json();
+
+  return data.exists;
 };

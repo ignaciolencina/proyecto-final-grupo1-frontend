@@ -1,10 +1,11 @@
+/*
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { postLoginFn } from "../../api/auth";
 import Input from "../ui/Input/Input";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "../../stores/useSession";
-import { postLoginFn } from "../../api/auth";
 
 const LoginForm = () => {
   const { login } = useSession();
@@ -22,7 +23,7 @@ const LoginForm = () => {
     mutationFn: postLoginFn,
     onSuccess: (userData) => {
       toast.dismiss();
-      toast.success(`Bienvenido ${userData.firstname}!`);
+      toast.success(`Welcome ${userData.firstname}!`);
 
       reset();
 
@@ -39,65 +40,57 @@ const LoginForm = () => {
   });
 
   const handleSubmit = (data) => {
-    toast.loading("Cargando...");
+    toast.loading("Loading...");
     postLogin(data);
   };
 
   return (
     <form onSubmit={onSubmitRHF(handleSubmit)}>
       <Input
-        className="mt-2"
-        error={errors.email}
-        label="Correo electrónico"
-        maxLength={40}
-        minLength={7}
-        name="email"
+        error={errors.username}
+        label="Username"
+        maxLenght={20}
+        minLenght={3}
+        name="username"
         options={{
-          required: "Campo requerido",
-          minLength: {
-            value: 7,
-            message: "Revisar correo elecronico y/o contraseña",
+          required: {
+            value: true,
+            message: "Obligatory field",
           },
-          maxLength: {
-            value: 40,
-            message: "Revisar correo elecronico y/o contraseña",
-          },
-          pattern: {
-            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message: "Revisar correo elecronico y/o contraseña",
-          },
+          length,
+          minLenght: 3,
+          maxLenght: 20,
         }}
-        placeholder="Correo electrónico"
+        placeholder="Username"
         register={register}
-        type="email"
       />
       <Input
-        className="mt-2"
+        className="mt-3"
         error={errors.password}
-        label="Contraseña"
+        label="Password"
+        maxLenght={20}
+        minLenght={3}
         name="password"
         options={{
           required: {
             value: true,
-            message: "Campo requerido",
+            message: "Obligatory field",
           },
-          minLength: 6,
-          maxLength: 15,
-          pattern: {
-            value:
-              /^(?=(?:.*\d.*\d))(?=(?:.*[a-zA-Z].*[a-zA-Z]))[a-zA-Z\d]{6,15}$/,
-            message: "Revisar correo elecronico y/o contraseña",
-          },
+          minLenght: 3,
+          maxLenght: 20,
         }}
+        placeholder="Password"
         register={register}
         type="password"
       />
-      <div className="d-flex justify-content-center mt-4">
-        <button className="loginBoton" type="submit">
-          INICIAR SESION
+      <div className="text-center mt-4">
+        <button className="btn text-light login-btn" type="submit">
+          Login
         </button>
       </div>
     </form>
   );
 };
 export default LoginForm;
+
+*/
