@@ -30,10 +30,6 @@ export const router = createBrowserRouter([
             path: "register",
             element: <RegisterView />,
           },
-          {
-            path: "userProfile",
-            element: <UserProfileView />,
-          },
         ],
       },
       // RUTAS PRIVADAS
