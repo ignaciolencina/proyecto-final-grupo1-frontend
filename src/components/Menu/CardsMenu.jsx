@@ -5,8 +5,8 @@ const CardsMenu = (props) => {
   const { menuItem } = props;
   const modalId = `descriptionModal-${menuItem.id}`;
   return (
-    <section className={menuItem.disabled ? "notAvailable" : ""}>
-      <article className="menuCard me-4 my-4">
+    <section className={`menuCard ${menuItem.disabled ? "notAvailable" : ""}`}>
+      <article>
         <button
           className="modalTrigger"
           data-bs-target={`#${modalId}`}
@@ -65,7 +65,7 @@ const CardsMenu = (props) => {
               <p className="mt-3 mb-0 bodyFont">{menuItem.description}</p>
             </div>
             <div className="footer">
-            <h2 className="priceModal me-5">${menuItem.price}</h2>
+              <h2 className="priceModal me-5">${menuItem.price}</h2>
               <button
                 className="btn btn-outline-secondary"
                 data-bs-dismiss="modal"
