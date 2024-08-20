@@ -14,6 +14,7 @@ export const postLoginFn = async (data) => {
     },
     body: JSON.stringify(data),
   });
+  console.log(data, res);
 
   if (res.status === 204 || res.headers.get("content-length") === "0") {
     throw new Error("Respuesta vacía del servidor");
