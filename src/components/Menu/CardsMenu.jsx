@@ -1,35 +1,38 @@
+import PropTypes from "prop-types";
 import "./cardsMenuStyle.css";
 
-const CardsMenu = () => {
+const CardsMenu = (props) => {
+  const { menuItem } = props;
+  const modalId = `descriptionModal-${menuItem.id}`;
   return (
-    <section>
+    <section className={menuItem.disabled ? "notAvailable" : ""}>
       <article className="menuCard me-4 my-4">
         <button
           className="modalTrigger"
-          data-bs-target="#descriptionModal"
+          data-bs-target={`#${modalId}`}
           data-bs-toggle="modal"
+          disabled={menuItem.disabled}
           type="button"
         >
           <div className="menuImage">
-            <img
-              alt="Item de menú"
-              src="https://www.goiko.com/es/wp-content/uploads/2017/03/KevinBacon_1200x600px-340x340.png"
-            />
+            <img alt={menuItem.name} src={menuItem.imageUrl} />
+            {menuItem.disabled && <div className="overlay"></div>}
           </div>
         </button>
-        <button className="addButton">
+        <button className="addButton" disabled={menuItem.disabled}>
           <i className="bi bi-plus-lg"></i>
         </button>
         <div className="menuText mt-3 ps-3">
           <button
             className="modalTrigger"
-            data-bs-target="#descriptionModal"
+            data-bs-target={`#${modalId}`}
             data-bs-toggle="modal"
+            disabled={menuItem.disabled}
             type="button"
           >
-            <h5>KEVIN BACON</h5>
+            <h5>{menuItem.name}</h5>
           </button>
-          <h2>$7000</h2>
+          <h2>${menuItem.price}</h2>
         </div>
       </article>
       <div
@@ -37,14 +40,14 @@ const CardsMenu = () => {
         aria-labelledby="foodDescription"
         className="modal fade"
         data-bs-theme="dark"
-        id="descriptionModal"
+        id={modalId}
         tabIndex="-1"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="foodDescription">
-                KEVIN BACON
+                {menuItem.name}
               </h1>
               <button
                 aria-label="Close"
@@ -55,18 +58,14 @@ const CardsMenu = () => {
             </div>
             <div className="modal-body">
               <img
-                alt="Item de menú"
+                alt={menuItem.name}
                 className="modalImage"
-                src="https://www.goiko.com/es/wp-content/uploads/2017/03/KevinBacon_1200x600px-340x340.png"
+                src={menuItem.imageUrl}
               />
-              <p className="mt-3 mb-0 bodyFont">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt
-                est beatae placeat dolore enim dolorem dignissimos architecto, a
-                assumenda facilis, mollitia aliquid illum voluptates sit iure
-                ab? Tempore, ipsum est
-              </p>
+              <p className="mt-3 mb-0 bodyFont">{menuItem.description}</p>
             </div>
-            <div className="text-end">
+            <div className="footer">
+            <h2 className="priceModal me-5">${menuItem.price}</h2>
               <button
                 className="btn btn-outline-secondary"
                 data-bs-dismiss="modal"
@@ -83,3 +82,14 @@ const CardsMenu = () => {
   );
 };
 export default CardsMenu;
+
+CardsMenu.propTypes = {
+  menuItem: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    disabled: PropTypes.bool.isRequired,
+  }),
+};
