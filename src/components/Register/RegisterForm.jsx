@@ -6,8 +6,20 @@ import { toast } from "sonner";
 import { useSession } from "../../stores/useSession";
 import Input from "../ui/Input/Input";
 import { postRegisterFn } from "../../api/auth";
+import { useState } from "react";
 
 const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatedPassword, setShowRepeatedPassword] = useState(false);
+
+  const handleCheckboxChange1 = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleCheckboxChange2 = () => {
+    setShowRepeatedPassword(!showRepeatedPassword);
+  };
+
   const { login } = useSession();
 
   const navigate = useNavigate();
@@ -17,7 +29,7 @@ const RegisterForm = () => {
     handleSubmit: onSubmitRHF,
     formState: { errors },
     reset,
-    getValues,
+    watch,
   } = useForm();
 
   const { mutate: postRegister } = useMutation({
@@ -41,6 +53,8 @@ const RegisterForm = () => {
       toast.warning(e.message);
     },
   });
+
+  const password = watch("password", "");
 
   const handleSubmit = (data) => {
     toast.loading("Guardando nuevo usuario");
@@ -155,30 +169,52 @@ const RegisterForm = () => {
               ),
             },
           }}
+          placeholder="Password"
           register={register}
-          type="password"
+          type={showPassword ? "text" : "password"}
         />
+        <div className="password-visible ms-3">
+          <input
+            className="custom-checkbox mt-2"
+            id="showPassword"
+            type="checkbox"
+            onChange={handleCheckboxChange1}
+          />
+          <label className="custom-label" htmlFor="showPassword">
+            Show Password
+          </label>
+        </div>
       </div>
       <div className="col-12 col-md-6 relative">
         <Input
-          error={errors.password}
-          label="Repetir Contraseña"
+          error={errors.repeatPassword}
+          label="Repeat Password"
+          maxLength={15}
+          minLength={6}
           name="repeatPassword"
           options={{
             required: {
               value: true,
-              message: "Este campo es requerido",
+              message: "Campo requerido",
             },
-            validate: (value) => {
-              const password = getValues("password");
-              const isValid = value === password;
-              console.log({ value, password, isValid });
-              return isValid || "Las contraseñas no coinciden";
-            },
+            validate: (value) =>
+              value === password || "Las contraseñas no coinciden",
           }}
+          placeholder="Repeat Password"
           register={register}
-          type="password"
+          type={showRepeatedPassword ? "text" : "password"}
         />
+        <div className="password-visible ms-3">
+          <input
+            className="custom-checkbox mt-2"
+            id="showRepeatedPassword"
+            type="checkbox"
+            onChange={handleCheckboxChange2}
+          />
+          <label className="custom-label" htmlFor="showRepeatedPassword">
+            Show Repeated Password
+          </label>
+        </div>
       </div>
       <div className="d-flex justify-content-center mt-4">
         <button className="registroBoton" type="submit">
