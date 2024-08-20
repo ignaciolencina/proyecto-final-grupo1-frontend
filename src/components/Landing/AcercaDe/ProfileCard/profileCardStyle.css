@@ -44,3 +44,9 @@ h2{
   width: 250px;
   white-space: wrap;
 }
+
+@media (width >= 525px){
+  .profileCard{
+    height: 520px;
+  }
+}

@@ -61,3 +61,17 @@
     font-size: 2rem;
   }
 }
+
+@media (width >= 550px) {
+  .offcanvas {
+    height: 50vh !important;
+  }
+  .logoOffcanvas {
+   display: none;
+  }
+  .socialNavbar {
+    position: absolute;
+    top: 72px;
+    right: 5%;
+  }
+}

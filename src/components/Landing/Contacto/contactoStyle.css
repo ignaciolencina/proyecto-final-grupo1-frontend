@@ -81,3 +81,14 @@
     font-size: 30px;
   }
 }
+
+@media (width >= 460px){
+  .contactoImage {
+    img {
+      height: 350px;
+    }
+  }
+  .contactoMap{
+    height: 350px;
+  }
+}
