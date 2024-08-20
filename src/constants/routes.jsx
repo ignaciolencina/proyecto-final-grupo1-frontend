@@ -6,7 +6,7 @@ import LoginView from "../views/Login/LoginView";
 import RegisterView from "../views/Register/RegisterView";
 import LandingView from "../views/LandingView";
 import Cart from "../views/Carrito/Cart";
-import ProductListPage from "../components/Lista-Productos/ProductListPage";
+import ProductListPage from "../views/Lista-Productos/ProductListPage";
 
 export const router = createBrowserRouter([
   {
