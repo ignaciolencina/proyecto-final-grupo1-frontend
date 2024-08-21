@@ -7,7 +7,7 @@ import { useSession } from "../../stores/useSession";
 import { useEffect, useState } from "react";
 
 const UserProfileForm = () => {
-  const { user } = useSession(); // Obteniendo el usuario desde el estado global
+  const { user, userToEdit, clearUserToEdit, setUserToEdit } = useSession();
 
   const {
     register,
@@ -17,7 +17,6 @@ const UserProfileForm = () => {
     setValue,
   } = useForm();
   const queryClient = useQueryClient();
-  const { userToEdit, clearUserToEdit } = useSession();
 
   const [isEditing, setIsEditing] = useState({
     firstname: false,
@@ -27,17 +26,20 @@ const UserProfileForm = () => {
   });
 
   useEffect(() => {
-    if (userToEdit) {
+    if (!userToEdit && user) {
+      console.log("Configurando userToEdit con el usuario actual:", user);
+      setUserToEdit(user);
+    } else if (userToEdit) {
+      console.log(
+        "Configurando valores del formulario con userToEdit:",
+        userToEdit
+      );
       setValue("firstname", userToEdit.firstname);
       setValue("lastname", userToEdit.lastname);
       setValue("email", userToEdit.email);
-      setValue("password", userToEdit.password);
-    } else if (user) {
-      setValue("firstname", user.firstname);
-      setValue("lastname", user.lastname);
-      setValue("email", user.email);
+      /* setValue("password", userToEdit.password); */
     }
-  }, [userToEdit, user, setValue]);
+  }, [userToEdit, user, setValue, setUserToEdit]);
 
   const { mutate: putRegister } = useMutation({
     mutationFn: putRegisterFn,
@@ -55,8 +57,14 @@ const UserProfileForm = () => {
   });
 
   const handleSubmitForm = (data) => {
+    console.log("Datos enviados al submit:", data);
     toast.loading("Guardando cambios...");
-    if (userToEdit) putRegister({ userId: userToEdit.id, data });
+
+    if (userToEdit) {
+      putRegister({ userId: userToEdit.id, data });
+    } else {
+      console.log("No se encontró userToEdit");
+    }
   };
 
   const toggleEditing = (field) => {

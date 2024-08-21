@@ -70,6 +70,7 @@ export const postRegisterFn = async (data) => {
 // ---------------------------------------------
 // PUT
 // ---------------------------------------------
+// LOGIN
 
 export const putLoginFn = async (data) => {
   // data: { email, password }
@@ -106,8 +107,9 @@ export const putLoginFn = async (data) => {
   return userData;
 };
 
-export const putRegisterFn = async (data) => {
-  const res = await fetch(`${BACKEND_URL}/users`, {
+// REGISTER
+export const putRegisterFn = async (userId, data) => {
+  const res = await fetch(`${BACKEND_URL}/users/${userId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
