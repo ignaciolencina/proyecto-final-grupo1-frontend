@@ -53,18 +53,18 @@ const LoginForm = () => {
         minLength={7}
         name="email"
         options={{
-          required: "Campo obligatorio",
+          required: "Campo requerido",
           minLength: {
             value: 7,
-            message: "El correo debe tener mínimo 7 caracteres",
+            message: "Revisar correo elecronico y/o contraseña",
           },
           maxLength: {
             value: 40,
-            message: "El correo debe tener máximo 40 caracteres",
+            message: "Revisar correo elecronico y/o contraseña",
           },
           pattern: {
             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message: "El correo debe contener @ y un dominio",
+            message: "Revisar correo elecronico y/o contraseña",
           },
         }}
         placeholder="Correo electrónico"
@@ -86,6 +86,7 @@ const LoginForm = () => {
           pattern: {
             value:
               /^(?=(?:.*\d.*\d))(?=(?:.*[a-zA-Z].*[a-zA-Z]))[a-zA-Z\d]{6,15}$/,
+            message: "Revisar correo elecronico y/o contraseña",
           },
         }}
         register={register}
