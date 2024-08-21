@@ -5,6 +5,7 @@ import PrivateViews from "../views/routing/PrivateViews";
 import LoginView from "../views/Login/LoginView";
 import RegisterView from "../views/Register/RegisterView";
 import LandingView from "../views/LandingView";
+import AdminView from "../views/Admin/AdminView";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "admin",
-            element: <p>Admin</p>,
+            element: <AdminView />,
           },
         ],
       },
