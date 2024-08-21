@@ -14,12 +14,20 @@ export const useSession = create((set) => {
   return {
     user,
     isLoggedIn,
+    userToEdit: null,
     login: (newUser) => {
       set({ user: newUser, isLoggedIn: true });
     },
     logout: () => {
       sessionStorage.removeItem("token");
       set({ user: null, isLoggedIn: false });
+    },
+    setUserToEdit: (user) => {
+      set({ userToEdit: user });
+    },
+
+    clearUserToEdit: () => {
+      set({ userToEdit: null });
     },
   };
 });
