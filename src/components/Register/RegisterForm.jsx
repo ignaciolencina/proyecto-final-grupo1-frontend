@@ -131,7 +131,7 @@ const RegisterForm = () => {
             validate: async (value) => {
               const emailExists = await checkEmailExists(value);
               if (emailExists) {
-                return "Este email ya est registrado";
+                return "Este email ya esta registrado";
               }
               return true;
             },
