@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import "./cardsMenuStyle.css";
+import { useCartStore } from "../../stores/useCartStore";
 
-const CardsMenu = (props) => {
-  const { menuItem } = props;
+const CardsMenu = ({ menuItem}) => {
+  const addToTheCart = useCartStore((state) => state.addToTheCart);
   const modalId = `descriptionModal-${menuItem.id}`;
   return (
     <section className={`menuCard ${menuItem.disabled ? "notAvailable" : ""}`}>
@@ -19,7 +20,7 @@ const CardsMenu = (props) => {
             {menuItem.disabled && <div className="overlay"></div>}
           </div>
         </button>
-        <button className="addButton" disabled={menuItem.disabled}>
+        <button className="addButton" disabled={menuItem.disabled} onClick={() => addToTheCart(menuItem)}>
           <i className="bi bi-plus-lg"></i>
         </button>
         <div className="menuText mt-3 ps-3">

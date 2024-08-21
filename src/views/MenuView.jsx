@@ -21,16 +21,19 @@ const MenuView = () => {
 
   if (isError) {
     return (
-      <div className="alert alert-danger">
-        Ocurrió un error trayendo los items del menú
+      <div className="mt-3 mx-2 alert alert-danger">
+        Lo sentimos, el menú no está disponible{" "}
+        <span className="fs-2">
+          <i className="bi bi-emoji-frown"></i>
+        </span>
       </div>
     );
   }
 
   if (menuItems && menuItems.length === 0) {
     return (
-      <div className="alert alert-danger">
-        No se encontraron items del menú para mostrar
+      <div className="mt-3 mx-2 alert alert-danger">
+        Lo sentimos, estamos trabajando sobre el menú
       </div>
     );
   }
@@ -43,7 +46,7 @@ const MenuView = () => {
             <CardsMenu menuItem={menuItem} />
           </article>
         ))}
-      </section>
+      </section> 
     </section>
   );
 };
