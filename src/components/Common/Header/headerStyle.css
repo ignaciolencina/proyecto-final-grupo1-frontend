@@ -62,6 +62,20 @@
   }
 }
 
+@media (width >= 550px) {
+  .offcanvas {
+    height: 50vh !important;
+  }
+  .logoOffcanvas {
+   display: none;
+  }
+  .socialNavbar {
+    position: absolute;
+    top: 72px;
+    right: 5%;
+  }
+}
+
 .logoutCard {
   border-radius: 20px 0 20px 0;
   box-shadow: 0 0 0.2rem 0.2rem var(--color-claro);
