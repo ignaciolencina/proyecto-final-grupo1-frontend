@@ -17,4 +17,5 @@ export const useCartStore = create((set) => ({
       cartItems: [...state.cartItems, product],
     }));
   },
+  clearCart: () => set({ cartItems: [] }),
 }));

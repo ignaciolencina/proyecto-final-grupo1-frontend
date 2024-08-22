@@ -6,7 +6,7 @@ const RootView = () => {
   return (
     <>
       <Header />
-      <main className="container my-3 flex-grow-1 p-0">
+      <main className="my-3 flex-grow-1 p-0">
         <Outlet />
       </main>
       <Footer />

@@ -12,7 +12,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 
 import "./index.css";
-import CartApp from "./components/Cart/CartApp";
 
 const queryClient = new QueryClient();
 
@@ -21,7 +20,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <Toaster richColors position="top-center" />
-      <CartApp />
     </QueryClientProvider>
   </React.StrictMode>
 );

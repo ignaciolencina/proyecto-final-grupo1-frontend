@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import LoginForm from "../../components/Login/LoginForm";
 import "./loginStyle.css";
 import "../../index.css";
-// import logoBurgerTuc from "../../assets/logoBurgerTuc.png";
 
 const LoginView = () => {
   return (
@@ -29,8 +28,3 @@ const LoginView = () => {
   );
 };
 export default LoginView;
-
-// para agregar una imagen en el article de login
-/*
- <img alt="Logo" className="login-img" src={logoBurgerTuc} /> 
- */

@@ -27,3 +27,18 @@
   .textoRojo{
     color: var(--color-detalles);
   }
+
+@media (width >= 550px) {
+  .railing-text{
+    font-size: 3rem;
+  }
+
+  @keyframes scroll-text {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-20%);
+    }
+  }
+}

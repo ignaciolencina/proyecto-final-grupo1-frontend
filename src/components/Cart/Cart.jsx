@@ -4,7 +4,15 @@ import "./cartStyle.css";
 import { useCartStore } from "../../stores/useCartStore";
 
 const Cart = () => {
-    const cartItems = useCartStore((state) => state.cartItems);
+  const cartItems = useCartStore((state) => state.cartItems);
+  const clearCart = useCartStore((state) => state.clearCart);
+
+  const totalPrice = cartItems.reduce((accumulator, product) => {
+    return accumulator + product.price;
+  }, 0);
+
+  console.log("Precio total:", totalPrice);
+
   return (
     <div
       aria-labelledby="offcanvasCartLabel"
@@ -39,11 +47,13 @@ const Cart = () => {
       <div className="cartResume">
         <div className="textResume">
           <h2>PRECIO TOTAL :</h2>
-          <h2>$20000</h2>
+          <h2>${totalPrice}</h2>
         </div>
         <div className="buttonsResume">
           <button className="buttonF">FINALIZAR PEDIDO</button>
-          <button className="buttonC">LIMPIAR CARRITO</button>
+          <button className="buttonC" onClick={() => clearCart(cartItems)}>
+            LIMPIAR CARRITO
+          </button>
         </div>
       </div>
     </div>
