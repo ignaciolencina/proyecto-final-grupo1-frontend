@@ -30,6 +30,7 @@
   background-color: transparent;
   width: 60px;
   height: 60px;
+  position: relative;
 }
 
 .bi.bi-cart4{
@@ -37,6 +38,17 @@
   width: 40px;
   height: 40px;
   font-size: 35px;
+}
+
+.activeCart{
+  background-color: #008A2E;
+  width: 10px;
+  height: 10px;
+  border: solid 1px #007d2a;
+  border-radius: 100%;
+  position: absolute;
+  top: 20px;
+  right: 28px
 }
 
 .navbarBrand {

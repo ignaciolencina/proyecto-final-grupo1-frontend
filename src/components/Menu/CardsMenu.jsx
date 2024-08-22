@@ -1,28 +1,43 @@
 import PropTypes from "prop-types";
-import "./cardsMenuStyle.css";
+import { toast } from "sonner";
 import { useCartStore } from "../../stores/useCartStore";
+import "./cardsMenuStyle.css";
 
-const CardsMenu = ({ menuItem}) => {
-  const addToTheCart = useCartStore((state) => state.addToTheCart);
+const CardsMenu = ({ menuItem }) => {
+  const { addToTheCart } = useCartStore();
+
+  const handleAdd = (menuItem) => {
+    toast.success("Producto agregado!", {
+      duration: 800,
+    });
+    addToTheCart(menuItem);
+  };
+
   const modalId = `descriptionModal-${menuItem.id}`;
   return (
     <section className={`menuCard ${menuItem.disabled ? "notAvailable" : ""}`}>
       <article>
-        <button
-          className="modalTrigger"
-          data-bs-target={`#${modalId}`}
-          data-bs-toggle="modal"
-          disabled={menuItem.disabled}
-          type="button"
-        >
-          <div className="menuImage">
-            <img alt={menuItem.name} src={menuItem.imageUrl} />
-            {menuItem.disabled && <div className="overlay"></div>}
-          </div>
-        </button>
-        <button className="addButton" disabled={menuItem.disabled} onClick={() => addToTheCart(menuItem)}>
-          <i className="bi bi-plus-lg"></i>
-        </button>
+        <div className="imageZone">
+          <button
+            className="modalTrigger"
+            data-bs-target={`#${modalId}`}
+            data-bs-toggle="modal"
+            disabled={menuItem.disabled}
+            type="button"
+          >
+            <div className="menuImage">
+              <img alt={menuItem.name} src={menuItem.imageUrl} />
+              {menuItem.disabled && <div className="overlay"></div>}
+            </div>
+          </button>
+          <button
+            className="addButton"
+            disabled={menuItem.disabled}
+            onClick={() => handleAdd(menuItem)}
+          >
+            <i className="bi bi-plus-lg"></i>
+          </button>
+        </div>
         <div className="menuText mt-3 ps-3">
           <button
             className="modalTrigger"
@@ -74,7 +89,12 @@ const CardsMenu = ({ menuItem}) => {
               >
                 CERRAR
               </button>
-              <button className="btn btn-danger m-3">AGREGAR</button>
+              <button
+                className="btn btn-danger m-3"
+                onClick={() => handleAdd(menuItem)}
+              >
+                AGREGAR
+              </button>
             </div>
           </div>
         </div>

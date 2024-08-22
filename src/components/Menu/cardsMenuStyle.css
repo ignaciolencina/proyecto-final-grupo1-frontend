@@ -7,10 +7,13 @@
   }
 } */
 
-.menuCard{
-    display: flex;
-    justify-content: center;
-    padding-left: 30px;
+.menuCard {
+  display: flex;
+  justify-content: center;
+}
+
+.imageZone {
+  position: relative;
 }
 
 .modalTrigger {
@@ -40,10 +43,10 @@
   font-size: 1rem;
   border: solid 2px var(--color-claro);
   border-radius: 0.4rem;
-  position: relative;
+  position: absolute;
   z-index: 100;
-  bottom: 215px;
-  right: 45px;
+  right: 10px;
+  top: 10px;
 }
 
 .menuText {
@@ -97,8 +100,8 @@
 }
 
 .notAvailable {
-  opacity: 0.6; 
-  pointer-events: none; 
+  opacity: 0.6;
+  pointer-events: none;
   position: relative;
 }
 
@@ -118,5 +121,5 @@
 
 .addButton[disabled] {
   cursor: not-allowed;
-  opacity: 0.5; 
+  opacity: 0.5;
 }

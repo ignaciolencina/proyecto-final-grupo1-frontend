@@ -6,13 +6,15 @@ import "./headerStyle.css";
 import "../../../index.css";
 import logoBurgerTuc from "../../../assets/logoBurgerTuc.png";
 import Cart from "../../Cart/Cart";
+import { useCartStore } from "../../../stores/useCartStore";
 
 const Header = () => {
   const { user, isLoggedIn, logout } = useSession();
+  const { cartItems = [] } = useCartStore();
 
   const handleLogout = async () => {
     const action = await Swal.fire({
-      title: "Atención",
+      title: "Ya te vas?",
       text: "Estas seguro que deseas cerrar sesión?",
       icon: "info",
       confirmButtonText: "CERRAR SESIÓN",
@@ -64,7 +66,10 @@ const Header = () => {
               </span>
             </button>
           )}
-        </div>
+          {cartItems.length >= 1 && (
+            <div className="activeCart"></div>
+          )}
+        </div>  
         <Cart />
         <div
           aria-labelledby="offcanvasNavbarLabel"

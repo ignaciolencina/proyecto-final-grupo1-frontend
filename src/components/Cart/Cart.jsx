@@ -2,16 +2,36 @@ import CardCart from "./Cards/CardCart";
 import PropTypes from "prop-types";
 import "./cartStyle.css";
 import { useCartStore } from "../../stores/useCartStore";
+import { toast } from "sonner";
+import { useMutation } from "@tanstack/react-query";
+import { postOrderFn } from "../../api/orders";
 
 const Cart = () => {
-  const { cartItems } = useCartStore();
-  const { clearCart } = useCartStore();
+  const { cartItems, clearCart } = useCartStore();
 
   const totalPrice = cartItems.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
 
-  console.log("Precio total:", totalPrice);
+  const { mutate: postOrder } = useMutation({
+    mutationFn: postOrderFn,
+    onSuccess: () => {
+      toast.dismiss();
+      toast.success("Tu orden se envió correctamente");
+
+      clearCart();
+    },
+    onError: (e) => {
+      toast.dismiss();
+      toast.warning(e.message);
+    },
+  });
+
+  const handleSubmit = (data) =>{
+    toast.loading("Enviando la orden")
+    postOrder(data)
+  }
+
 
   return (
     <div
@@ -50,7 +70,7 @@ const Cart = () => {
           <h2>${totalPrice}</h2>
         </div>
         <div className="buttonsResume">
-          <button className="buttonF">FINALIZAR PEDIDO</button>
+          <button className="buttonF" onClick={() => handleSubmit(cartItems)}>FINALIZAR PEDIDO</button>
           <button className="buttonC" onClick={() => clearCart(cartItems)}>
             LIMPIAR CARRITO
           </button>
