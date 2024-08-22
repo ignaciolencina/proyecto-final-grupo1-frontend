@@ -92,6 +92,17 @@ const Header = () => {
                   </Link>
                 </li>
               )}
+              {isLoggedIn && (
+                <li className="nav-item">
+                  <Link
+                    reloadDocument
+                    className="nav-link titleFont"
+                    to="/userProfile"
+                  >
+                    PERFIL
+                  </Link>
+                </li>
+              )}
               {isLoggedIn && user.isAdmin && (
                 <li className="nav-item">
                   <Link
