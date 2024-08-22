@@ -4,11 +4,11 @@ import "./cartStyle.css";
 import { useCartStore } from "../../stores/useCartStore";
 
 const Cart = () => {
-  const cartItems = useCartStore((state) => state.cartItems);
-  const clearCart = useCartStore((state) => state.clearCart);
+  const { cartItems } = useCartStore();
+  const { clearCart } = useCartStore();
 
   const totalPrice = cartItems.reduce((accumulator, product) => {
-    return accumulator + product.price;
+    return accumulator + product.price * product.quantity;
   }, 0);
 
   console.log("Precio total:", totalPrice);
