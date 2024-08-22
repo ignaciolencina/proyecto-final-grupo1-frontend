@@ -5,6 +5,7 @@ import PrivateViews from "../views/routing/PrivateViews";
 import LoginView from "../views/Login/LoginView";
 import RegisterView from "../views/Register/RegisterView";
 import LandingView from "../views/LandingView";
+import UserProfileView from "../views/UserProfile/UserProfileView";
 import AdminView from "../views/Admin/AdminView";
 import MenuView from "../views/MenuView";
 
@@ -15,8 +16,8 @@ export const router = createBrowserRouter([
     children: [
       // RUTAS PÚBLICAS
       {
-        path: '',
-        element: <LandingView/>,
+        path: "",
+        element: <LandingView />,
       },
       {
         path: 'menu',
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
           {
             path: "admin",
             element: <AdminView />,
+          },
+          {
+            path: "userProfile",
+            element: <UserProfileView />,
           },
         ],
       },
