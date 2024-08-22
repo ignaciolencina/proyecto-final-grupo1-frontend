@@ -67,10 +67,7 @@ export const postRegisterFn = async (data) => {
   return userData;
 };
 
-// ---------------------------------------------
-// PUT
-// ---------------------------------------------
-// LOGIN
+// PUT LOGIN FUNTION
 
 export const putLoginFn = async (data) => {
   // data: { email, password }
@@ -107,31 +104,22 @@ export const putLoginFn = async (data) => {
   return userData;
 };
 
-// REGISTER
-export const putRegisterFn = async (userId, data) => {
+// PUT REGISTER FUNTION
+export const putRegisterFn = async ([userId, data]) => {
   const res = await fetch(`${BACKEND_URL}/users/${userId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: JSON.stringify({
-      firstname: data.firstname,
-      lastname: data.lastname,
-      email: data.email,
-      password: data.password,
-    }),
+    body: JSON.stringify(data),
   });
 
   if (!res.ok) {
     throw new Error("Ocurrió un error al editar el usuario");
   }
 
-  // Token en registro
-  const userData = await postLoginFn({
-    email: data.email,
-    password: data.password,
-  });
-
+  const userData = await res.json();
   return userData;
 };
 

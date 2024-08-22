@@ -37,16 +37,17 @@ const UserProfileForm = () => {
       setValue("firstname", userToEdit.firstname);
       setValue("lastname", userToEdit.lastname);
       setValue("email", userToEdit.email);
-      /* setValue("password", userToEdit.password); */
+      setValue("password", userToEdit.password);
     }
   }, [userToEdit, user, setValue, setUserToEdit]);
 
   const { mutate: putRegister } = useMutation({
     mutationFn: putRegisterFn,
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast.dismiss();
       toast.success("Datos actualizados correctamente");
       reset();
+      setUserToEdit(data.data);
       clearUserToEdit();
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
@@ -60,10 +61,22 @@ const UserProfileForm = () => {
     console.log("Datos enviados al submit:", data);
     toast.loading("Guardando cambios...");
 
-    if (userToEdit) {
-      putRegister({ userId: userToEdit.id, data });
+    if (userToEdit?.id) {
+      const payload = {
+        firstname: data.firstname || "",
+        lastname: data.lastname || "",
+        email: data.email || "",
+      };
+      if (data.password) {
+        payload.password = data.password;
+      }
+      console.log("Payload enviado al backend:", payload); // Confirma que todos los campos están presentes
+
+      putRegister([userToEdit.id, data]);
     } else {
-      console.log("No se encontró userToEdit");
+      console.error("No se encontró userToEdit o el id es invalido");
+      toast.dismiss();
+      toast.error("No se encontró el usuario para editar.");
     }
   };
 
@@ -107,13 +120,11 @@ const UserProfileForm = () => {
               register={register}
             />
           )}
-          <button
-            className="user-profile-boton-editar"
+          <div
+            className="bi bi-pencil-fill ms-3"
             type="button"
             onClick={() => toggleEditing("firstname")}
-          >
-            Editar
-          </button>
+          ></div>
         </div>
       </div>
 
@@ -142,13 +153,11 @@ const UserProfileForm = () => {
               register={register}
             />
           )}
-          <button
-            className="user-profile-boton-editar"
+          <div
+            className="bi bi-pencil-fill ms-3"
             type="button"
             onClick={() => toggleEditing("lastname")}
-          >
-            Editar
-          </button>
+          ></div>
         </div>
       </div>
 
@@ -174,13 +183,11 @@ const UserProfileForm = () => {
               type="email"
             />
           )}
-          <button
-            className="user-profile-boton-editar"
+          <div
+            className="bi bi-pencil-fill ms-3"
             type="button"
             onClick={() => toggleEditing("email")}
-          >
-            Editar
-          </button>
+          ></div>
         </div>
       </div>
 
@@ -206,13 +213,11 @@ const UserProfileForm = () => {
               type="password"
             />
           )}
-          <button
-            className="user-profile-boton-editar"
+          <div
+            className="bi bi-pencil-fill ms-3"
             type="button"
             onClick={() => toggleEditing("password")}
-          >
-            Editar
-          </button>
+          ></div>
         </div>
       </div>
 

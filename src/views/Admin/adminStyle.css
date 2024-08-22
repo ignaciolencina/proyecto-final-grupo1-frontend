@@ -1,0 +1,8 @@
+.adminTitle {
+    margin-inline-start: 13px;
+    h2 {
+      font-size: 2rem;
+      font-family: var(--fuente-titulo);
+      color: var(--color-claro);
+    }
+  }
