@@ -8,7 +8,7 @@ import { postOrderFn } from "../../api/orders";
 
 const Cart = () => {
   const { cartItems, clearCart } = useCartStore();
-
+  console.log(cartItems);
   const totalPrice = cartItems.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
@@ -27,11 +27,21 @@ const Cart = () => {
     },
   });
 
-  const handleSubmit = (data) =>{
-    toast.loading("Enviando la orden")
-    postOrder(data)
-  }
+  const handleSubmit = (cartItems) => {
+    const orderData = {
+      orderId: "uniqueOrderId123", // Genera un ID único para la orden, puedes usar una librería como uuid para esto.
+      tableNumber: 5, // Este es un ejemplo, podrías obtenerlo de algún input o seleccionar un valor fijo.
+      totalPrice: totalPrice, // Ya calculado anteriormente
+      products: cartItems.map((item) => ({
+        name: item.name,
+        quantity: item.quantity, // Asegúrate de que `quantity` esté disponible en cada `item`
+        price: item.price,
+      })),
+    };
 
+    toast.loading("Enviando la orden");
+    postOrder(orderData);
+  };
 
   return (
     <div
@@ -70,7 +80,9 @@ const Cart = () => {
           <h2>${totalPrice}</h2>
         </div>
         <div className="buttonsResume">
-          <button className="buttonF" onClick={() => handleSubmit(cartItems)}>FINALIZAR PEDIDO</button>
+          <button className="buttonF" onClick={() => handleSubmit(cartItems)}>
+            FINALIZAR PEDIDO
+          </button>
           <button className="buttonC" onClick={() => clearCart(cartItems)}>
             LIMPIAR CARRITO
           </button>

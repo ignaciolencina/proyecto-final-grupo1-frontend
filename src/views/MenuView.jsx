@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMenuItemsFn } from "../api/menuItems";
+import { getProductsFn } from "../api/products";
 
 import CardsMenu from "../components/Menu/CardsMenu";
 
 const MenuView = () => {
   const {
-    data: menuItems,
+    data: products,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["menuItems"],
-    queryFn: getMenuItemsFn,
+    queryKey: ["products"],
+    queryFn: getProductsFn,
   });
 
   if (isLoading) {
@@ -30,7 +30,7 @@ const MenuView = () => {
     );
   }
 
-  if (menuItems && menuItems.length === 0) {
+  if (products && products.length === 0) {
     return (
       <div className="mt-3 mx-2 alert alert-danger">
         Lo sentimos, estamos trabajando sobre el menú
@@ -41,7 +41,7 @@ const MenuView = () => {
   return (
     <section className="container mt-4">
       <section className="row">
-        {menuItems.map((menuItem) => (
+        {products.map((menuItem) => (
           <article className="col-12 col-md-4 col-lg-3 mb-3" key={menuItem.id}>
             <CardsMenu menuItem={menuItem} />
           </article>
