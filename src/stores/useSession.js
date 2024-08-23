@@ -15,6 +15,7 @@ export const useSession = create((set) => {
     user,
     isLoggedIn,
     userToEdit: null,
+    tableNumber: null,
     login: (newUser) => {
       set({ user: newUser, isLoggedIn: true });
     },
@@ -27,6 +28,9 @@ export const useSession = create((set) => {
     },
     clearUserToEdit: () => {
       set({ userToEdit: null });
+    },
+    setTableNumber: (number) => {
+      set({ tableNumber: number });
     },
   };
 });

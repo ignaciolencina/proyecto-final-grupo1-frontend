@@ -19,10 +19,6 @@ export const router = createBrowserRouter([
         path: "",
         element: <LandingView />,
       },
-      {
-        path: 'menu',
-        element: <MenuView/>,
-      },
       // RUTAS DE AUTENTICACION
       {
         path: "",
@@ -44,8 +40,8 @@ export const router = createBrowserRouter([
         element: <PrivateViews />,
         children: [
           {
-            path: "index",
-            element: <p>Index</p>,
+            path: 'menu',
+            element: <MenuView/>,
           },
           {
             path: "admin",
