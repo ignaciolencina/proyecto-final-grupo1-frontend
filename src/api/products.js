@@ -1,7 +1,7 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 // Obtener todos los productos
-export const getProduct = async () => {
+export const getProductsFn = async () => {
   try {
     const res = await fetch(`${BACKEND_URL}/products`);
     if (!res.ok) {

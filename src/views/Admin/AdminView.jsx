@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {
-  getProduct,
+  getProductsFn,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -19,7 +19,7 @@ const AdminView = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await getProduct();
+        const response = await getProductsFn();
         const fetchedProducts = response.data || [];
         setProducts(fetchedProducts);
       } catch (error) {
