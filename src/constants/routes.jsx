@@ -7,6 +7,7 @@ import RegisterView from "../views/Register/RegisterView";
 import LandingView from "../views/LandingView";
 import UserProfileView from "../views/UserProfile/UserProfileView";
 import AdminView from "../views/Admin/AdminView";
+import MenuView from "../views/MenuView";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: <LandingView />,
+      },
+      {
+        path: 'menu',
+        element: <MenuView/>,
       },
       // RUTAS DE AUTENTICACION
       {
