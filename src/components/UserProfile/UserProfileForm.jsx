@@ -46,10 +46,11 @@ const UserProfileForm = () => {
     onSuccess: (data) => {
       toast.dismiss();
       toast.success("Datos actualizados correctamente");
-      reset();
       setUserToEdit(data.data);
+
       clearUserToEdit();
       queryClient.invalidateQueries({ queryKey: ["user"] });
+      reset();
     },
     onError: (e) => {
       toast.dismiss();
