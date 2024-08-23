@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getProduct, createProduct, updateProduct, deleteProduct } from '../../api/products.js';
+import { getProductsFn, createProduct, updateProduct, deleteProduct } from '../../api/products.js';
 
 import AdminForm from '../../components/Admin/AdminForm'
 import AdminList from '../../components/Admin/AdminList'
@@ -15,7 +15,7 @@ const AdminView = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await getProduct();
+        const response = await getProductsFn();
         const fetchedProducts = response.data || []; 
         setProducts(fetchedProducts);
       } catch (error) {
