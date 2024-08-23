@@ -1,118 +1,119 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import './adminStyles.css';
 
-import './adminStyle.css'
-
-const AdminForm = ({ onSubmit }) => {
-  const [product, setProduct] = useState({
+const AdminForm = ({ initialData, onSubmit, onCancel }) => {
+  const [formData, setFormData] = useState({
     name: '',
-    image: '',
+    imageUrl: '',
     price: '',
     description: '',
-    available: 'yes',
-    ingredients: '',
-    category: 'N/A',
+    available: true,
+    ingredients: 'N/A',
+    category: 'burgers',
   });
 
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    } else {
+      setFormData({
+        name: '',
+        imageUrl: '',
+        price: '',
+        description: '',
+        available: true,
+        ingredients: 'N/A',
+        category: 'burgers',
+      });
+    }
+  }, [initialData]);
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({
-      ...product,
-      [name]: value,
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(product);
-    setProduct({
-      name: '',
-      image: '',
-      price: '',
-      description: '',
-      available: 'yes',
-      ingredients: '',
-      category: 'N/A',
-    });
+    onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-3 px-4">
-        <label className="formSubTitle form-label">Nombre del Producto</label>
+    <form className="admin-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="name">Nombre del Producto</label>
         <input
           required
           className="form-control"
+          id="name"
           name="name"
-          placeholder="Ingrese el nombre del producto"
           type="text"
-          value={product.name}
+          value={formData.name}
           onChange={handleChange}
         />
       </div>
 
-      <div className="mb-3 px-4">
-        <label className="formSubTitle form-label">Imagen del producto URL</label>
+      <div className="form-group">
+        <label htmlFor="imageUrl">Imagen (URL)</label>
         <input
           required
           className="form-control"
-          name="image"
-          placeholder="Ingrese la URL de la imagen"
+          id="imageUrl"
+          name="imageUrl"
           type="url"
-          value={product.image}
+          value={formData.imageUrl}
           onChange={handleChange}
         />
       </div>
 
-      <div className="mb-3 px-4">
-        <label className="formSubTitle form-label">Precio</label>
+      <div className="form-group">
+        <label htmlFor="price">Precio</label>
         <input
           required
           className="form-control"
-          min="0"
+          id="price"
           name="price"
-          placeholder="Ingrese el precio del producto"
-          step="0.01"
-          type="number"
-          value={product.price}
+          type="text"
+          value={formData.price}
           onChange={handleChange}
         />
       </div>
 
-      <div className="mb-3 px-4">
-        <label className="formSubTitle form-label">Descripción</label>
+      <div className="form-group">
+        <label htmlFor="description">Descripción</label>
         <textarea
           required
           className="form-control"
+          id="description"
           name="description"
-          placeholder="Ingrese una descripción básica del producto"
-          rows="3"
-          value={product.description}
+          value={formData.description}
           onChange={handleChange}
-        ></textarea>
+        />
       </div>
 
-      <div className="mb-3 px-4">
-        <label className="formSubTitle form-label">Disponibilidad</label>
-        <select
-          required
-          className="formSelect form-select"
+      <div className="form-group">
+        <label htmlFor="available">Disponible</label>
+        <input
+          checked={formData.available}
+          className="form-check-input"
+          id="available"
           name="available"
-          value={product.available}
+          type="checkbox"
           onChange={handleChange}
-        >
-          <option value="yes">Disponible</option>
-          <option value="no">No Disponible</option>
-        </select>
+        />
       </div>
 
-      <div className="mb-3 px-4">
-        <label className="formSubTitle form-label">Segun los ingredientes</label>
+      <div className="form-group">
+        <label htmlFor="ingredients">Ingredientes</label>
         <select
-          required
-          className="formSelect form-select"
+          className="form-control"
+          id="ingredients"
           name="ingredients"
-          value={product.category}
+          value={formData.ingredients}
           onChange={handleChange}
         >
           <option value="N/A">N/A</option>
@@ -121,34 +122,42 @@ const AdminForm = ({ onSubmit }) => {
           <option value="sin TACC">Sin TACC</option>
         </select>
       </div>
-      <div className="mb-3 px-4">
-        <label className="formSubTitle form-label">Categoría</label>
+
+      <div className="form-group">
+        <label htmlFor="category">Categoría</label>
         <select
-          required
-          className="formSelect form-select"
+          className="form-control"
+          id="category"
           name="category"
-          value={product.category}
+          value={formData.category}
           onChange={handleChange}
         >
-          <option value="hamburguesas">Hamburguesas</option>
-          <option value="kids">Menus kids</option>
+          <option value="burgers">Burgers</option>
           <option value="entrantes">Entrantes</option>
+          <option value="kids">Kids</option>
           <option value="bebidas">Bebidas</option>
           <option value="postres">Postres</option>
         </select>
       </div>
 
-
-      <button className=" formBoton btn btn-danger" type="submit" >
-        Guardar Producto
-      </button>
+      <div className="form-group">
+        <button className="formBoton" type="submit">
+          {initialData ? 'Actualizar Producto' : 'Guardar Producto'}
+        </button>
+        {initialData && (
+          <button className="formBoton" type="button" onClick={onCancel}>
+            Cancelar
+          </button>
+        )}
+      </div>
     </form>
   );
 };
 
 AdminForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  };
+  initialData: PropTypes.object,
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
 
 export default AdminForm;
-
