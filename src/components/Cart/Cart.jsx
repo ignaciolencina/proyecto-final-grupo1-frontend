@@ -10,6 +10,7 @@ import { useSession } from "../../stores/useSession";
 const Cart = () => {
   const { cartItems, clearCart } = useCartStore();
   const {tableNumber} = useSession();
+  console.log(tableNumber)
   
   const totalPrice = cartItems.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
@@ -31,7 +32,6 @@ const Cart = () => {
 
   const handleSubmit = (cartItems) => {
     const orderData = {
-      // orderId: cartItems.id, // Genera un ID único para la orden, puedes usar una librería como uuid para esto.
       tableNumber: tableNumber, // Este es un ejemplo, podrías obtenerlo de algún input o seleccionar un valor fijo.
       totalPrice: totalPrice, // Ya calculado anteriormente
       products: cartItems.map((item) => ({

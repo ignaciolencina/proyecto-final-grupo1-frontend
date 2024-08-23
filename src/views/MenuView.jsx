@@ -41,9 +41,9 @@ const MenuView = () => {
   return (
     <section className="container mt-4">
       <section className="row">
-        {products.map((menuItem) => (
-          <article className="col-12 col-md-4 col-lg-3 mb-3" key={menuItem.id}>
-            <CardsMenu menuItem={menuItem} />
+        {products.data.map((product) => (
+          <article className="col-12 col-md-4 col-lg-3 mb-3" key={product.id}>
+            <CardsMenu product={product} />
           </article>
         ))}
       </section> 

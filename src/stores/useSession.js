@@ -3,11 +3,14 @@ import { decodeJWT } from "../utilities/decodeJWT";
 
 let user = null;
 let isLoggedIn = false;
+let tableNumber = null;
 
 const token = sessionStorage.getItem("token");
+
 if (token) {
   user = decodeJWT(token).user;
   isLoggedIn = true;
+  tableNumber = sessionStorage.getItem("tableNumber");
 }
 
 export const useSession = create((set) => {
@@ -15,13 +18,14 @@ export const useSession = create((set) => {
     user,
     isLoggedIn,
     userToEdit: null,
-    tableNumber: null,
+    tableNumber,
     login: (newUser) => {
       set({ user: newUser, isLoggedIn: true });
     },
     logout: () => {
       sessionStorage.removeItem("token");
-      set({ user: null, isLoggedIn: false });
+      sessionStorage.removeItem("tableNumber");
+      set({ user: null, isLoggedIn: false, tableNumber: null });
     },
     setUserToEdit: (user) => {
       set({ userToEdit: user });
@@ -30,6 +34,7 @@ export const useSession = create((set) => {
       set({ userToEdit: null });
     },
     setTableNumber: (number) => {
+      sessionStorage.setItem("tableNumber", number);
       set({ tableNumber: number });
     },
   };
