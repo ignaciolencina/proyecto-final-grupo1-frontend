@@ -40,8 +40,8 @@ export const router = createBrowserRouter([
         element: <PrivateViews />,
         children: [
           {
-            path: 'menu',
-            element: <MenuView/>,
+            path: "menu",
+            element: <MenuView />,
           },
           {
             path: "admin",

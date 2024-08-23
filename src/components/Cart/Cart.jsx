@@ -68,7 +68,7 @@ const Cart = () => {
         </button>
       </div>
       <div className="cartDetail mx-2">
-        <h2>Mesa N°{tableNumber}</h2>
+        <h2>Mesa N° {tableNumber}</h2>
         <h2>Detalle</h2>
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => (

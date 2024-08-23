@@ -1,31 +1,89 @@
-import { useState } from "react";
-import AdminForm from "../../components/Admin/AdminForm";
+import { useState, useEffect } from 'react';
+import { getProductsFn, createProduct, updateProduct, deleteProduct } from '../../api/products.js';
 
-import './adminStyle.css'
+import AdminForm from '../../components/Admin/AdminForm'
+import AdminList from '../../components/Admin/AdminList'
+
+
+import './adminStyle.css'; 
 
 const AdminView = () => {
-  const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [editingProduct, setEditingProduct] = useState(null);
 
-  const handleAddCategory = (newCategory) => {
-    setCategories([...categories, newCategory]);
+  // Fetch de los productos cuando se monta el componente
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await getProductsFn();
+        const fetchedProducts = response.data || []; 
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error('Error al obtener los productos:', error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  // Manejo del POST para agregar un nuevo producto
+  const handleAddProduct = async (product) => {
+    try {
+      const newProduct = await createProduct(product);
+      setProducts([...products, newProduct]);
+    } catch (error) {
+      console.error('Error al agregar el producto:', error);
+    }
   };
 
-  const handleAddProduct = (newProduct) => {
-    setProducts([...products, newProduct]);
+  // Manejo del PUT para editar un producto existente
+  const handleEditProduct = (product) => {
+    setEditingProduct(product);
+  };
+
+  const handleUpdateProduct = async (updatedProduct) => {
+    try {
+      const updated = await updateProduct(editingProduct.id, updatedProduct);
+      if (updated) {
+        setProducts(
+          products.map((product) =>
+            product.id === editingProduct.id ? updated : product
+          )
+        );
+        setEditingProduct(null);
+      } else {
+        console.error('El producto actualizado es nulo o no se devolvió correctamente');
+      }
+    } catch (error) {
+      console.error('Error al actualizar el producto:', error);
+    }
+  };
+
+  // Manejo del DELETE para eliminar un producto
+  const handleDeleteProduct = async (productId) => {
+    try {
+      await deleteProduct(productId);
+      setProducts(products.filter((product) => product.id !== productId));
+    } catch (error) {
+      console.error('Error al eliminar el producto:', error);
+    }
   };
 
   return (
-    <div>
-        <article className="adminTitle">
-          <h2>Formulario</h2>
-        </article>
+    <div className="admin-view py-4 adminTitle">
+      <h2>Administrador de Productos</h2>
       <AdminForm
-        onAddCategory={handleAddCategory}
-        onAddProduct={handleAddProduct}
+        initialData={editingProduct}
+        onCancel={() => setEditingProduct(null)}
+        onSubmit={editingProduct ? handleUpdateProduct : handleAddProduct}
+      />
+      <AdminList
+        products={products}
+        onDelete={handleDeleteProduct}
+        onEdit={handleEditProduct}
       />
     </div>
   );
 };
 
 export default AdminView;
+

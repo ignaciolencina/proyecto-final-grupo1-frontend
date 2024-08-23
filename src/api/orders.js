@@ -7,7 +7,6 @@ export const postOrderFn = async (data) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      orderId: data.orderId,
       tableNumber: data.tableNumber,
       totalPrice: data.totalPrice,
       products: data.products.map((product) => ({
