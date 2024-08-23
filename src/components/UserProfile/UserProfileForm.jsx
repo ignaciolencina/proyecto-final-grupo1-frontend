@@ -222,7 +222,7 @@ const UserProfileForm = () => {
         </div>
       </div>
 
-      <div className="text-end">
+      <div className="botonesResume">
         <button className="user-profile-boton-guardar" type="submit">
           GUARDAR
         </button>
