@@ -5,13 +5,16 @@ import Swal from "sweetalert2";
 import "./headerStyle.css";
 import "../../../index.css";
 import logoBurgerTuc from "../../../assets/logoBurgerTuc.png";
+import Cart from "../../Cart/Cart";
+import { useCartStore } from "../../../stores/useCartStore";
 
 const Header = () => {
   const { user, isLoggedIn, logout } = useSession();
+  const { cartItems = [] } = useCartStore();
 
   const handleLogout = async () => {
     const action = await Swal.fire({
-      title: "Atención",
+      title: "Ya te vas?",
       text: "Estas seguro que deseas cerrar sesión?",
       icon: "info",
       confirmButtonText: "CERRAR SESIÓN",
@@ -31,21 +34,43 @@ const Header = () => {
   return (
     <nav className="navbar fixed-top">
       <div className="container-fluid">
-        <button
-          aria-controls="offcanvasNavbar"
-          aria-label="Toggle navigation"
-          className="navbarMenu"
-          data-bs-target="#offcanvasNavbar"
-          data-bs-toggle="offcanvas"
-          type="button"
-        >
-          <span>
-            <i className="bi bi-list"></i>
-          </span>
-        </button>
-        <Link className="navbarBrand titleFont" to="/">
-          BURGERTUC
-        </Link>
+        <div className="logoSide">
+          <button
+            aria-controls="offcanvasNavbar"
+            aria-label="Toggle navigation"
+            className="navbarMenu"
+            data-bs-target="#offcanvasNavbar"
+            data-bs-toggle="offcanvas"
+            type="button"
+          >
+            <span>
+              <i className="bi bi-list"></i>
+            </span>
+          </button>
+          <Link className="navbarBrand titleFont" to="/">
+            BURGERTUC
+          </Link>
+        </div>
+        <div>
+          {!isLoggedIn && (
+            <button
+              aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation"
+              className="navbarCart"
+              data-bs-target="#offcanvasCart"
+              data-bs-toggle="offcanvas"
+              type="button"
+            >
+              <span>
+                <i className="bi bi-cart4"></i>
+              </span>
+            </button>
+          )}
+          {cartItems.length >= 1 && (
+            <div className="activeCart"></div>
+          )}
+        </div>  
+        <Cart />
         <div
           aria-labelledby="offcanvasNavbarLabel"
           className="offcanvas offcanvas-top"
@@ -89,6 +114,17 @@ const Header = () => {
                     to="/login"
                   >
                     INGRESAR
+                  </Link>
+                </li>
+              )}
+              {isLoggedIn && (
+                <li className="nav-item">
+                  <Link
+                    reloadDocument
+                    className="nav-link titleFont"
+                    to="/userProfile"
+                  >
+                    PERFIL
                   </Link>
                 </li>
               )}
