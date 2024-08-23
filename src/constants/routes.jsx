@@ -14,8 +14,8 @@ export const router = createBrowserRouter([
     children: [
       // RUTAS PÚBLICAS
       {
-        path: '',
-        element: <LandingView/>,
+        path: "",
+        element: <LandingView />,
       },
       // RUTAS DE AUTENTICACION
       {

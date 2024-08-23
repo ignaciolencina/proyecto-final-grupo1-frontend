@@ -1,4 +1,4 @@
-.formSubTitle {
+.formSubtitle {
     margin-inline: 12px;
     margin-bottom: 15px;
     color: var(--color-claro);
@@ -42,4 +42,28 @@
     margin-left: 30px;
     padding-left: 35px;
     padding-right: 25px;
+  }
+
+  .categoryTitle {
+    margin-inline-start: 13px;
+    h3 {
+      font-size: 2rem;
+      font-family: var(--fuente-titulo);
+      color: var(--color-claro);
+    }
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .card img {
+    object-fit: cover;
+    height: 150px;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
