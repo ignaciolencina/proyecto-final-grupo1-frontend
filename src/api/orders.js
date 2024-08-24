@@ -21,3 +21,14 @@ export const postOrderFn = async (data) => {
     throw new Error("Ocurrió un error enviando la orden");
   }
 };
+
+export const getOrdersFn = async () => {
+  const res = await fetch(`${BACKEND_URL}/orders`);
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error('Ocurrió un error leyendo las ordenes');
+  }
+
+  return data;
+};
