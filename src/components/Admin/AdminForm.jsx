@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import './adminStyles.css';
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import "./adminStyles.css";
 
 const AdminForm = ({ initialData, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    imageUrl: '',
-    price: '',
-    description: '',
+    name: "",
+    imageUrl: "",
+    price: "",
+    description: "",
     available: true,
-    ingredients: 'N/A',
-    category: 'burgers',
+    ingredients: "N/A",
+    category: "burgers",
   });
 
   useEffect(() => {
@@ -18,13 +18,13 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
       setFormData(initialData);
     } else {
       setFormData({
-        name: '',
-        imageUrl: '',
-        price: '',
-        description: '',
+        name: "",
+        imageUrl: "",
+        price: "",
+        description: "",
         available: true,
-        ingredients: 'N/A',
-        category: 'burgers',
+        ingredients: "N/A",
+        category: "burgers",
       });
     }
   }, [initialData]);
@@ -33,7 +33,7 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -82,7 +82,6 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
           onChange={handleChange}
         />
       </div>
-
       <div className="form-group">
         <label htmlFor="description">Descripción</label>
         <textarea
@@ -97,14 +96,16 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
 
       <div className="form-group">
         <label htmlFor="available">Disponible</label>
-        <input
-          checked={formData.available}
-          className="form-check-input"
-          id="available"
-          name="available"
-          type="checkbox"
-          onChange={handleChange}
-        />
+        <div className="form-check form-switch mx-3">
+          <input
+            checked={formData.available}
+            className="form-check-input"
+            id="available"
+            name="available"
+            type="checkbox"
+            onChange={handleChange}
+          />
+        </div>
       </div>
 
       <div className="form-group">
@@ -140,9 +141,9 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
         </select>
       </div>
 
-      <div className="form-group">
+      <div className="form-group mt-auto d-flex justify-content-around">
         <button className="formBoton" type="submit">
-          {initialData ? 'Actualizar Producto' : 'Guardar Producto'}
+          {initialData ? "Actualizar" : "Guardar Producto"}
         </button>
         {initialData && (
           <button className="formBoton" type="button" onClick={onCancel}>
