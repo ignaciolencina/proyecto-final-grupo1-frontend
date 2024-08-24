@@ -16,19 +16,19 @@ export const getProductsFn = async () => {
 export const createProduct = async (productData) => {
   try {
     const res = await fetch(`${BACKEND_URL}/products`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(productData),
     });
     if (!res.ok) {
-      throw new Error('Error al crear el producto');
+      throw new Error("Error al crear el producto");
     }
     const newProduct = await res.json();
     return newProduct;
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     return null;
   }
 };
@@ -37,19 +37,21 @@ export const createProduct = async (productData) => {
 export const updateProduct = async (productId, updatedData) => {
   try {
     const res = await fetch(`${BACKEND_URL}/products/${productId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedData),
     });
     if (!res.ok) {
-      throw new Error('Error al actualizar el producto');
+      const errorResponse = await res.json(); // Intenta leer el mensaje de error
+      console.error("Error en el backend:", errorResponse);
+      throw new Error("Error al actualizar el producto");
     }
     const updatedProduct = await res.json();
     return updatedProduct;
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     return null;
   }
 };
@@ -58,14 +60,14 @@ export const updateProduct = async (productId, updatedData) => {
 export const deleteProduct = async (productId) => {
   try {
     const res = await fetch(`${BACKEND_URL}/products/${productId}`, {
-      method: 'DELETE',
+      method: "DELETE",
     });
     if (!res.ok) {
-      throw new Error('Error al eliminar el producto');
+      throw new Error("Error al eliminar el producto");
     }
     return true;
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     return false;
   }
 };
