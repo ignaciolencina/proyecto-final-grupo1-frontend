@@ -7,7 +7,8 @@ import { useSession } from "../../stores/useSession";
 import { useEffect, useState } from "react";
 
 const UserProfileForm = () => {
-  const { user, userToEdit, clearUserToEdit, setUserToEdit } = useSession();
+  const { user, userToEdit, clearUserToEdit, setUserToEdit, updateUser } =
+    useSession();
 
   const {
     register,
@@ -22,7 +23,6 @@ const UserProfileForm = () => {
     firstname: false,
     lastname: false,
     email: false,
-    password: false,
   });
 
   useEffect(() => {
@@ -37,7 +37,6 @@ const UserProfileForm = () => {
       setValue("firstname", userToEdit.firstname);
       setValue("lastname", userToEdit.lastname);
       setValue("email", userToEdit.email);
-      setValue("password", userToEdit.password);
     }
   }, [userToEdit, user, setValue, setUserToEdit]);
 
@@ -46,9 +45,9 @@ const UserProfileForm = () => {
     onSuccess: (data) => {
       toast.dismiss();
       toast.success("Datos actualizados correctamente");
-      setUserToEdit(data.data);
-
-      clearUserToEdit();
+      updateUser(data.data);
+      // setUserToEdit (data.data);
+      // clearUserToEdit();
       queryClient.invalidateQueries({ queryKey: ["user"] });
       reset();
     },
@@ -57,7 +56,31 @@ const UserProfileForm = () => {
       toast.error(e.message);
     },
   });
+  /*
+  const { mutate: putRegister } = useMutation({
+    mutationFn: putRegisterFn,
+    onSuccess: async (data) => {
+      toast.dismiss();
+      toast.success("Datos actualizados correctamente");
 
+      // Realizar una solicitud GET para obtener el usuario actualizado
+      try {
+        const updatedUser = await fetchUserById(data.id); // Suponiendo que `fetchUserById` es una función que hace la solicitud GET
+        setUserToEdit(updatedUser);
+        updateUser(updatedUser);
+      } catch (e) {
+        toast.error("Error al obtener los datos actualizados");
+      }
+
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      reset();
+    },
+    onError: (e) => {
+      toast.dismiss();
+      toast.error(e.message);
+    },
+  });
+*/
   const handleSubmitForm = (data) => {
     console.log("Datos enviados al submit:", data);
     toast.loading("Guardando cambios...");
@@ -68,10 +91,7 @@ const UserProfileForm = () => {
         lastname: data.lastname || "",
         email: data.email || "",
       };
-      if (data.password) {
-        payload.password = data.password;
-      }
-      console.log("Payload enviado al backend:", payload); // Confirma que todos los campos están presentes
+      console.log("Payload enviado al backend:", payload);
 
       putRegister([userToEdit.id, data]);
     } else {
@@ -195,30 +215,7 @@ const UserProfileForm = () => {
       <div className="mb-3">
         <label className="form-label">Contraseña:</label>
         <div className="d-flex align-items-center">
-          {!isEditing.password ? (
-            <span>********</span>
-          ) : (
-            <Input
-              className="user-profile-form-control"
-              error={errors.password}
-              name="password"
-              options={{
-                required: "Campo obligatorio",
-                minLength: {
-                  value: 6,
-                  message: "La contraseña debe tener mínimo 6 caracteres",
-                },
-              }}
-              placeholder="Contraseña"
-              register={register}
-              type="password"
-            />
-          )}
-          <div
-            className="bi bi-pencil-fill ms-3"
-            type="button"
-            onClick={() => toggleEditing("password")}
-          ></div>
+          <span>********</span>
         </div>
       </div>
 

@@ -140,3 +140,29 @@ export const checkEmailExists = async (email) => {
 
   return data.exists;
 };
+
+// GET by ID
+
+export const fetchUserById = async (id) => {
+  try {
+    const res = await fetch(`${BACKEND_URL}/users/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Error fetching user:", errorData);
+      throw new Error("Error al obtener el usuario");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in fetchUserById:", error);
+    throw error;
+  }
+};

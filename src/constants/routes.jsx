@@ -8,6 +8,8 @@ import LandingView from "../views/LandingView";
 import UserProfileView from "../views/UserProfile/UserProfileView";
 import AdminView from "../views/Admin/AdminView";
 import MenuView from "../views/MenuView";
+// import UserHistoryView from "../views/UserHistoryView/UserHistoryView";
+// import AdminHistoryView from "../views/AdminHistoryView/AdminHistoryView";
 
 export const router = createBrowserRouter([
   {
@@ -18,10 +20,6 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: <LandingView />,
-      },
-      {
-        path: 'menu',
-        element: <MenuView/>,
       },
       // RUTAS DE AUTENTICACION
       {
@@ -44,17 +42,31 @@ export const router = createBrowserRouter([
         element: <PrivateViews />,
         children: [
           {
-            path: "index",
-            element: <p>Index</p>,
+            path: "menu",
+            element: <MenuView />,
           },
           {
             path: "admin",
             element: <AdminView />,
           },
+
           {
             path: "userProfile",
             element: <UserProfileView />,
           },
+          /*
+          {
+            path: '/user-history',
+            element: <UserHistoryView />,
+            private: true,
+          },
+          {
+            path: '/admin-history',
+            element: <AdminHistoryView />,
+            private: true,
+            roleRequired: 'admin',
+          },
+          */
         ],
       },
       {
