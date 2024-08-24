@@ -5,9 +5,10 @@ import Input from "../ui/Input/Input";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "../../stores/useSession";
 import { postLoginFn } from "../../api/auth";
+import Swal from "sweetalert2";
 
 const LoginForm = () => {
-  const { login } = useSession();
+  const { login, setTableNumber } = useSession();
 
   const navigate = useNavigate();
 
@@ -20,17 +21,44 @@ const LoginForm = () => {
 
   const { mutate: postLogin } = useMutation({
     mutationFn: postLoginFn,
-    onSuccess: (userData) => {
+    onSuccess: async (userData) => {
       toast.dismiss();
-      toast.success(`Bienvenido ${userData.firstname}!`);
 
       reset();
 
       login(userData);
 
-      setTimeout(() => {
+      const userName = userData.firstname;
+
+      const result = await Swal.fire({
+        html: `¡Bienvenido ${userName}! Por favor ingresa tu número de mesa`,
+        background: "#000000",
+        color: "#ffffff",
+        input: "number",
+        inputAttributes: {
+          autocapitalize: "off",
+          min: 0,
+        },
+        showCancelButton: false,
+        confirmButtonText: "Guardar",
+        confirmButtonColor: "#EE2737",
+        preConfirm: (tableNumber) => {
+          if (!tableNumber || tableNumber < 0) {
+            Swal.showValidationMessage(
+              "Debes ingresar un número de mesa válido."
+            );
+          }
+          return tableNumber;
+        },
+        allowOutsideClick: false,
+      });
+
+      if (result.isConfirmed) {
+        const tableNumber = result.value;
+        setTableNumber(tableNumber);
+        console.log(tableNumber)
         navigate("/");
-      }, 1500);
+      }
     },
     onError: (e) => {
       toast.dismiss();

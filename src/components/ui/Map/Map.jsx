@@ -3,7 +3,7 @@ import "./mapStyle.css";
 const Map = () => {
   return (
     <iframe
-      allowfullscreen=""
+      allowFullScreen=""
       className="map"
       loading="lazy"
       referrerPolicy="no-referrer-when-downgrade"

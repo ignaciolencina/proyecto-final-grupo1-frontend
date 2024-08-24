@@ -7,7 +7,6 @@ export const postOrderFn = async (data) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      orderId: data.orderId,
       tableNumber: data.tableNumber,
       totalPrice: data.totalPrice,
       products: data.products.map((product) => ({
@@ -21,4 +20,15 @@ export const postOrderFn = async (data) => {
   if (!res.ok) {
     throw new Error("Ocurrió un error enviando la orden");
   }
+};
+
+export const getOrdersFn = async () => {
+  const res = await fetch(`${BACKEND_URL}/orders`);
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error('Ocurrió un error leyendo las ordenes');
+  }
+
+  return data;
 };

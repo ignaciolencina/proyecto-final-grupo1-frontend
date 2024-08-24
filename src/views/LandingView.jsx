@@ -5,7 +5,7 @@ import Info from "../components/Landing/Info/Info";
 const LandingView = () => {
   return (
     <section>
-      <Info/>
+      <Info />
       <Contacto />
       <AcercaDe />
     </section>
