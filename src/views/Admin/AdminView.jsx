@@ -1,15 +1,11 @@
-import { useState, useEffect } from "react";
-import {
-  getProductsFn,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-} from "../../api/products.js";
+import { useState, useEffect } from 'react';
+import { getProductsFn, createProduct, updateProduct, deleteProduct } from '../../api/products.js';
 
-import AdminForm from "../../components/Admin/AdminForm";
-import AdminList from "../../components/Admin/AdminList";
+import AdminForm from '../../components/Admin/AdminForm'
+import AdminList from '../../components/Admin/AdminList'
 
-import "./adminStyle.css";
+
+import './adminStyle.css'; 
 
 const AdminView = () => {
   const [products, setProducts] = useState([]);
@@ -20,7 +16,7 @@ const AdminView = () => {
     const fetchProducts = async () => {
       try {
         const response = await getProductsFn();
-        const fetchedProducts = response.data || [];
+        const fetchedProducts = response.data || []; 
         setProducts(fetchedProducts);
       } catch (error) {
         console.error("Error al obtener los productos:", error);

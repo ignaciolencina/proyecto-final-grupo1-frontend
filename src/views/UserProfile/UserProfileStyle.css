@@ -1,0 +1,69 @@
+
+
+.user-profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--fuente-cuerpo);
+    padding: 5px;
+    }
+    
+    .user-profile-titulo{
+      font-family: var(--fuente-titulo);
+      text-align: center;
+    }
+    
+    .user-profile-card {
+      width: 100%;
+      position: relative;
+      overflow: hidden; /* Ocultar contenido que sobrepase los bordes */
+      margin: 5px auto; /* Centra la tarjeta */
+      padding: 5px;
+    }
+    
+    .user-profile-content {
+      position: relative; /* Asegura que el contenido esté por encima de la imagen */
+      z-index: 1; /* Trae el contenido al frente */
+      color: var(--color-claro);
+      padding: 1rem;
+    }
+    .user-profile-texto {
+    text-align: left;
+    }
+
+    .user-profile-boton-guardar {
+      display: flex;
+      align-items: center;
+      font-family: var(--fuente-cuerpo);
+      color: var(--color-claro);
+      font-weight: 800;
+      background-color: var(--color-detalles);
+      border: solid 2px;
+      border-color: var(--color-detalles);
+      border-radius: 1.75rem;
+      padding-left: 30px;
+      padding-right: 22px;
+      .bi.bi-arrow-right-short {
+        font-size: 30px;
+      }
+    }
+    .user-profile-boton-cancelar {
+      display: flex;
+      align-items: center;
+      font-family: var(--fuente-cuerpo);
+      color: var(--color-claro);
+      font-weight: 800;
+      background-color: gray;
+      border: solid 2px;
+      border-color: gray;
+      border-radius: 1.75rem;
+      padding-left: 30px;
+      padding-right: 22px;
+      .bi.bi-arrow-right-short {
+        font-size: 30px;
+      }
+    }
+    
+    .user-profile-boton-editar {
+text-align: right;
+    }

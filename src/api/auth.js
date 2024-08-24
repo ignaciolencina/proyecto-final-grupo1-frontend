@@ -55,7 +55,7 @@ export const postRegisterFn = async (data) => {
   });
 
   if (!res.ok) {
-    throw new Error("Ocurrió un error guardando el usuario");
+    throw new Error("Ocurrió un error al crear el usuario");
   }
 
   // Token en registro
@@ -64,6 +64,62 @@ export const postRegisterFn = async (data) => {
     password: data.password,
   });
 
+  return userData;
+};
+
+// PUT LOGIN FUNTION
+
+export const putLoginFn = async (data) => {
+  // data: { email, password }
+
+  const res = await fetch(`${BACKEND_URL}/auth/login`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (res.status === 204 || res.headers.get("content-length") === "0") {
+    throw new Error("Respuesta vacía del servidor");
+  }
+
+  const resData = await res.json();
+
+  if (!res.ok) {
+    throw new Error(resData.message || "Ocurrió un error");
+  }
+
+  const token = resData.data;
+
+  if (!token) {
+    throw new Error(resData.message || "Ocurrió un error");
+  }
+
+  const userData = decodeJWT(token).user;
+
+  // Persistir el JWT
+  sessionStorage.setItem("token", token);
+
+  return userData;
+};
+
+// PUT REGISTER FUNTION
+export const putRegisterFn = async ([userId, data]) => {
+  const res = await fetch(`${BACKEND_URL}/users/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw new Error("Ocurrió un error al editar el usuario");
+  }
+
+  const userData = await res.json();
   return userData;
 };
 

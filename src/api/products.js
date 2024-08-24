@@ -2,17 +2,14 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 // Obtener todos los productos
 export const getProductsFn = async () => {
-  try {
-    const res = await fetch(`${BACKEND_URL}/products`);
-    if (!res.ok) {
-      throw new Error("Error al obtener los productos");
-    }
-    const products = await res.json();
-    return products;
-  } catch (error) {
-    console.error("Error:", error);
-    return [];
+  const res = await fetch(`${BACKEND_URL}/products`);
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error("Ocurrió un error leyendo los productos del menú");
   }
+
+  return data;
 };
 
 // Crear un nuevo producto
