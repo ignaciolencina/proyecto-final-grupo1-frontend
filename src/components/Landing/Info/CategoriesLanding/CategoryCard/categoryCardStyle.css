@@ -1,4 +1,4 @@
-.infoMenu {
+.infoCategories {
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
@@ -7,7 +7,11 @@
   }
 }
 
-.menuImage {
+.categoryLink{
+  text-decoration: none;
+}
+
+.categoryImage {
   width: 240px;
   height: 240px;
   border: solid 2px var(--color-claro);
@@ -15,13 +19,13 @@
   overflow: hidden;
 }
 
-.menuImage img {
+.categoryImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.menuText {
+.categoryText {
   h5 {
     font-family: var(--fuente-titulo);
     color: var(--color-claro);
