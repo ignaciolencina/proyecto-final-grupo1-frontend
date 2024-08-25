@@ -1,12 +1,3 @@
-/* .infoMenu {
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-} */
-
 .menuCard {
   display: flex;
   justify-content: center;
