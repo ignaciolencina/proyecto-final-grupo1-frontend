@@ -1,31 +1,44 @@
-import React from 'react';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 
 const AdminHistoryView = () => {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/orders', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${yourAuthToken}`,
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => response.json())
+      .then(data => setOrders(data))
+      .catch(error => console.error('Error fetching admin orders:', error));
+  }, []);
+
   return (
-    <Container className="admin-history-view my-4">
-      <h1>Pedidos Recibidos</h1>
+    <Container>
+      <h1 className="my-4">Historial de Pedidos (Admin)</h1>
       <Row>
-        <Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th># Pedido</th>
-                <th>Cliente</th>
-                <th>Detalles</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* Itera sobre los pedidos recibidos */}
-              <tr>
-                <td>1</td>
-                <td>Juan Pérez</td>
-                <td>Detalles del pedido</td>
-              </tr>
-              {/* Repite la estructura para cada pedido */}
-            </tbody>
-          </Table>
-        </Col>
+        {orders.map(order => (
+          <Col md={6} lg={4} key={order.id} className="mb-4">
+            <Card>
+              <Card.Header>Pedido ID: {order.id}</Card.Header>
+              <Card.Body>
+                <Card.Text>Total: {order.totalPrice}</Card.Text>
+                <Card.Text>Mesa: {order.tableNumber}</Card.Text>
+                <ListGroup variant="flush">
+                  {order.products.map((product, index) => (
+                    <ListGroup.Item key={index}>
+                      {product.name} - Cantidad: {product.quantity} - Precio: {product.price}
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
       </Row>
     </Container>
   );
