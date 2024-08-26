@@ -13,6 +13,8 @@ const CardsMenu = ({ product }) => {
     addToTheCart(product);
   };
 
+  console.log(product);
+
   const modalId = `descriptionModal-${product.id}`;
   return (
     <section className={`menuCard ${!product.available ? "notAvailable" : ""}`}>
@@ -37,6 +39,20 @@ const CardsMenu = ({ product }) => {
           >
             <i className="bi bi-plus-lg"></i>
           </button>
+          {product.ingredients === "sin TACC" && (
+            <img
+              alt="Sin Tacc"
+              className="logoIngredients"
+              src="https://seeklogo.com/images/S/sin-tacc-logo-4C05BF3770-seeklogo.com.png"
+            />
+          )}
+          {product.ingredients === "vegetariano" && (
+            <img
+              alt="Vegetariano"
+              className="logoIngredients"
+              src="https://cdn-icons-png.flaticon.com/512/3637/3637997.png"
+            />
+          )}
         </div>
         <div className="menuText mt-3 ps-3">
           <button
@@ -78,6 +94,20 @@ const CardsMenu = ({ product }) => {
                 className="modalImage"
                 src={product.imageUrl}
               />
+              {product.ingredients === "sin TACC" && (
+                <img
+                  alt="Sin Tacc"
+                  className="logoIngredientsModal"
+                  src="https://seeklogo.com/images/S/sin-tacc-logo-4C05BF3770-seeklogo.com.png"
+                />
+              )}
+              {product.ingredients === "vegetariano" && (
+                <img
+                  alt="Vegetariano"
+                  className="logoIngredientsModal"
+                  src="https://cdn-icons-png.flaticon.com/512/3637/3637997.png"
+                />
+              )}
               <p className="mt-3 mb-0 bodyFont">{product.description}</p>
             </div>
             <div className="footer">
@@ -112,5 +142,6 @@ CardsMenu.propTypes = {
     description: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     available: PropTypes.bool.isRequired,
+    ingredients: PropTypes.string.isRequired,
   }),
 };

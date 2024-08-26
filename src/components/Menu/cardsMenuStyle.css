@@ -40,6 +40,14 @@
   top: 10px;
 }
 
+.logoIngredients{
+  width: 60px;
+  position: absolute;
+  z-index: 100;
+  right: 175px;
+  top: 10px;
+}
+
 .menuText {
   h5 {
     font-family: var(--fuente-titulo);
@@ -70,13 +78,21 @@
 
 .modal-body p {
   text-wrap: wrap;
+  position: relative;
 }
 
-.modal-body img {
+.modalImage {
   border: solid 2px;
   border-radius: 1rem;
   width: 100%;
   object-fit: cover;
+}
+
+.logoIngredientsModal{
+width: 80px;
+position: absolute;
+right: 245px;
+top: 30px;
 }
 
 .priceModal {
