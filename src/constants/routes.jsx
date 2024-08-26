@@ -10,6 +10,7 @@ import AdminView from "../views/Admin/AdminView";
 import MenuView from "../views/MenuView";
 import UserHistoryView from "../views/UserHistoryView/UserHistoryView";
 import AdminHistoryView from "../views/AdminHistoryView/AdminHistoryView";
+import Error404 from "../views/Error404/Error404";
 
 
 export const router = createBrowserRouter([
@@ -69,7 +70,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <p>Error 404</p>,
+        element: <Error404/>,
       },
     ],
   },
