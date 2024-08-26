@@ -1,4 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Container, Table, Spinner, Alert, Button, Collapse, Card } from 'react-bootstrap';
+import { useQuery } from '@tanstack/react-query';
+import { getOrdersFn } from '../../api/orders';
 
 const UserHistoryView = () => {
   const { data, isLoading, isError, error } = useQuery({
