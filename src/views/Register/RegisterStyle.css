@@ -5,38 +5,31 @@
   font-family: var(--fuente-cuerpo);
   padding: 5px;
   }
-  
   .registro-titulo{
     font-family: var(--fuente-titulo);
   }
-  
   .register-card {
     border-radius:  20px 0 20px 0;
     box-shadow: 0 0 0.2rem 0.2rem var(--color-claro);
     width: 90%;
     position: relative;
-    overflow: hidden; 
-    margin: 5px auto; 
+    overflow: hidden;
+    margin: 5px auto;
     padding: 5px;
     box-sizing: border-box;
   }
-  
-
   .register-content {
     position: relative;
-    z-index: 1; 
+    z-index: 1;
     color: var(--color-claro);
     padding: 1rem;
   }
-
   .login {
     color: var(--color-claro);
   }
-
   .login-link {
     color: var(--color-detalles);
   }
-
   .registroBoton {
     display: flex;
     align-items: center;
