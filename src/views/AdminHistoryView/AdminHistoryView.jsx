@@ -1,45 +1,65 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import { Container, Table, Spinner, Alert } from 'react-bootstrap';
+import { getOrdersFn } from '../api/orders';
 
 const AdminHistoryView = () => {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch('http://localhost:3001/orders', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${yourAuthToken}`,
-        'Content-Type': 'application/json'
-      },
-    })
-      .then(response => response.json())
-      .then(data => setOrders(data))
-      .catch(error => console.error('Error fetching admin orders:', error));
+useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await getOrdersFn();
+        setOrders(response.data); // Usa response.data si esa es la estructura correcta
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
   }, []);
-
-  return (
+  
+return (
     <Container>
-      <h1 className="my-4">Historial de Pedidos (Admin)</h1>
-      <Row>
-        {orders.map(order => (
-          <Col md={6} lg={4} key={order.id} className="mb-4">
-            <Card>
-              <Card.Header>Pedido ID: {order.id}</Card.Header>
-              <Card.Body>
-                <Card.Text>Total: {order.totalPrice}</Card.Text>
-                <Card.Text>Mesa: {order.tableNumber}</Card.Text>
-                <ListGroup variant="flush">
-                  {order.products.map((product, index) => (
-                    <ListGroup.Item key={index}>
-                      {product.name} - Cantidad: {product.quantity} - Precio: {product.price}
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      <h1 className="my-4">Historial de Pedidos</h1>
+      {error && <Alert variant="danger">{error}</Alert>}
+      {loading ? (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </Spinner>
+      ) : (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Número de Mesa</th>
+              <th>Total</th>
+              <th>Productos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map(order => (
+              <tr key={order.id}>
+                <td>{order.id}</td>
+                <td>{order.tableNumber}</td>
+                <td>${order.totalPrice}</td>
+                <td>
+                  <ul>
+                    {order.products.map((product, index) => (
+                      <li key={index}>
+                        {product.name} - Cantidad: {product.quantity} - Precio: ${product.price}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
     </Container>
   );
 };
