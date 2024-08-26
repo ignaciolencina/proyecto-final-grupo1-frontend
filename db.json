@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "firstname": "Administrador",
       "lastname": "Delbar",
       "email": "admindelbar@admin.com",
@@ -75,7 +75,8 @@
           "quantity": 1,
           "price": 6900
         }
-      ]
+      ],
+      "id": "07f8"
     },
     {
       "id": "0a59",
@@ -105,6 +106,75 @@
           "name": "CHICKEN AMORE",
           "quantity": 4,
           "price": 6500
+        }
+      ]
+    },
+    {
+      "id": "190c",
+      "orderId": "uniqueOrderId123",
+      "tableNumber": 5,
+      "totalPrice": 26400,
+      "products": [
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 3,
+          "price": 6500
+        },
+        {
+          "name": "RETRO",
+          "quantity": 1,
+          "price": 6900
+        }
+      ]
+    },
+    {
+      "id": "dda4",
+      "tableNumber": 5,
+      "totalPrice": 13400,
+      "products": [
+        {
+          "name": "RETRO",
+          "quantity": 1,
+          "price": 6900
+        },
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 1,
+          "price": 6500
+        }
+      ]
+    },
+    {
+      "id": "ec2b",
+      "tableNumber": 5,
+      "totalPrice": 20300,
+      "products": [
+        {
+          "name": "RETRO",
+          "quantity": 2,
+          "price": 6900
+        },
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 1,
+          "price": 6500
+        }
+      ]
+    },
+    {
+      "id": "021b",
+      "tableNumber": 5,
+      "totalPrice": 19900,
+      "products": [
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 2,
+          "price": 6500
+        },
+        {
+          "name": "RETRO",
+          "quantity": 1,
+          "price": 6900
         }
       ]
     }

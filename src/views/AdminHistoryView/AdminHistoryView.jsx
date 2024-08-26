@@ -1,11 +1,4 @@
-import React from 'react';
-import { Container, Table, Spinner, Alert, Row, Col } from 'react-bootstrap';
-import { useQuery } from '@tanstack/react-query';
-import { getOrdersFn } from '../../api/orders';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
-
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+import { Container, Row, Col, Table } from 'react-bootstrap';
 
 const AdminHistoryView = () => {
   const { data, isLoading, isError, error } = useQuery({
@@ -66,10 +59,11 @@ const AdminHistoryView = () => {
   };
 
   return (
-    <Container className="mt-4">
-      <Row className="mb-4">
-        <Col md={12}>
-          <h2 className="mb-4">Historial de Pedidos</h2>
+    <div>AdminHistoryView</div>
+    <Container className="admin-history-view my-4">
+      <h1>Pedidos Recibidos</h1>
+      <Row>
+        <Col>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -107,6 +101,7 @@ const AdminHistoryView = () => {
         </Col>
       </Row>
     </Container>
+    </section>
   );
 };
 

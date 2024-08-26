@@ -5,10 +5,12 @@ import { useCartStore } from "../../stores/useCartStore";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { postOrderFn } from "../../api/orders";
+import { useSession } from "../../stores/useSession";
 
 const Cart = () => {
   const { cartItems, clearCart } = useCartStore();
-  console.log(cartItems);
+  const {tableNumber} = useSession();
+  
   const totalPrice = cartItems.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
@@ -18,7 +20,7 @@ const Cart = () => {
     onSuccess: () => {
       toast.dismiss();
       toast.success("Tu orden se envió correctamente");
-
+      
       clearCart();
     },
     onError: (e) => {
@@ -29,14 +31,13 @@ const Cart = () => {
 
   const handleSubmit = (cartItems) => {
     const orderData = {
-      orderId: "uniqueOrderId123", // Genera un ID único para la orden, puedes usar una librería como uuid para esto.
-      tableNumber: 5, // Este es un ejemplo, podrías obtenerlo de algún input o seleccionar un valor fijo.
-      totalPrice: totalPrice, // Ya calculado anteriormente
+      tableNumber: tableNumber,
+      totalPrice: totalPrice, 
       products: cartItems.map((item) => ({
         name: item.name,
-        quantity: item.quantity, // Asegúrate de que `quantity` esté disponible en cada `item`
+        quantity: item.quantity,
         price: item.price,
-      })),
+      })),    
     };
 
     toast.loading("Enviando la orden");
@@ -65,6 +66,7 @@ const Cart = () => {
         </button>
       </div>
       <div className="cartDetail mx-2">
+        <h2>Mesa N° {tableNumber}</h2>
         <h2>Detalle</h2>
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => (

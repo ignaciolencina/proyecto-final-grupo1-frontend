@@ -140,3 +140,4 @@ export const checkEmailExists = async (email) => {
 
   return data.exists;
 };
+

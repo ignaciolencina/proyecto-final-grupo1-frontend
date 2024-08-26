@@ -7,9 +7,11 @@ import RegisterView from "../views/Register/RegisterView";
 import LandingView from "../views/LandingView";
 import UserProfileView from "../views/UserProfile/UserProfileView";
 import AdminView from "../views/Admin/AdminView";
-import MenuView from "../views/MenuView";
 import UserHistoryView from "../views/UserHistoryView/UserHistoryView";
 import AdminHistoryView from "../views/AdminHistoryView/AdminHistoryView";
+import Error404 from "../views/Error404/Error404";
+import MenuView from "../views/Menu/MenuView";
+
 
 
 export const router = createBrowserRouter([
@@ -21,10 +23,6 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: <LandingView />,
-      },
-      {
-        path: 'menu',
-        element: <MenuView/>,
       },
       // RUTAS DE AUTENTICACION
       {
@@ -47,8 +45,8 @@ export const router = createBrowserRouter([
         element: <PrivateViews />,
         children: [
           {
-            path: "index",
-            element: <p>Index</p>,
+            path: "menu",
+            element: <MenuView />,
           },
           {
             path: "admin",
@@ -73,7 +71,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <p>Error 404</p>,
+        element: <Error404/>,
       },
     ],
   },

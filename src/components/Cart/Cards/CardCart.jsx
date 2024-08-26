@@ -93,7 +93,7 @@ CardCart.propTypes = {
     id: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
     quantity: PropTypes.number,
   }),
 };
