@@ -1,6 +1,6 @@
 import RailingText from "../../ui/RailingText/RailingText";
 import Carousel from "./Carousel/Carousel";
-import MenuLanding from "./MenuLanding/MenuLanding";
+import CategoriesLanding from "./CategoriesLanding/CategorysLanding";
 import Welcome from "./Welcome/Welcome";
 
 const Info = () => {
@@ -13,8 +13,8 @@ const Info = () => {
         <Carousel />
         <RailingText text="BURGERTUC" />
       </section>
-      <section className="menuSection">
-        <MenuLanding />
+      <section className="categoriesSection">
+        <CategoriesLanding />
       </section>
     </section>
   );

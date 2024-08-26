@@ -2,10 +2,11 @@ import PropTypes from "prop-types";
 import "./profileCardStyle.css";
 
 const ProfileCard = (props) => {
-    const { profileImage, profileName, profileDescription } = props;
+    const { profileImage, profileName, profileDescription, profileJob } = props;
   return (
     <section>
       <div className="profileCard ms-3">
+      <div className="profileJob">{profileJob}</div>
         <div className="profileFrame">
           <div className="profileFront">
             <img
@@ -33,4 +34,5 @@ ProfileCard.propTypes = {
     profileImage: PropTypes.string.isRequired,
     profileName: PropTypes.string.isRequired,
     profileDescription: PropTypes.string.isRequired,
+    profileJob: PropTypes.string.isRequired,
   };

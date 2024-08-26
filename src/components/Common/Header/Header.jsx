@@ -15,21 +15,23 @@ const Header = () => {
   const handleLogout = async () => {
     const action = await Swal.fire({
       title: "Ya te vas?",
-      text: "Estas seguro que deseas cerrar sesión?",
-      icon: "info",
-      confirmButtonText: "CERRAR SESIÓN",
+      text: "Desea cerrar sesión?",
+      background: "#000000",
+      color: "#ffffff",
+      imageUrl:
+        "https://i.pinimg.com/originals/a4/38/4c/a4384c5d86fa696a392ab216bc09a3d3.gif",
+      imageWidth: 150,
+      imageHeight: 150,
+      confirmButtonText: "Salir",
+      confirmButtonColor: "#EE2737",
+      cancelButtonText: "Cancelar",
       showCancelButton: true,
-      cancelButtonText: "CANCELAR",
     });
 
     if (action.isConfirmed) {
       logout();
     }
   };
-
-  <div className="logoutCard">
-    <handleLogout />
-  </div>;
 
   return (
     <nav className="navbar fixed-top">
@@ -52,7 +54,7 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          {!isLoggedIn && (
+          {isLoggedIn && (
             <button
               aria-controls="offcanvasNavbar"
               aria-label="Toggle navigation"
@@ -66,10 +68,8 @@ const Header = () => {
               </span>
             </button>
           )}
-          {cartItems.length >= 1 && (
-            <div className="activeCart"></div>
-          )}
-        </div>  
+          {cartItems.length >= 1 && <div className="activeCart"></div>}
+        </div>
         <Cart />
         <div
           aria-labelledby="offcanvasNavbarLabel"
@@ -86,72 +86,75 @@ const Header = () => {
               type="button"
             ></button>
           </div>
-          <div className="ps-4">
-            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-              {!isLoggedIn && (
-                <li className="nav-item">
-                  <Link reloadDocument className="nav-link titleFont" to="/">
-                    VER MENÚ
-                  </Link>
-                </li>
-              )}
-              {!isLoggedIn && (
-                <li className="nav-item">
-                  <Link
-                    reloadDocument
-                    className="nav-link titleFont"
-                    to="/login"
-                  >
-                    HACER PEDIDO
-                  </Link>
-                </li>
-              )}
-              {!isLoggedIn && (
-                <li className="nav-item">
-                  <Link
-                    reloadDocument
-                    className="nav-link titleFont"
-                    to="/login"
-                  >
-                    INGRESAR
-                  </Link>
-                </li>
-              )}
-              {isLoggedIn && (
-                <li className="nav-item">
-                  <Link
-                    reloadDocument
-                    className="nav-link titleFont"
-                    to="/userProfile"
-                  >
-                    PERFIL
-                  </Link>
-                </li>
-              )}
-              {isLoggedIn && user.isAdmin && (
-                <li className="nav-item">
-                  <Link
-                    reloadDocument
-                    className="nav-link titleFont"
-                    to="/admin"
-                  >
-                    ADMIN
-                  </Link>
-                </li>
-              )}
-              {isLoggedIn && (
-                <li className="nav-item">
-                  <button
-                    className="btn btn-danger logoutButton titleFont"
-                    onClick={handleLogout}
-                  >
-                    <span>
-                      <i className="bi bi-box-arrow-right"></i>
-                    </span>{" "}
-                    SALIR
-                  </button>
-                </li>
-              )}
+          <div className="offStuff">
+            <ul className="navbar-nav px-4">
+              <div>
+                {isLoggedIn && (
+                  <li className="nav-item">
+                    <Link
+                      reloadDocument
+                      className="nav-link titleFont"
+                      to="/menu"
+                    >
+                      VER MENÚ
+                    </Link>
+                  </li>
+                )}
+                {!isLoggedIn && (
+                  <li className="nav-item">
+                    <Link
+                      reloadDocument
+                      className="nav-link titleFont"
+                      to="/login"
+                    >
+                      HACER PEDIDO
+                    </Link>
+                  </li>
+                )}
+                {!isLoggedIn && (
+                  <li className="nav-item">
+                    <Link
+                      reloadDocument
+                      className="nav-link titleFont"
+                      to="/login"
+                    >
+                      INGRESAR
+                    </Link>
+                  </li>
+                )}
+                {isLoggedIn && (
+                  <li className="nav-item">
+                    <Link
+                      reloadDocument
+                      className="nav-link titleFont"
+                      to="/userProfile"
+                    >
+                      PERFIL
+                    </Link>
+                  </li>
+                )}
+                {isLoggedIn && user.isAdmin && (
+                  <li className="nav-item">
+                    <Link
+                      reloadDocument
+                      className="nav-link titleFont"
+                      to="/admin"
+                    >
+                      ADMIN
+                    </Link>
+                  </li>
+                )}
+                {isLoggedIn && (
+                  <li className="nav-item">
+                    <button className="logoutButton" onClick={handleLogout}>
+                      <span>
+                        <i className="bi bi-box-arrow-right pe-2"></i>
+                      </span>
+                      SALIR
+                    </button>
+                  </li>
+                )}
+              </div>
               <div className="socialNavbar">
                 <li className="nav-item">
                   <Link reloadDocument to="*">
@@ -169,14 +172,12 @@ const Header = () => {
                   </Link>
                 </li>
               </div>
-              <div>
-                <img
-                  alt="Logo de BurgerTuc"
-                  className="logoOffcanvas"
-                  src={logoBurgerTuc}
-                />
-              </div>
             </ul>
+            <img
+              alt="Logo de BurgerTuc"
+              className="logoOffcanvas"
+              src={logoBurgerTuc}
+            />
           </div>
         </div>
       </div>
