@@ -1,44 +1,110 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import React from 'react';
+import { Container, Table, Spinner, Alert, Row, Col } from 'react-bootstrap';
+import { useQuery } from '@tanstack/react-query';
+import { getOrdersFn } from '../../api/orders';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 const AdminHistoryView = () => {
-  const [orders, setOrders] = useState([]);
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ['orders'],
+    queryFn: getOrdersFn,
+  });
 
-  useEffect(() => {
-    fetch('http://localhost:3001/orders', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${yourAuthToken}`,
-        'Content-Type': 'application/json'
+  if (isLoading) {
+    return (
+      <Container className="text-center mt-5">
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Container className="text-center mt-5">
+        <Alert variant="danger">Error: {error.message}</Alert>
+      </Container>
+    );
+  }
+
+  const orders = data?.data || [];
+
+  const productStats = orders.reduce((acc, order) => {
+    order.products.forEach(product => {
+      if (!acc[product.name]) {
+        acc[product.name] = 0;
+      }
+      acc[product.name] += product.quantity;
+    });
+    return acc;
+  }, {});
+
+  const chartData = {
+    labels: Object.keys(productStats),
+    datasets: [{
+      label: 'Cantidad Vendida',
+      data: Object.values(productStats),
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1,
+    }],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
       },
-    })
-      .then(response => response.json())
-      .then(data => setOrders(data))
-      .catch(error => console.error('Error fetching admin orders:', error));
-  }, []);
+      title: {
+        display: true,
+        text: 'Estadísticas de Productos Vendidos',
+      },
+    },
+  };
 
   return (
-    <Container>
-      <h1 className="my-4">Historial de Pedidos (Admin)</h1>
+    <Container className="mt-4">
+      <Row className="mb-4">
+        <Col md={12}>
+          <h2 className="mb-4">Historial de Pedidos</h2>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tabla</th>
+                <th>Precio Total</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.length > 0 ? (
+                orders.map((order) => (
+                  <tr key={order.id}>
+                    <td>{order.id}</td>
+                    <td>{order.tableNumber}</td>
+                    <td>${order.totalPrice}</td>
+                    <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4" className="text-center">
+                    <Alert variant="info">No orders found.</Alert>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
       <Row>
-        {orders.map(order => (
-          <Col md={6} lg={4} key={order.id} className="mb-4">
-            <Card>
-              <Card.Header>Pedido ID: {order.id}</Card.Header>
-              <Card.Body>
-                <Card.Text>Total: {order.totalPrice}</Card.Text>
-                <Card.Text>Mesa: {order.tableNumber}</Card.Text>
-                <ListGroup variant="flush">
-                  {order.products.map((product, index) => (
-                    <ListGroup.Item key={index}>
-                      {product.name} - Cantidad: {product.quantity} - Precio: {product.price}
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
+        <Col md={12}>
+          <h3 className="mb-4">Estadísticas de Productos</h3>
+          <Bar data={chartData} options={chartOptions} />
+        </Col>
       </Row>
     </Container>
   );

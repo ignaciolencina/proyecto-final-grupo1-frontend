@@ -1,45 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Card, ListGroup, Alert } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Table, Spinner, Alert, Button, Collapse, Card } from 'react-bootstrap';
+import { useQuery } from '@tanstack/react-query';
+import { getOrdersFn } from '../../api/orders';
 
 const UserHistoryView = () => {
-  const [orders, setOrders] = useState([]);
-  const [error, setError] = useState(null);
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ['orders'],
+    queryFn: getOrdersFn,
+  });
 
-  useEffect(() => {
-    fetch('http://localhost:3000/api/v1/orders')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => setOrders(data.data))
-      .catch(error => setError(error.message));
-  }, []);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+
+  if (isLoading) {
+    return (
+      <Container className="text-center mt-5">
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Container className="text-center mt-5">
+        <Alert variant="danger">Error: {error.message}</Alert>
+      </Container>
+    );
+  }
+
+  const orders = data?.data || [];
 
   return (
-    <Container>
-      <h1 className="my-4">Historial de Pedidos</h1>
-      {error && <Alert variant="danger">{error}</Alert>}
+    <Container className="mt-4">
+      <h2 className="mb-4">Historial de Pedidos</h2>
       {orders.length > 0 ? (
-        orders.map(order => (
-          <Card key={order.id} className="mb-3">
-            <Card.Header>Pedido ID: {order.id}</Card.Header>
-            <Card.Body>
-              <Card.Title>Total: ${order.totalPrice}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Número de Mesa: {order.tableNumber}</Card.Subtitle>
-              <ListGroup variant="flush">
-                {order.products.map((product, index) => (
-                  <ListGroup.Item key={index}>
-                    {product.name} - Cantidad: {product.quantity} - Precio: ${product.price}
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-            </Card.Body>
-          </Card>
-        ))
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tabla</th>
+              <th>Precio Total</th>
+              <th>Fecha</th>
+              <th>Detalles</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <React.Fragment key={order.id}>
+                <tr>
+                  <td>{order.id}</td>
+                  <td>{order.tableNumber}</td>
+                  <td>${order.totalPrice}</td>
+                  <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                  <td>
+                    <Button
+                      variant="info"
+                      onClick={() => setSelectedOrderId(order.id === selectedOrderId ? null : order.id)}
+                    >
+                      {order.id === selectedOrderId ? 'Ocultar Detalles' : 'Ver Detalles'}
+                    </Button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="5">
+                    <Collapse in={selectedOrderId === order.id}>
+                      <Card>
+                        <Card.Body>
+                          <h5>Detalles del Pedido</h5>
+                          <Table striped bordered hover>
+                            <thead>
+                              <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {order.products.map((product, index) => (
+                                <tr key={index}>
+                                  <td>{product.name}</td>
+                                  <td>${product.price}</td>
+                                  <td>{product.quantity}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </Card.Body>
+                      </Card>
+                    </Collapse>
+                  </td>
+                </tr>
+              </React.Fragment>
+            ))}
+          </tbody>
+        </Table>
       ) : (
-        <p>No hay pedidos disponibles.</p>
+        <Container className="text-center mt-5">
+          <Alert variant="info">No se encontraron pedidos.</Alert>
+        </Container>
       )}
     </Container>
   );
