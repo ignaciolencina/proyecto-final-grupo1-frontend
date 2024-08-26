@@ -56,7 +56,7 @@ const LoginForm = () => {
       if (result.isConfirmed) {
         const tableNumber = result.value;
         setTableNumber(tableNumber);
-        console.log(tableNumber)
+        console.log(tableNumber);
         navigate("/");
       }
     },

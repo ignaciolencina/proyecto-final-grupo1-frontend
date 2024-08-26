@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import Input from "../ui/Input/Input";
@@ -7,7 +7,15 @@ import { useSession } from "../../stores/useSession";
 import { useEffect, useState } from "react";
 
 const UserProfileForm = () => {
-  const { user, userToEdit, clearUserToEdit, setUserToEdit } = useSession();
+  const {
+    user,
+    userToEdit,
+    clearUserToEdit,
+    setUserToEdit,
+    updateUser,
+    login,
+    userData,
+  } = useSession();
 
   const {
     register,
@@ -16,13 +24,11 @@ const UserProfileForm = () => {
     formState: { errors },
     setValue,
   } = useForm();
-  const queryClient = useQueryClient();
 
   const [isEditing, setIsEditing] = useState({
     firstname: false,
     lastname: false,
     email: false,
-    password: false,
   });
 
   useEffect(() => {
@@ -37,19 +43,21 @@ const UserProfileForm = () => {
       setValue("firstname", userToEdit.firstname);
       setValue("lastname", userToEdit.lastname);
       setValue("email", userToEdit.email);
-      setValue("password", userToEdit.password);
     }
-  }, [userToEdit, user, setValue, setUserToEdit]);
+  }, [userToEdit, user, setUserToEdit, setValue, userData]);
 
   const { mutate: putRegister } = useMutation({
     mutationFn: putRegisterFn,
-    onSuccess: (data) => {
+    onSuccess: (response) => {
       toast.dismiss();
       toast.success("Datos actualizados correctamente");
+
+      const { token, data: updatedUser } = response;
+      sessionStorage.setItem("token", token);
+      updateUser(updatedUser);
+      login(updatedUser);
+
       reset();
-      setUserToEdit(data.data);
-      clearUserToEdit();
-      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
     onError: (e) => {
       toast.dismiss();
@@ -67,10 +75,7 @@ const UserProfileForm = () => {
         lastname: data.lastname || "",
         email: data.email || "",
       };
-      if (data.password) {
-        payload.password = data.password;
-      }
-      console.log("Payload enviado al backend:", payload); // Confirma que todos los campos están presentes
+      console.log("Payload enviado al backend:", payload);
 
       putRegister([userToEdit.id, data]);
     } else {
@@ -194,34 +199,11 @@ const UserProfileForm = () => {
       <div className="mb-3">
         <label className="form-label">Contraseña:</label>
         <div className="d-flex align-items-center">
-          {!isEditing.password ? (
-            <span>********</span>
-          ) : (
-            <Input
-              className="user-profile-form-control"
-              error={errors.password}
-              name="password"
-              options={{
-                required: "Campo obligatorio",
-                minLength: {
-                  value: 6,
-                  message: "La contraseña debe tener mínimo 6 caracteres",
-                },
-              }}
-              placeholder="Contraseña"
-              register={register}
-              type="password"
-            />
-          )}
-          <div
-            className="bi bi-pencil-fill ms-3"
-            type="button"
-            onClick={() => toggleEditing("password")}
-          ></div>
+          <span>********</span>
         </div>
       </div>
 
-      <div className="text-end">
+      <div className="botonesResume">
         <button className="user-profile-boton-guardar" type="submit">
           GUARDAR
         </button>
