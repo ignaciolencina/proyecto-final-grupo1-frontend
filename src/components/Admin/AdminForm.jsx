@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+
 import "./adminStyles.css";
+import AdminInput from "../ui/Form/AdminInput";
 
 const AdminForm = ({ initialData, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,8 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
     ingredients: "N/A",
     category: "burgers",
   });
+
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (initialData) {
@@ -37,69 +41,116 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
     });
   };
 
+  const validate = () => {
+    const newErrors = {};
+
+    // Validaciones personalizadas que puedes mover a AdminInput si es necesario
+    if (!formData.name || formData.name.length > 30) {
+      newErrors.name = "El nombre debe tener entre 1 y 30 caracteres";
+    }
+
+    const urlPattern = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm;
+    if (!formData.imageUrl || !urlPattern.test(formData.imageUrl)) {
+      newErrors.imageUrl = "Debe ingresar una URL válida";
+    }
+
+    const pricePattern = /^\d+(\.\d{2})?$/;
+    const priceValue = parseFloat(formData.price);
+    if (
+      !formData.price ||
+      !pricePattern.test(formData.price) ||
+      priceValue < 0.01 ||
+      priceValue > 1000000
+    ) {
+      newErrors.price = "El precio debe estar entre 0 y 1,000,000";
+    }
+
+    if (
+      !formData.description ||
+      formData.description.length < 3 ||
+      formData.description.length > 500
+    ) {
+      newErrors.description =
+        "La descripción debe tener entre 3 y 500 caracteres";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    if (validate()) {
+      onSubmit(formData);
+    }
   };
 
   return (
     <form className="admin-form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="name">Nombre del Producto</label>
-        <input
-          required
-          className="form-control"
-          id="name"
-          name="name"
-          type="text"
-          value={formData.name}
-          onChange={handleChange}
-        />
-      </div>
+      <AdminInput
+        error={errors.name}
+        label="Nombre del Producto"
+        name="name"
+        type="text"
+        value={formData.name}
+        onChange={handleChange}
+      />
 
-      <div className="form-group">
-        <label htmlFor="imageUrl">Imagen (URL)</label>
-        <input
-          required
-          className="form-control"
-          id="imageUrl"
-          name="imageUrl"
-          type="url"
-          value={formData.imageUrl}
-          onChange={handleChange}
-        />
-      </div>
+      <AdminInput
+        error={errors.imageUrl}
+        label="Imagen (URL)"
+        name="imageUrl"
+        type="url"
+        value={formData.imageUrl}
+        onChange={handleChange}
+      />
 
-      <div className="form-group">
-        <label htmlFor="price">Precio</label>
-        <input
-          required
-          className="form-control"
-          id="price"
-          name="price"
-          type="text"
-          value={formData.price}
-          onChange={handleChange}
-        />
-      </div>
+      <AdminInput
+        error={errors.price}
+        label="Precio"
+        name="price"
+        type="text"
+        value={formData.price}
+        onChange={handleChange}
+      />
+
       <div className="form-group">
         <label htmlFor="description">Descripción</label>
         <textarea
           required
-          className="form-control"
           id="description"
           name="description"
           value={formData.description}
+          onBlur={() => {
+            if (
+              !formData.description ||
+              formData.description.length < 3 ||
+              formData.description.length > 500
+            ) {
+              setErrors((prevErrors) => ({
+                ...prevErrors,
+                description:
+                  "La descripción debe tener entre 3 y 500 caracteres",
+              }));
+            } else {
+              setErrors((prevErrors) => ({
+                ...prevErrors,
+                description: null,
+              }));
+            }
+          }}
           onChange={handleChange}
         />
+        {errors.description && (
+          <p className="error-text">{errors.description}</p>
+        )}
       </div>
 
-      <div className="form-group">
+      <div className="form-group d-flex">
         <label htmlFor="available">Disponible</label>
-        <div className="form-check form-switch mx-3">
+        <div className="form-switch ml-0">
           <input
             checked={formData.available}
-            className="form-check-input"
             id="available"
             name="available"
             type="checkbox"
@@ -111,7 +162,6 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
       <div className="form-group">
         <label htmlFor="ingredients">Ingredientes</label>
         <select
-          className="form-control"
           id="ingredients"
           name="ingredients"
           value={formData.ingredients}
@@ -127,7 +177,6 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
       <div className="form-group">
         <label htmlFor="category">Categoría</label>
         <select
-          className="form-control"
           id="category"
           name="category"
           value={formData.category}
@@ -141,12 +190,12 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
         </select>
       </div>
 
-      <div className="form-group mt-auto d-flex justify-content-around">
-        <button className="formBoton" type="submit">
+      <div className="form-actions">
+        <button className="form-button" type="submit">
           {initialData ? "Actualizar" : "Guardar Producto"}
         </button>
         {initialData && (
-          <button className="formBoton" type="button" onClick={onCancel}>
+          <button className="form-button" type="button" onClick={onCancel}>
             Cancelar
           </button>
         )}
