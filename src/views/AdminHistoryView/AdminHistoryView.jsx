@@ -1,8 +1,8 @@
-import React from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
 
 const AdminHistoryView = () => {
   return (
+    <div>AdminHistoryView</div>
     <Container className="admin-history-view my-4">
       <h1>Pedidos Recibidos</h1>
       <Row>
