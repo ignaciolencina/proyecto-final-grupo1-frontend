@@ -70,40 +70,46 @@ const AdminHistoryView = () => {
       <Row className="mb-4">
         <Col md={12}>
           <h2 className="mb-4">Historial de Pedidos</h2>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Tabla</th>
-                <th>Precio Total</th>
-                <th>Fecha</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.length > 0 ? (
-                orders.map((order) => (
-                  <tr key={order.id}>
-                    <td>{order.id}</td>
-                    <td>{order.tableNumber}</td>
-                    <td>${order.totalPrice}</td>
-                    <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                  </tr>
-                ))
-              ) : (
+          <div className="table-responsive">
+            <Table striped bordered hover>
+              <thead>
                 <tr>
-                  <td colSpan="4" className="text-center">
-                    <Alert variant="info">No orders found.</Alert>
-                  </td>
+                  <th>ID</th>
+                  <th>Tabla</th>
+                  <th>Precio Total</th>
+                  <th>Fecha</th>
                 </tr>
-              )}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {orders.length > 0 ? (
+                  orders.map((order) => (
+                    <tr key={order.id}>
+                      <td>{order.id}</td>
+                      <td>{order.tableNumber}</td>
+                      <td>${order.totalPrice}</td>
+                      <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="4" className="text-center">
+                      <Alert variant="info">No se encontraron pedidos.</Alert>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </div>
         </Col>
       </Row>
       <Row>
         <Col md={12}>
           <h3 className="mb-4">Estadísticas de Productos</h3>
-          <Bar data={chartData} options={chartOptions} />
+          <div className="d-flex justify-content-center">
+            <div style={{ maxWidth: '600px', width: '100%' }}>
+              <Bar data={chartData} options={chartOptions} />
+            </div>
+          </div>
         </Col>
       </Row>
     </Container>
@@ -111,4 +117,3 @@ const AdminHistoryView = () => {
 };
 
 export default AdminHistoryView;
-
