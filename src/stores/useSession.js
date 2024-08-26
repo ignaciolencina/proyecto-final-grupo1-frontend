@@ -30,6 +30,12 @@ export const useSession = create((set) => {
     setUserToEdit: (user) => {
       set({ userToEdit: user });
     },
+    updateUser: (updatedUser) => {
+      set((state) => ({
+        user: { ...state.user, ...updatedUser },
+        userToEdit: { ...state.userToEdit, ...updatedUser },
+      }));
+    },
     clearUserToEdit: () => {
       set({ userToEdit: null });
     },

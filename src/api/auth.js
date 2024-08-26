@@ -67,60 +67,55 @@ export const postRegisterFn = async (data) => {
   return userData;
 };
 
-// PUT LOGIN FUNTION
+// PUT REGISTER FUNTION
 
-export const putLoginFn = async (data) => {
-  // data: { email, password }
-
-  const res = await fetch(`${BACKEND_URL}/auth/login`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-
-  if (res.status === 204 || res.headers.get("content-length") === "0") {
-    throw new Error("Respuesta vacía del servidor");
+export const putRegisterFn = async ([userId, updatedData]) => {
+  try {
+    const res = await fetch(`${BACKEND_URL}/users/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(updatedData),
+    });
+    if (!res.ok) {
+      const errorResponse = await res.json();
+      console.error("Error en el backend:", errorResponse);
+      throw new Error("Error al actualizar el usuario");
+    }
+    const updatedUser = await res.json();
+    return updatedUser;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
   }
-
-  const resData = await res.json();
-
-  if (!res.ok) {
-    throw new Error(resData.message || "Ocurrió un error");
-  }
-
-  const token = resData.data;
-
-  if (!token) {
-    throw new Error(resData.message || "Ocurrió un error");
-  }
-
-  const userData = decodeJWT(token).user;
-
-  // Persistir el JWT
-  sessionStorage.setItem("token", token);
-
-  return userData;
 };
 
-// PUT REGISTER FUNTION
-export const putRegisterFn = async ([userId, data]) => {
-  const res = await fetch(`${BACKEND_URL}/users/${userId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-    },
-    body: JSON.stringify(data),
-  });
+// GET by ID
 
-  if (!res.ok) {
-    throw new Error("Ocurrió un error al editar el usuario");
+export const fetchUserById = async (id) => {
+  try {
+    const res = await fetch(`${BACKEND_URL}/users/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Error fetching user:", errorData);
+      throw new Error("Error al obtener el usuario");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in fetchUserById:", error);
+    throw error;
   }
-
-  const userData = await res.json();
-  return userData;
 };
 
 // GET REGISTER FUNTION EMAIL CONTROL
@@ -140,4 +135,3 @@ export const checkEmailExists = async (email) => {
 
   return data.exists;
 };
-

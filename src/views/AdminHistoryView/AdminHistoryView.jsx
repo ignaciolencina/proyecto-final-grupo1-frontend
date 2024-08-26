@@ -1,15 +1,30 @@
-import React from 'react';
-import { Container, Table, Spinner, Alert, Row, Col } from 'react-bootstrap';
-import { useQuery } from '@tanstack/react-query';
-import { getOrdersFn } from '../../api/orders';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
+import React from "react";
+import { Container, Table, Spinner, Alert, Row, Col } from "react-bootstrap";
+import { useQuery } from "@tanstack/react-query";
+import { getOrdersFn } from "../../api/orders";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
 
 const AdminHistoryView = () => {
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['orders'],
+    queryKey: ["orders"],
     queryFn: getOrdersFn,
   });
 
@@ -32,7 +47,7 @@ const AdminHistoryView = () => {
   const orders = data?.data || [];
 
   const productStats = orders.reduce((acc, order) => {
-    order.products.forEach(product => {
+    order.products.forEach((product) => {
       if (!acc[product.name]) {
         acc[product.name] = 0;
       }
@@ -43,24 +58,26 @@ const AdminHistoryView = () => {
 
   const chartData = {
     labels: Object.keys(productStats),
-    datasets: [{
-      label: 'Cantidad Vendida',
-      data: Object.values(productStats),
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1,
-    }],
+    datasets: [
+      {
+        label: "Cantidad Vendida",
+        data: Object.values(productStats),
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+    ],
   };
 
   const chartOptions = {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
       title: {
         display: true,
-        text: 'Estadísticas de Productos Vendidos',
+        text: "Estadísticas de Productos Vendidos",
       },
     },
   };
@@ -106,7 +123,7 @@ const AdminHistoryView = () => {
         <Col md={12}>
           <h3 className="mb-4">Estadísticas de Productos</h3>
           <div className="d-flex justify-content-center">
-            <div style={{ maxWidth: '600px', width: '100%' }}>
+            <div style={{ maxWidth: "600px", width: "100%" }}>
               <Bar data={chartData} options={chartOptions} />
             </div>
           </div>

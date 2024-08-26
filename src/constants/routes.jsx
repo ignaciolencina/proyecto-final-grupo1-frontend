@@ -12,8 +12,6 @@ import AdminHistoryView from "../views/AdminHistoryView/AdminHistoryView";
 import Error404 from "../views/Error404/Error404";
 import MenuView from "../views/Menu/MenuView";
 
-
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -52,26 +50,27 @@ export const router = createBrowserRouter([
             path: "admin",
             element: <AdminView />,
           },
+
           {
             path: "userProfile",
             element: <UserProfileView />,
           },
           {
-            path: '/user-history',
+            path: "/user-history",
             element: <UserHistoryView />,
             private: true,
           },
           {
-            path: '/admin-history',
+            path: "/admin-history",
             element: <AdminHistoryView />,
             private: true,
-            roleRequired: 'admin',
+            roleRequired: "admin",
           },
         ],
       },
       {
         path: "*",
-        element: <Error404/>,
+        element: <Error404 />,
       },
     ],
   },

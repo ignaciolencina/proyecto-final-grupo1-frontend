@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import { Container, Table, Spinner, Alert, Button, Collapse, Card } from 'react-bootstrap';
-import { useQuery } from '@tanstack/react-query';
-import { getOrdersFn } from '../../api/orders';
+import React, { useState } from "react";
+import {
+  Container,
+  Table,
+  Spinner,
+  Alert,
+  Button,
+  Collapse,
+  Card,
+} from "react-bootstrap";
+import { useQuery } from "@tanstack/react-query";
+import { getOrdersFn } from "../../api/orders";
 
 const UserHistoryView = () => {
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['orders'],
+    queryKey: ["orders"],
     queryFn: getOrdersFn,
   });
 
@@ -55,9 +63,15 @@ const UserHistoryView = () => {
                     <td>
                       <Button
                         variant="info"
-                        onClick={() => setSelectedOrderId(order.id === selectedOrderId ? null : order.id)}
+                        onClick={() =>
+                          setSelectedOrderId(
+                            order.id === selectedOrderId ? null : order.id
+                          )
+                        }
                       >
-                        {order.id === selectedOrderId ? 'Ocultar Detalles' : 'Ver Detalles'}
+                        {order.id === selectedOrderId
+                          ? "Ocultar Detalles"
+                          : "Ver Detalles"}
                       </Button>
                     </td>
                   </tr>
@@ -71,9 +85,16 @@ const UserHistoryView = () => {
                               <Card key={index} className="mb-2">
                                 <Card.Body>
                                   <div className="d-flex justify-content-between">
-                                    <div><strong>Producto:</strong> {product.name}</div>
-                                    <div><strong>Precio:</strong> ${product.price}</div>
-                                    <div><strong>Cantidad:</strong> {product.quantity}</div>
+                                    <div>
+                                      <strong>Producto:</strong> {product.name}
+                                    </div>
+                                    <div>
+                                      <strong>Precio:</strong> ${product.price}
+                                    </div>
+                                    <div>
+                                      <strong>Cantidad:</strong>{" "}
+                                      {product.quantity}
+                                    </div>
                                   </div>
                                 </Card.Body>
                               </Card>
