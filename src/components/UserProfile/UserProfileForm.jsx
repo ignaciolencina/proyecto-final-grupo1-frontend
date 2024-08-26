@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import Input from "../ui/Input/Input";
@@ -7,8 +7,15 @@ import { useSession } from "../../stores/useSession";
 import { useEffect, useState } from "react";
 
 const UserProfileForm = () => {
-  const { user, userToEdit, clearUserToEdit, setUserToEdit, updateUser } =
-    useSession();
+  const {
+    user,
+    userToEdit,
+    clearUserToEdit,
+    setUserToEdit,
+    updateUser,
+    login,
+    userData,
+  } = useSession();
 
   const {
     register,
@@ -17,7 +24,6 @@ const UserProfileForm = () => {
     formState: { errors },
     setValue,
   } = useForm();
-  const queryClient = useQueryClient();
 
   const [isEditing, setIsEditing] = useState({
     firstname: false,
@@ -38,17 +44,19 @@ const UserProfileForm = () => {
       setValue("lastname", userToEdit.lastname);
       setValue("email", userToEdit.email);
     }
-  }, [userToEdit, user, setValue, setUserToEdit]);
+  }, [userToEdit, user, setUserToEdit, setValue, userData]);
 
   const { mutate: putRegister } = useMutation({
     mutationFn: putRegisterFn,
-    onSuccess: (data) => {
+    onSuccess: (response) => {
       toast.dismiss();
       toast.success("Datos actualizados correctamente");
-      updateUser(data.data);
-      // setUserToEdit (data.data);
-      // clearUserToEdit();
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+
+      const { token, data: updatedUser } = response;
+      sessionStorage.setItem("token", token);
+      updateUser(updatedUser);
+      login(updatedUser);
+
       reset();
     },
     onError: (e) => {
@@ -56,31 +64,7 @@ const UserProfileForm = () => {
       toast.error(e.message);
     },
   });
-  /*
-  const { mutate: putRegister } = useMutation({
-    mutationFn: putRegisterFn,
-    onSuccess: async (data) => {
-      toast.dismiss();
-      toast.success("Datos actualizados correctamente");
 
-      // Realizar una solicitud GET para obtener el usuario actualizado
-      try {
-        const updatedUser = await fetchUserById(data.id); // Suponiendo que `fetchUserById` es una función que hace la solicitud GET
-        setUserToEdit(updatedUser);
-        updateUser(updatedUser);
-      } catch (e) {
-        toast.error("Error al obtener los datos actualizados");
-      }
-
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-      reset();
-    },
-    onError: (e) => {
-      toast.dismiss();
-      toast.error(e.message);
-    },
-  });
-*/
   const handleSubmitForm = (data) => {
     console.log("Datos enviados al submit:", data);
     toast.loading("Guardando cambios...");
