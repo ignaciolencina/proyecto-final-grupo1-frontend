@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card, ListGroup, Alert } from 'react-bootstrap';
+import { getOrdersFn } from '../api/orders';
 
 const UserHistoryView = () => {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/api/v1/orders')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => setOrders(data.data))
-      .catch(error => setError(error.message));
+ useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await getOrdersFn();
+        setOrders(response.data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchOrders();
   }, []);
 
   return (
@@ -23,23 +25,28 @@ const UserHistoryView = () => {
       {error && <Alert variant="danger">{error}</Alert>}
       {orders.length > 0 ? (
         orders.map(order => (
-          <Card key={order.id} className="mb-3">
-            <Card.Header>Pedido ID: {order.id}</Card.Header>
+          <Card className="my-3" key={order.id}>
             <Card.Body>
-              <Card.Title>Total: ${order.totalPrice}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Número de Mesa: {order.tableNumber}</Card.Subtitle>
+              <Card.Title>Pedido ID: {order.id}</Card.Title>
               <ListGroup variant="flush">
-                {order.products.map((product, index) => (
-                  <ListGroup.Item key={index}>
-                    {product.name} - Cantidad: {product.quantity} - Precio: ${product.price}
-                  </ListGroup.Item>
-                ))}
+                <ListGroup.Item>Número de Mesa: {order.tableNumber}</ListGroup.Item>
+                <ListGroup.Item>Total: ${order.totalPrice}</ListGroup.Item>
+                <ListGroup.Item>
+                  <strong>Productos:</strong>
+                  <ul>
+                    {order.products.map((product, index) => (
+                      <li key={index}>
+                        {product.name} - Cantidad: {product.quantity} - Precio: ${product.price}
+                      </li>
+                    ))}
+                  </ul>
+                </ListGroup.Item>
               </ListGroup>
             </Card.Body>
           </Card>
         ))
       ) : (
-        <p>No hay pedidos disponibles.</p>
+        <Alert variant="info">No hay pedidos disponibles.</Alert>
       )}
     </Container>
   );
