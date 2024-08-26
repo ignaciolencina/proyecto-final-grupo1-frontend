@@ -19,6 +19,7 @@
   flex-wrap: wrap;
   align-items: center;
   margin-right: 15px;
+  position: relative;
 }
 
 .profileFrame {
@@ -33,6 +34,19 @@
 
 .profilePicture {
   width: 250px;
+}
+
+.profileJob{
+  background-color: var(--color-detalles);
+  padding-inline: 15px;
+  border-radius: 1rem;
+  font-family: var(--fuente-cuerpo);
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--color-claro);
+  position: absolute;
+  z-index: 100;
+  top: 10px;
 }
 
 h2{

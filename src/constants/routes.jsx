@@ -7,10 +7,11 @@ import RegisterView from "../views/Register/RegisterView";
 import LandingView from "../views/LandingView";
 import UserProfileView from "../views/UserProfile/UserProfileView";
 import AdminView from "../views/Admin/AdminView";
-import MenuView from "../views/MenuView";
 import UserHistoryView from "../views/UserHistoryView/UserHistoryView";
 import AdminHistoryView from "../views/AdminHistoryView/AdminHistoryView";
 import Error404 from "../views/Error404/Error404";
+import MenuView from "../views/Menu/MenuView";
+
 
 
 export const router = createBrowserRouter([
