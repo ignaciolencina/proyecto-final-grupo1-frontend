@@ -10,7 +10,6 @@ import { useSession } from "../../stores/useSession";
 const Cart = () => {
   const { cartItems, clearCart } = useCartStore();
   const {tableNumber} = useSession();
-  console.log(tableNumber)
   
   const totalPrice = cartItems.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
@@ -32,18 +31,17 @@ const Cart = () => {
 
   const handleSubmit = (cartItems) => {
     const orderData = {
-      tableNumber: tableNumber, // Este es un ejemplo, podrías obtenerlo de algún input o seleccionar un valor fijo.
-      totalPrice: totalPrice, // Ya calculado anteriormente
+      tableNumber: tableNumber,
+      totalPrice: totalPrice, 
       products: cartItems.map((item) => ({
         name: item.name,
-        quantity: item.quantity, // Asegúrate de que `quantity` esté disponible en cada `item`
+        quantity: item.quantity,
         price: item.price,
       })),    
     };
 
     toast.loading("Enviando la orden");
     postOrder(orderData);
-    console.log(orderData);
   };
 
   return (
