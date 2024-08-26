@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Swal from 'sweetalert2';
 import "./adminStyles.css";
 
 const AdminList = ({ products, onEdit, onDelete }) => {
@@ -13,6 +14,36 @@ const AdminList = ({ products, onEdit, onDelete }) => {
     acc[category].push(product);
     return acc;
   }, {});
+
+  const handleEdit = (product) => {
+    onEdit(product);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleDelete = (productId) => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sí, eliminar',
+      customClass: {
+        popup: 'custom-swal-popup',
+        title: 'custom-swal-title',
+        confirmButton: 'custom-confirm-button',
+        cancelButton: 'custom-cancel-button',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onDelete(productId); 
+        Swal.fire(
+          '¡Eliminado!',
+          'El producto ha sido eliminado.',
+          'success'
+        );
+      }
+    });
+  };
 
   return (
     <div className="admin-list container">
@@ -44,14 +75,14 @@ const AdminList = ({ products, onEdit, onDelete }) => {
                     </p>
                     <div className="mt-auto d-flex justify-content-around">
                       <button
-                        className="btn btn-danger"
-                        onClick={() => onEdit(product)}
+                        className="btn btn-secondary"
+                        onClick={() => handleEdit(product)}
                       >
                         Editar
                       </button>
                       <button
-                        className="btn btn-secondary"
-                        onClick={() => onDelete(product.id)}
+                        className="btn btn-danger"
+                        onClick={() => handleDelete(product.id)}
                       >
                         Eliminar
                       </button>
