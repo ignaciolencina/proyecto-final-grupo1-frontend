@@ -3,7 +3,6 @@ import { decodeJWT } from "../utilities/decodeJWT";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 // POST LOGIN FUNTION
-
 export const postLoginFn = async (data) => {
   const res = await fetch(`${BACKEND_URL}/auth/login`, {
     method: "POST",
@@ -32,14 +31,12 @@ export const postLoginFn = async (data) => {
 
   const userData = decodeJWT(token).user;
 
-  // Persistir el JWT
   sessionStorage.setItem("token", token);
 
   return userData;
 };
 
 // POST REGISTER FUNTION
-
 export const postRegisterFn = async (data) => {
   const res = await fetch(`${BACKEND_URL}/users`, {
     method: "POST",
@@ -58,7 +55,6 @@ export const postRegisterFn = async (data) => {
     throw new Error("Ocurrió un error al crear el usuario");
   }
 
-  // Token en registro
   const userData = await postLoginFn({
     email: data.email,
     password: data.password,
@@ -68,7 +64,6 @@ export const postRegisterFn = async (data) => {
 };
 
 // PUT REGISTER FUNTION
-
 export const putRegisterFn = async ([userId, updatedData]) => {
   try {
     const res = await fetch(`${BACKEND_URL}/users/${userId}`, {
@@ -93,7 +88,6 @@ export const putRegisterFn = async ([userId, updatedData]) => {
 };
 
 // GET by ID
-
 export const fetchUserById = async (id) => {
   try {
     const res = await fetch(`${BACKEND_URL}/users/${id}`, {

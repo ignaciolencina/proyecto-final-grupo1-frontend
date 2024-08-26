@@ -153,33 +153,19 @@ const RegisterForm = () => {
             },
             minLength: {
               value: 6,
-              message: (
-                <>
-                  La contraseña debe tener:
-                  <br />
-                  un mínimo de 2 numeros y 2 letras,
-                  <br />y entre 6 y 15 caracteres.
-                </>
-              ),
+              message: <>Revise la contraseña</>,
             },
             maxLength: 15,
             pattern: {
               value:
                 /^(?=(?:.*\d.*\d))(?=(?:.*[a-zA-Z].*[a-zA-Z]))[a-zA-Z\d]{6,15}$/,
-              message: (
-                <>
-                  La contraseña debe tener:
-                  <br />
-                  un mínimo de 2 numeros y 2 letras,
-                  <br />y entre 6 y 15 caracteres.
-                </>
-              ),
             },
           }}
           placeholder="Password"
           register={register}
           type={showPassword ? "text" : "password"}
         />
+
         <div className="password-visible ms-3">
           <input
             className="custom-checkbox mt-2"
@@ -222,6 +208,16 @@ const RegisterForm = () => {
             Ver contraseña repetida
           </label>
         </div>
+      </div>
+      <div className="col-12 col-md-6 relative">
+        <p>
+          <>
+            La contraseña debe tener:
+            <br />
+            un mínimo de 2 numeros y 2 letras,
+            <br />y entre 6 y 15 caracteres.
+          </>
+        </p>
       </div>
       <div className="d-flex justify-content-center mt-4">
         <button className="registroBoton" type="submit">
