@@ -6,8 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useSession } from "../../stores/useSession";
 import { postLoginFn } from "../../api/auth";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleCheckboxChange = () => {
+    setShowPassword(!showPassword);
+  };
+
   const { login, setTableNumber } = useSession();
 
   const navigate = useNavigate();
@@ -56,7 +62,6 @@ const LoginForm = () => {
       if (result.isConfirmed) {
         const tableNumber = result.value;
         setTableNumber(tableNumber);
-        console.log(tableNumber);
         navigate("/");
       }
     },
@@ -118,9 +123,20 @@ const LoginForm = () => {
           },
         }}
         register={register}
-        type="password"
+        type={showPassword ? "text" : "password"}
       />
-      <div className="d-flex justify-content-center mt-4">
+      <div className="password-visible ms-3">
+        <input
+          className="custom-checkbox mt-2"
+          id="showPassword"
+          type="checkbox"
+          onChange={handleCheckboxChange}
+        />
+        <label className="custom-label" htmlFor="showPassword">
+          Ver contraseña
+        </label>
+      </div>
+      <div className="d-flex justify-content-center mt-4 mb-3">
         <button className="loginBoton" type="submit">
           INICIAR SESION
         </button>

@@ -5,6 +5,7 @@ import Input from "../ui/Input/Input";
 import { putRegisterFn } from "../../api/auth";
 import { useSession } from "../../stores/useSession";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const UserProfileForm = () => {
   const {
@@ -15,6 +16,7 @@ const UserProfileForm = () => {
     updateUser,
     login,
     userData,
+    isLoggedIn,
   } = useSession();
 
   const {
@@ -33,13 +35,8 @@ const UserProfileForm = () => {
 
   useEffect(() => {
     if (!userToEdit && user) {
-      console.log("Configurando userToEdit con el usuario actual:", user);
       setUserToEdit(user);
     } else if (userToEdit) {
-      console.log(
-        "Configurando valores del formulario con userToEdit:",
-        userToEdit
-      );
       setValue("firstname", userToEdit.firstname);
       setValue("lastname", userToEdit.lastname);
       setValue("email", userToEdit.email);
@@ -66,7 +63,6 @@ const UserProfileForm = () => {
   });
 
   const handleSubmitForm = (data) => {
-    console.log("Datos enviados al submit:", data);
     toast.loading("Guardando cambios...");
 
     if (userToEdit?.id) {
@@ -75,7 +71,7 @@ const UserProfileForm = () => {
         lastname: data.lastname || "",
         email: data.email || "",
       };
-      console.log("Payload enviado al backend:", payload);
+      console.log("Payload:", payload);
 
       putRegister([userToEdit.id, data]);
     } else {
@@ -95,127 +91,140 @@ const UserProfileForm = () => {
   };
 
   return (
-    <form
-      className="user-profile-form !important"
-      onSubmit={handleSubmit(handleSubmitForm)}
-    >
-      <h3 className="user-profile-texto">Datos del perfil:</h3>
-      <div className="mb-3">
-        <label className="form-label">Nombre:</label>
-        <div className="d-flex align-items-center">
-          {!isEditing.firstname ? (
-            <span>{userToEdit?.firstname || user?.firstname}</span>
-          ) : (
-            <Input
-              className="user-profile-form-control"
-              error={errors.firstname}
-              name="firstname"
-              options={{
-                required: "Campo obligatorio",
-                minLength: {
-                  value: 3,
-                  message: "El nombre debe tener mínimo 3 caracteres",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "El nombre debe tener máximo 20 caracteres",
-                },
-              }}
-              placeholder="Nombre"
-              register={register}
-            />
-          )}
-          <div
-            className="bi bi-pencil-fill ms-3"
+    <>
+      <form
+        className="user-profile-form !important"
+        onSubmit={handleSubmit(handleSubmitForm)}
+      >
+        <h3 className="user-profile-texto">Datos del perfil:</h3>
+        <section className="row">
+          <div className="mb-3 col-12 col-sm-6 col-lg-3">
+            <label className="form-label">Nombre:</label>
+            <div className="d-flex align-items-center">
+              {!isEditing.firstname ? (
+                <span>{userToEdit?.firstname || user?.firstname}</span>
+              ) : (
+                <Input
+                  className="user-profile-form-control"
+                  error={errors.firstname}
+                  name="firstname"
+                  options={{
+                    required: "Campo obligatorio",
+                    minLength: {
+                      value: 3,
+                      message: "El nombre debe tener mínimo 3 caracteres",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "El nombre debe tener máximo 20 caracteres",
+                    },
+                  }}
+                  placeholder="Nombre"
+                  register={register}
+                />
+              )}
+              <div
+                className="bi bi-pencil-fill ms-3"
+                type="button"
+                onClick={() => toggleEditing("firstname")}
+              ></div>
+            </div>
+          </div>
+
+          <div className="mb-3 col-12 col-sm-6 col-lg-3">
+            <label className="form-label">Apellido:</label>
+            <div className="d-flex align-items-center">
+              {!isEditing.lastname ? (
+                <span>{userToEdit?.lastname || user?.lastname}</span>
+              ) : (
+                <Input
+                  className="user-profile-form-control"
+                  error={errors.lastname}
+                  name="lastname"
+                  options={{
+                    required: "Campo obligatorio",
+                    minLength: {
+                      value: 3,
+                      message: "El apellido debe tener mínimo 3 caracteres",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "El apellido debe tener máximo 20 caracteres",
+                    },
+                  }}
+                  placeholder="Apellido"
+                  register={register}
+                />
+              )}
+              <div
+                className="bi bi-pencil-fill ms-3"
+                type="button"
+                onClick={() => toggleEditing("lastname")}
+              ></div>
+            </div>
+          </div>
+
+          <div className="mb-3 col-12 col-sm-6 col-lg-3">
+            <label className="form-label">Correo electrónico:</label>
+            <div className="d-flex align-items-center">
+              {!isEditing.email ? (
+                <span>{userToEdit?.email || user?.email}</span>
+              ) : (
+                <Input
+                  className="user-profile-form-control"
+                  error={errors.email}
+                  name="email"
+                  options={{
+                    required: "Campo obligatorio",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Correo inválido",
+                    },
+                  }}
+                  placeholder="Correo electrónico"
+                  register={register}
+                  type="email"
+                />
+              )}
+              <div
+                className="bi bi-pencil-fill ms-3"
+                type="button"
+                onClick={() => toggleEditing("email")}
+              ></div>
+            </div>
+          </div>
+
+          <div className="mb-3 col-12 col-sm-6 col-lg-3">
+            <label className="form-label">Contraseña:</label>
+            <div className="d-flex align-items-center">
+              <span>********</span>
+            </div>
+          </div>
+        </section>
+        <div className="botonesResume">
+          <button className="user-profile-boton-guardar" type="submit">
+            GUARDAR
+          </button>
+          <button
+            className="user-profile-boton-cancelar"
             type="button"
-            onClick={() => toggleEditing("firstname")}
-          ></div>
+            onClick={handleCancelEdit}
+          >
+            CANCELAR
+          </button>
         </div>
-      </div>
-
-      <div className="mb-3">
-        <label className="form-label">Apellido:</label>
-        <div className="d-flex align-items-center">
-          {!isEditing.lastname ? (
-            <span>{userToEdit?.lastname || user?.lastname}</span>
-          ) : (
-            <Input
-              className="user-profile-form-control"
-              error={errors.lastname}
-              name="lastname"
-              options={{
-                required: "Campo obligatorio",
-                minLength: {
-                  value: 3,
-                  message: "El apellido debe tener mínimo 3 caracteres",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "El apellido debe tener máximo 20 caracteres",
-                },
-              }}
-              placeholder="Apellido"
-              register={register}
-            />
-          )}
-          <div
-            className="bi bi-pencil-fill ms-3"
-            type="button"
-            onClick={() => toggleEditing("lastname")}
-          ></div>
+      </form>
+      {isLoggedIn && user.isAdmin && (
+        <div className="mt-4 text-center">
+          <Link
+            className="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover fs-3"
+            to="/user-history"
+          >
+            VER ESTADISTICAS DE PRODUCTOS
+          </Link>
         </div>
-      </div>
-
-      <div className="mb-3">
-        <label className="form-label">Correo electrónico:</label>
-        <div className="d-flex align-items-center">
-          {!isEditing.email ? (
-            <span>{userToEdit?.email || user?.email}</span>
-          ) : (
-            <Input
-              className="user-profile-form-control"
-              error={errors.email}
-              name="email"
-              options={{
-                required: "Campo obligatorio",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Correo inválido",
-                },
-              }}
-              placeholder="Correo electrónico"
-              register={register}
-              type="email"
-            />
-          )}
-          <div
-            className="bi bi-pencil-fill ms-3"
-            type="button"
-            onClick={() => toggleEditing("email")}
-          ></div>
-        </div>
-      </div>
-
-      <div className="mb-3">
-        <label className="form-label">Contraseña:</label>
-        <div className="d-flex align-items-center">
-          <span>********</span>
-        </div>
-      </div>
-
-      <div className="botonesResume">
-        <button className="user-profile-boton-guardar" type="submit">
-          GUARDAR
-        </button>
-        <button
-          className="user-profile-boton-cancelar"
-          type="button"
-          onClick={handleCancelEdit}
-        >
-          CANCELAR
-        </button>
-      </div>
-    </form>
+      )}
+    </>
   );
 };
 

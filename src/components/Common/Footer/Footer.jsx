@@ -10,7 +10,7 @@ const Footer = () => {
 
   return (
     <footer className="pt-1">
-      <RailingText text="BURGERTUC"/>
+      <RailingText text1="BURGERTUC" text2="BURGERTUC" />
       <section className="ps-4 pe-5 mt-3">
         <div className="d-flex align-items-center justify-content-between">
           <div>
@@ -32,51 +32,46 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <div className="pt-3">
-          <h6 className="text-light bodyFont py-2">Explorar</h6>
-          <ul className="p-0">
-            {!isLoggedIn && (
+        <section className="infoFooter">
+          <div className="noPad">
+            <h6 className="text-light bodyFont py-2">Explorar</h6>
+            <ul className="p-0">
+              {!isLoggedIn && (
+                <li>
+                  <Link className="linkFooter bodyFont" to="/login">
+                    Ver menú
+                  </Link>
+                </li>
+              )}
               <li>
-                <Link className="linkFooter bodyFont" to="/login">
-                  Ver menú
+                <Link className="linkFooter bodyFont">Sobre Nosotros</Link>
+              </li>
+              <li>
+                <Link className="linkFooter bodyFont">Contáctanos</Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h6 className="text-light bodyFont py-2">Términos y condiciones</h6>
+            <ul className="p-0">
+              <li>
+                <Link className="linkFooter bodyFont" to="*">
+                  Políticas de Privacidad
                 </Link>
               </li>
-            )}
-            {!isLoggedIn && (
               <li>
-                <Link className="linkFooter bodyFont" to="/login">
-                  Hacer pedido
+                <Link className="linkFooter bodyFont" to="*">
+                  Bases y condiciones
                 </Link>
               </li>
-            )}
-            <li>
-              <Link className="linkFooter bodyFont">Sobre Nosotros</Link>
-            </li>
-            <li>
-              <Link className="linkFooter bodyFont">Contáctanos</Link>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h6 className="text-light bodyFont py-2">Términos y condiciones</h6>
-          <ul className="p-0">
-            <li>
-              <Link className="linkFooter bodyFont" to="*">
-                Políticas de Privacidad
-              </Link>
-            </li>
-            <li>
-              <Link className="linkFooter bodyFont" to="*">
-                Bases y condiciones
-              </Link>
-            </li>
-            <li>
-              <Link className="linkFooter bodyFont" to="*">
-                Atención al cliente
-              </Link>
-            </li>
-          </ul>
-        </div>
+              <li>
+                <Link className="linkFooter bodyFont" to="*">
+                  Atención al cliente
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </section>
       </section>
       <p className="text-light bodyFont text-center">Copyright &copy; 2024</p>
     </footer>

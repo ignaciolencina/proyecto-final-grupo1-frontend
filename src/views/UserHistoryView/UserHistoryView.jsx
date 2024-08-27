@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, Fragment } from "react";
 import {
   Container,
   Table,
@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
 import { getOrdersFn } from "../../api/orders";
-
 
 const UserHistoryView = () => {
   const { data, isLoading, isError, error } = useQuery({
@@ -43,24 +42,22 @@ const UserHistoryView = () => {
       <h2 className="mb-4">Historial de Pedidos</h2>
       {orders.length > 0 ? (
         <div className="table-responsive">
-          <Table striped bordered hover>
+          <Table bordered hover striped>
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Tabla</th>
+                <th>Mesa</th>
                 <th>Precio Total</th>
-                <th>Fecha</th>
                 <th>Detalles</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => (
-                <React.Fragment key={order.id}>
+                <Fragment key={order.id}>
                   <tr>
                     <td>{order.id}</td>
                     <td>{order.tableNumber}</td>
                     <td>${order.totalPrice}</td>
-                    <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                     <td>
                       <Button
                         variant="info"
@@ -83,7 +80,7 @@ const UserHistoryView = () => {
                           <Card.Body>
                             <h5>Detalles del Pedido</h5>
                             {order.products.map((product, index) => (
-                              <Card key={index} className="mb-2">
+                              <Card className="mb-2" key={index}>
                                 <Card.Body>
                                   <div className="d-flex justify-content-between">
                                     <div>
@@ -105,7 +102,7 @@ const UserHistoryView = () => {
                       </Collapse>
                     </td>
                   </tr>
-                </React.Fragment>
+                </Fragment>
               ))}
             </tbody>
           </Table>

@@ -66,3 +66,9 @@
     }
   }
 }
+
+@media (width >= 550px) {
+  .offcanvas.offcanvas-end{
+    height: 100vh !important;
+  }
+}

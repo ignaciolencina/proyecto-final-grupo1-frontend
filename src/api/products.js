@@ -1,6 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-// Obtener todos los productos
+
 export const getProductsFn = async () => {
   const res = await fetch(`${BACKEND_URL}/products`);
   const data = await res.json();
@@ -12,7 +12,7 @@ export const getProductsFn = async () => {
   return data;
 };
 
-// Crear un nuevo producto
+
 export const createProduct = async (productData) => {
   try {
     const res = await fetch(`${BACKEND_URL}/products`, {
@@ -33,7 +33,7 @@ export const createProduct = async (productData) => {
   }
 };
 
-// Actualizar un producto existente
+
 export const updateProduct = async (productId, updatedData) => {
   try {
     const res = await fetch(`${BACKEND_URL}/products/${productId}`, {
@@ -44,7 +44,7 @@ export const updateProduct = async (productId, updatedData) => {
       body: JSON.stringify(updatedData),
     });
     if (!res.ok) {
-      const errorResponse = await res.json(); // Intenta leer el mensaje de error
+      const errorResponse = await res.json();
       console.error("Error en el backend:", errorResponse);
       throw new Error("Error al actualizar el producto");
     }
@@ -56,7 +56,7 @@ export const updateProduct = async (productId, updatedData) => {
   }
 };
 
-// Eliminar un producto
+
 export const deleteProduct = async (productId) => {
   try {
     const res = await fetch(`${BACKEND_URL}/products/${productId}`, {

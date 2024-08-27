@@ -2,16 +2,16 @@ import "./railingStyle.css";
 import PropTypes from "prop-types";
 
 const RailingText = (props) => {
-  const { text } = props;
+  const { text1, text2 } = props;
   return (
     <div className="railing-container">
       <div className="railing-text text-light titleFont">
-        <span>{text}</span>
-        <span className="textoRojo">{text}</span>
-        <span>{text}</span>
-        <span className="textoRojo">{text}</span>
-        <span>{text}</span>
-        <span className="textoRojo">{text}</span>
+        <span>{text1}</span>
+        <span className="textoRojo">{text2}</span>
+        <span>{text1}</span>
+        <span className="textoRojo">{text2}</span>
+        <span>{text1}</span>
+        <span className="textoRojo">{text2}</span>
       </div>
     </div>
   );
@@ -19,5 +19,6 @@ const RailingText = (props) => {
 export default RailingText;
 
 RailingText.propTypes = {
-  text: PropTypes.string.isRequired,
+  text1: PropTypes.string.isRequired,
+  text2: PropTypes.string.isRequired,
 };

@@ -17,12 +17,10 @@ export const router = createBrowserRouter([
     path: "/",
     element: <RootView />,
     children: [
-      // RUTAS PÚBLICAS
       {
         path: "",
         element: <LandingView />,
       },
-      // RUTAS DE AUTENTICACION
       {
         path: "",
         element: <AuthViews />,
@@ -37,7 +35,6 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      // RUTAS PRIVADAS
       {
         path: "",
         element: <PrivateViews />,
@@ -58,13 +55,10 @@ export const router = createBrowserRouter([
           {
             path: "/user-history",
             element: <UserHistoryView />,
-            private: true,
           },
           {
             path: "/admin-history",
             element: <AdminHistoryView />,
-            private: true,
-            roleRequired: "admin",
           },
         ],
       },

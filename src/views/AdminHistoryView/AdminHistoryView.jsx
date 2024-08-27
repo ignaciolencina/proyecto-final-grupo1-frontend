@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, Table, Spinner, Alert, Row, Col } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
 import { getOrdersFn } from "../../api/orders";
@@ -88,13 +87,12 @@ const AdminHistoryView = () => {
         <Col md={12}>
           <h2 className="mb-4">Historial de Pedidos</h2>
           <div className="table-responsive">
-            <Table striped bordered hover>
+            <Table bordered hover striped>
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>Tabla</th>
                   <th>Precio Total</th>
-                  <th>Fecha</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,12 +102,11 @@ const AdminHistoryView = () => {
                       <td>{order.id}</td>
                       <td>{order.tableNumber}</td>
                       <td>${order.totalPrice}</td>
-                      <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="4" className="text-center">
+                    <td className="text-center" colSpan="4">
                       <Alert variant="info">No se encontraron pedidos.</Alert>
                     </td>
                   </tr>

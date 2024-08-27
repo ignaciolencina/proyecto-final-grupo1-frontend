@@ -23,3 +23,17 @@ footer {
 li {
   list-style-type: none;
 }
+
+
+@media (width >= 600px) {
+  .infoFooter{
+    display: flex;
+    justify-content: space-evenly;
+    h6{
+      text-align: center;
+    }
+    ul{
+      text-align: center;
+    }
+  }
+}

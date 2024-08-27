@@ -209,17 +209,13 @@ const RegisterForm = () => {
           </label>
         </div>
       </div>
-      <div className="col-12 col-md-6 relative">
-        <p>
-          <>
-            La contraseña debe tener:
-            <br />
-            un mínimo de 2 numeros y 2 letras,
-            <br />y entre 6 y 15 caracteres.
-          </>
-        </p>
+      <div className="alertBlock py-2">
+        <p className="mb-0">La contraseña debe tener:</p>
+        <li>Entre 6 y 15 caracteres</li>
+        <li>Al menos 2 letras</li>
+        <li>Al menos 2 números</li>
       </div>
-      <div className="d-flex justify-content-center mt-4">
+      <div className="d-flex justify-content-center mt-4 mb-3">
         <button className="registroBoton" type="submit">
           REGISTRAR
         </button>

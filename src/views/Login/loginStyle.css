@@ -3,52 +3,34 @@
     flex-direction: column;
     align-items: center;
     font-family: var(--fuente-cuerpo);
-    padding: 5px;
   }
+
   .login-titulo{
     font-family: var(--fuente-titulo);
   }
+
   .login-card {
+    width: 85%;
     border-radius: 20px 0 20px 0;
-    box-shadow: 0 0 0.2rem 0.2rem var(--color-claro);
-    width: 90%;
-    position: relative;
-    overflow: hidden;
-    margin: 5px auto;
-    padding: 5px;
-    box-sizing: border-box;
+    box-shadow: 0 0 0.3rem 0.3rem var(--color-claro);
+    padding-inline: 15px;
   }
+
   .login-content {
-    position: relative;
-    z-index: 1;
     color: var(--color-claro);
-    padding: 1px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
+
   .register{
     color: var(--color-claro);
   }
+
   .register-link {
   color: var(--color-detalles);
   }
-  .form-control {
-    background-color: transparent 50% !important;
-  }
-  .form-control:focus {
-    border-color: var(--color-detalles) !important;
-    box-shadow: 0 0 0.2rem 0.2rem #f8a2ab !important;
-  }
-  label {
-    background-color: transparent !important; /* Hacer el label transparente */
-    color: var(--color-detalles) !important; /* Asegúrate de que el texto del label sea visible */
-  }
-  label::after {
-    content: ""; /* Eliminar el fondo del pseudo-elemento */
-    background-color: transparent !important;
 
-  }
   .loginBoton{
-    display: flex;
-    align-items: center;
     font-family: var(--fuente-cuerpo);
     color: var(--color-claro);
     font-weight: 800;
@@ -56,15 +38,12 @@
     border: solid 2px;
     border-color: var(--color-detalles);
     border-radius: 1.75rem;
-    padding-left: 30px;
-    padding-right: 22px;
-    .bi.bi-arrow-right-short {
-      font-size: 30px;
-    }
+    padding-inline: 20px;
+    padding-top: 3px;
   }
-  @media (max-width: 576px) {
+
+  @media (width >= 576px) {
     .login-card {
-      width: 90%;
-      padding: 10px;
+      width: 60%;
     }
   }

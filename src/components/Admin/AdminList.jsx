@@ -57,7 +57,6 @@ const AdminList = ({ products, onEdit, onDelete }) => {
                 key={product._id}
               >
                 <div className="card h-100">
-                  {console.log(product)}
                   <img
                     alt={product.name}
                     className="card-img-top"

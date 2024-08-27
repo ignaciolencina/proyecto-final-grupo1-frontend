@@ -8,7 +8,7 @@ const RegisterView = () => {
     <section className="register-section mt-5">
       <article className="register-card">
         <div className="register-content">
-          <h1 className="text-center mt-2 registro-titulo">Registro</h1>
+          <h1 className="text-center mt-2 registro-titulo">REGISTRO</h1>
           <h2 className="text-center fs-5 mb-3">
             Nos alegra que te sumes a nuestro equipo!
           </h2>

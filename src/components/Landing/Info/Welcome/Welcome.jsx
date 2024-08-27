@@ -13,7 +13,7 @@ const Welcome = () => {
           src="https://www.goiko.com/es/wp-content/uploads/2023/04/CartaPortada_Web_Desktop.jpg"
         />
       </div>
-      <RailingText text="WELCOME"/>
+      <RailingText text1="WELCOME" text2="BIENVENIDO"/>
     </section>
   );
 };

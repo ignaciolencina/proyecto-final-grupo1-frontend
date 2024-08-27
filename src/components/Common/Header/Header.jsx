@@ -107,7 +107,7 @@ const Header = () => {
                       className="nav-link titleFont"
                       to="/login"
                     >
-                      HACER PEDIDO
+                      VER MENÚ
                     </Link>
                   </li>
                 )}
@@ -140,7 +140,18 @@ const Header = () => {
                       className="nav-link titleFont"
                       to="/admin"
                     >
-                      ADMIN
+                      CARAGAR PRODUCTOS
+                    </Link>
+                  </li>
+                )}
+                {isLoggedIn && user.isAdmin && (
+                  <li className="nav-item">
+                    <Link
+                      reloadDocument
+                      className="nav-link titleFont"
+                      to="/user-history"
+                    >
+                      VENTAS
                     </Link>
                   </li>
                 )}

@@ -11,7 +11,7 @@ const Info = () => {
       </section>
       <section className="carouselSection">
         <Carousel />
-        <RailingText text="BURGERTUC" />
+        <RailingText text1="BURGERTUC" text2="BURGERTUC" />
       </section>
       <section className="categoriesSection">
         <CategoriesLanding />

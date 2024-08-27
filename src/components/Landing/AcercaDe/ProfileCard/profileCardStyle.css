@@ -8,7 +8,7 @@
 }
 
 .profileCard {
-  max-width: fit-content;
+  max-width: 284px;
   height: 502px;
   padding: 15px;
   background-color: transparent;
@@ -63,4 +63,10 @@ h2{
   .profileCard{
     height: 520px;
   }
+}
+
+@media (width >= 1275px){
+.aboutProfiles{
+  justify-content: center;
+}
 }

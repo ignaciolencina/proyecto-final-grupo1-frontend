@@ -2,7 +2,7 @@ import { decodeJWT } from "../utilities/decodeJWT";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-// POST LOGIN FUNTION
+
 export const postLoginFn = async (data) => {
   const res = await fetch(`${BACKEND_URL}/auth/login`, {
     method: "POST",
@@ -11,7 +11,6 @@ export const postLoginFn = async (data) => {
     },
     body: JSON.stringify(data),
   });
-  console.log(data, res);
 
   if (res.status === 204 || res.headers.get("content-length") === "0") {
     throw new Error("Respuesta vacía del servidor");
@@ -36,7 +35,7 @@ export const postLoginFn = async (data) => {
   return userData;
 };
 
-// POST REGISTER FUNTION
+
 export const postRegisterFn = async (data) => {
   const res = await fetch(`${BACKEND_URL}/users`, {
     method: "POST",
@@ -63,7 +62,7 @@ export const postRegisterFn = async (data) => {
   return userData;
 };
 
-// PUT REGISTER FUNTION
+
 export const putRegisterFn = async ([userId, updatedData]) => {
   try {
     const res = await fetch(`${BACKEND_URL}/users/${userId}`, {
@@ -87,7 +86,7 @@ export const putRegisterFn = async ([userId, updatedData]) => {
   }
 };
 
-// GET by ID
+
 export const fetchUserById = async (id) => {
   try {
     const res = await fetch(`${BACKEND_URL}/users/${id}`, {
@@ -112,7 +111,7 @@ export const fetchUserById = async (id) => {
   }
 };
 
-// GET REGISTER FUNTION EMAIL CONTROL
+
 export const checkEmailExists = async (email) => {
   const res = await fetch(`${BACKEND_URL}/users/check-email?email=${email}`, {
     method: "GET",

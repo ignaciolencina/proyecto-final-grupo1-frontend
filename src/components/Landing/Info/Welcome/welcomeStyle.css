@@ -13,7 +13,7 @@
 .welcomeImage {
   width: 100%;
   height: 400px;
-  overflow: hidden; /* Esto asegura que la imagen no se salga del contenedor */
+  overflow: hidden;
 }
 
 .welcomeImage::after {
@@ -31,4 +31,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .welcomeTitle{
+    h1{
+      font-size: 4.2rem;
+    }
+  }
 }

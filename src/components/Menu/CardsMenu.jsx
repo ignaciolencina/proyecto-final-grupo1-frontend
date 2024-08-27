@@ -13,7 +13,6 @@ const CardsMenu = ({ product }) => {
     addToTheCart(product);
   };
 
-  console.log(product);
 
   const modalId = `descriptionModal-${product.id}`;
   return (
