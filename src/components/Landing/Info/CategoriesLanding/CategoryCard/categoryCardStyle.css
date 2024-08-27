@@ -1,0 +1,37 @@
+.infoCategories {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.categoryLink{
+  text-decoration: none;
+}
+
+.categoryImage {
+  width: 240px;
+  height: 240px;
+  border: solid 2px var(--color-claro);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.categoryImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.categoryText {
+  h5 {
+    font-family: var(--fuente-titulo);
+    color: var(--color-claro);
+  }
+  p {
+    font-family: var(--fuente-cuerpo);
+    color: var(--color-claro-secundario);
+  }
+}

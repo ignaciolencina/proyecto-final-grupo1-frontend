@@ -1,0 +1,31 @@
+.form-control {
+  background-color: transparent !important;
+  color: var(--color-claro) !important;
+  border: solid 2px !important;
+  border-color: var(--color-detalles) !important;
+  font-family: var(--fuente-cuerpo) !important;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0.2rem 0.2rem var(--color-detalles-hover) !important;
+}
+
+label {
+  font-family: var(--fuente-cuerpo) !important;
+  background-color: transparent !important;
+  color: var(--color-claro) !important;
+}
+
+label::after {
+  content: "";
+  background-color: transparent !important;
+}
+
+.inputTextArea {
+  height: 120px !important;
+}
+
+.invalid-feedback {
+  font-family: var(--fuente-cuerpo) !important;
+  font-size: 17px !important;
+}

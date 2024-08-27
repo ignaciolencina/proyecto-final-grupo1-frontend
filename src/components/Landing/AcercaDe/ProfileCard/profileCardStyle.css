@@ -1,0 +1,72 @@
+.aboutProfiles{
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.profileCard {
+  max-width: 284px;
+  height: 502px;
+  padding: 15px;
+  background-color: transparent;
+  border: solid 2px var(--color-claro);
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-right: 15px;
+  position: relative;
+}
+
+.profileFrame {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  overflow: hidden;
+  border: solid 5px var(--color-claro);
+  margin-bottom: 10px;
+}
+
+
+.profilePicture {
+  width: 250px;
+}
+
+.profileJob{
+  background-color: var(--color-detalles);
+  padding-inline: 15px;
+  border-radius: 1rem;
+  font-family: var(--fuente-cuerpo);
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--color-claro);
+  position: absolute;
+  z-index: 100;
+  top: 10px;
+}
+
+h2{
+  text-wrap: wrap;
+  text-align: center;
+}
+
+.profileDescription {
+  width: 250px;
+  white-space: wrap;
+}
+
+@media (width >= 525px){
+  .profileCard{
+    height: 520px;
+  }
+}
+
+@media (width >= 1275px){
+.aboutProfiles{
+  justify-content: center;
+}
+}

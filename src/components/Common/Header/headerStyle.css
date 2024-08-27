@@ -1,0 +1,120 @@
+.navbar {
+  background-color: var(--color-detalles);
+}
+
+.logoSide {
+  display: flex;
+  align-items: center;
+}
+
+.navbarMenu {
+  border: none;
+  background-color: transparent;
+  width: 60px;
+  height: 60px;
+}
+
+.bi.bi-list {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.navbarCart {
+  border: none;
+  background-color: transparent;
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.bi.bi-cart4 {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  font-size: 35px;
+}
+
+.activeCart {
+  background-color: #008a2e;
+  width: 10px;
+  height: 10px;
+  border: solid 1px #007d2a;
+  border-radius: 100%;
+  position: absolute;
+  top: 20px;
+  right: 28px;
+}
+
+.navbarBrand {
+  text-decoration: none;
+  color: var(--color-fondo);
+  font-size: 1.75rem;
+}
+
+.offcanvas {
+  height: 100vh !important;
+}
+
+.offcanvas-header .btn-close {
+  margin: 0 !important;
+}
+
+.navbar-nav {
+  height: 85vh !important;
+  justify-content: space-between;
+}
+
+.nav-link {
+  color: var(--color-claro) !important;
+  font-size: 2rem !important;
+}
+
+.offStuff {
+  position: relative;
+}
+
+.logoOffcanvas {
+  position: absolute;
+  left: calc(50% - 160px);
+  bottom: calc(50% - 160px);
+  width: 320px;
+  z-index: -1;
+  opacity: 50%;
+}
+
+.socialNavbar {
+  i {
+    text-decoration: none;
+    color: var(--color-claro);
+    font-size: 2rem;
+  }
+}
+
+.logoutButton {
+  font-family: var(--fuente-titulo);
+  color: var(--color-claro);
+  font-size: 2rem;
+  background-color: var(--color-detalles);
+  border: solid 2px;
+  border-color: var(--color-detalles);
+  border-radius: 1.75rem;
+  padding-inline: 20px;
+}
+
+@media (width >= 550px) {
+  .offcanvas {
+    height: 57vh !important;
+  }
+  .logoOffcanvas {
+    opacity: unset;
+    width: 150px;
+    left: 80%;
+    bottom: 75%;
+  }
+  .socialNavbar {
+    position: absolute;    
+    right: 5%;
+  }
+}

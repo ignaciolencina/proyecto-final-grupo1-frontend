@@ -1,12 +1,182 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "firstname": "Administrador",
       "lastname": "Delbar",
-      "mail": "admindelbar@admin.com",
+      "email": "admindelbar@admin.com",
       "password": "Admin1234",
       "isAdmin": true
+    }
+  ],
+  "consults": [
+    {
+      "id": "7819",
+      "firstname": "Ignacio",
+      "lastname": "Lencina",
+      "email": "nacholencina60@gmail.com",
+      "consult": "Hola buenas! Muy rico todo! Felicidades!"
+    },
+    {
+      "id": "4eb9",
+      "firstname": "Daniel",
+      "lastname": "Lencina",
+      "email": "dalencina@gmail.com",
+      "consult": "Una cagada che, la pagina mas linda que el mismo lugar."
+    }
+  ],
+  "products": [
+    {
+      "id": "001",
+      "imageUrl": "https://www.goiko.com/es/wp-content/uploads/2017/03/KevinBacon_1200x600px-340x340.png",
+      "name": "KEVIN BACON",
+      "price": 7000,
+      "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunest beatae placeat dolore enim dolorem dignissimos architecto, aassumenda facilis, mollitia aliquid illum voluptates sit iureab? Tempore, ipsum est",
+      "disabled": true
+    },
+    {
+      "id": "002",
+      "imageUrl": "https://www.goiko.com/es/wp-content/uploads/2024/07/CHICKEN-AMORE_1200x600px-1-340x340.png",
+      "name": "CHICKEN AMORE",
+      "price": 6500,
+      "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunest beatae placeat dolore enim dolorem dignissimos architecto, aassumenda facilis, mollitia aliquid illum voluptates sit iureab? Tempore, ipsum est",
+      "disabled": false
+    },
+    {
+      "id": "003",
+      "imageUrl": "https://www.goiko.com/es/wp-content/uploads/2024/04/LaRetro_1200x600px-340x340.png",
+      "name": "RETRO",
+      "price": 6900,
+      "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunest beatae placeat dolore enim dolorem dignissimos architecto, aassumenda facilis, mollitia aliquid illum voluptates sit iureab? Tempore, ipsum est",
+      "disabled": false
+    },
+    {
+      "id": "004",
+      "imageUrl": "https://www.goiko.com/es/wp-content/uploads/2020/12/KVN-COSTNER-_1200x600px-340x340.png",
+      "name": "KEVIN COSTNER",
+      "price": 7500,
+      "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunest beatae placeat dolore enim dolorem dignissimos architecto, aassumenda facilis, mollitia aliquid illum voluptates sit iureab? Tempore, ipsum est",
+      "disabled": false
+    }
+  ],
+  "orders": [
+    {
+      "orderId": "001",
+      "tableNumber": "01",
+      "totalPrice": 20000,
+      "products": [
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 2,
+          "price": 6500
+        },
+        {
+          "name": "RETRO",
+          "quantity": 1,
+          "price": 6900
+        }
+      ],
+      "id": "07f8"
+    },
+    {
+      "id": "0a59",
+      "orderId": "uniqueOrderId123",
+      "tableNumber": 5,
+      "totalPrice": 19900,
+      "products": [
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 2,
+          "price": 6500
+        },
+        {
+          "name": "RETRO",
+          "quantity": 1,
+          "price": 6900
+        }
+      ]
+    },
+    {
+      "id": "0813",
+      "orderId": "uniqueOrderId123",
+      "tableNumber": 5,
+      "totalPrice": 26000,
+      "products": [
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 4,
+          "price": 6500
+        }
+      ]
+    },
+    {
+      "id": "190c",
+      "orderId": "uniqueOrderId123",
+      "tableNumber": 5,
+      "totalPrice": 26400,
+      "products": [
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 3,
+          "price": 6500
+        },
+        {
+          "name": "RETRO",
+          "quantity": 1,
+          "price": 6900
+        }
+      ]
+    },
+    {
+      "id": "dda4",
+      "tableNumber": 5,
+      "totalPrice": 13400,
+      "products": [
+        {
+          "name": "RETRO",
+          "quantity": 1,
+          "price": 6900
+        },
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 1,
+          "price": 6500
+        }
+      ]
+    },
+    {
+      "id": "ec2b",
+      "tableNumber": 5,
+      "totalPrice": 20300,
+      "products": [
+        {
+          "name": "RETRO",
+          "quantity": 2,
+          "price": 6900
+        },
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 1,
+          "price": 6500
+        }
+      ]
+    },
+    {
+      "id": "021b",
+      "tableNumber": 5,
+      "totalPrice": 19900,
+      "products": [
+        {
+          "name": "CHICKEN AMORE",
+          "quantity": 2,
+          "price": 6500
+        },
+        {
+          "name": "RETRO",
+          "quantity": 1,
+          "price": 6900
+        }
+      ]
     }
   ]
 }

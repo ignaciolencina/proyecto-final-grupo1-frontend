@@ -1,0 +1,44 @@
+.railing-container {
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+  }
+  
+  .railing-text {
+    border: solid 2px;
+    display: inline-block;
+    animation: scroll-text 15s linear infinite;
+    font-size: 2rem;
+  }
+  
+  .railing-text span {
+    display: inline-block;
+  }
+  
+  @keyframes scroll-text {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .textoRojo{
+    color: var(--color-detalles);
+  }
+
+@media (width >= 550px) {
+  .railing-text{
+    font-size: 3rem;
+  }
+
+  @keyframes scroll-text {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-15%);
+    }
+  }
+}

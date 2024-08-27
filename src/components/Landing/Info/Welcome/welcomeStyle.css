@@ -1,0 +1,42 @@
+.welcomeTitle {
+  font-family: var(--fuente-titulo);
+  color: transparent; /* Hace que el relleno del texto sea transparente */
+  -webkit-text-stroke: 1px var(--color-claro);
+  position: absolute;
+  right: 2%;
+  z-index: 100;
+  h1 {
+    font-size: 2.7rem;
+  }
+}
+
+.welcomeImage {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.welcomeImage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(#212529, transparent);
+  pointer-events: none;
+}
+
+.welcomeImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .welcomeTitle{
+    h1{
+      font-size: 4.2rem;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+footer {
+  background-color: var(--color-fondo);
+}
+
+.logoFooter {
+  width: 90px;
+}
+
+.linkFooter {
+  text-decoration: none;
+  color: var(--color-claro);
+  font-weight: lighter;
+}
+
+.socialFooter {
+  i {
+    text-decoration: none;
+    color: var(--color-claro);
+    font-size: 1.5rem;
+  }
+}
+
+li {
+  list-style-type: none;
+}
+
+
+@media (width >= 600px) {
+  .infoFooter{
+    display: flex;
+    justify-content: space-evenly;
+    h6{
+      text-align: center;
+    }
+    ul{
+      text-align: center;
+    }
+  }
+}
