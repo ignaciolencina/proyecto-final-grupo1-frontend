@@ -8,6 +8,8 @@ import Input from "../ui/Input/Input";
 import { postRegisterFn, checkEmailExists } from "../../api/auth";
 import { useState } from "react";
 
+import "registerFormStyle.css"
+
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatedPassword, setShowRepeatedPassword] = useState(false);

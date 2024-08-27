@@ -1,0 +1,64 @@
+.registroBoton {
+    font-family: var(--fuente-cuerpo);
+    color: var(--color-claro);
+    font-weight: 800;
+    background-color: var(--color-detalles);
+    border: solid 2px;
+    border-color: var(--color-detalles);
+    border-radius: 1.75rem;
+    padding-inline: 20px;
+    padding-top: 3px;
+  }
+  
+  .password-visible {
+    display: flex;
+    align-items: center;
+  }
+  
+  .custom-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: transparent;
+    border: 2px solid var(--color-detalles);
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .custom-checkbox:checked {
+    background-color: var(--color-detalles);
+  }
+  
+  .custom-checkbox:checked::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    width: 5px;
+    height: 9px;
+    border: solid var(--color-claro);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  .custom-label {
+    margin-top: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  
+  .alertBlock {
+    text-align: center;
+    font-family: var(--fuente-cuerpo);
+    font-size: 13px;
+    border: solid 1px;
+    border-radius: 8px;
+    color: var(--color-claro);
+    p {
+      font-size: 15px;
+      font-weight: 600;
+    }
+  }
