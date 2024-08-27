@@ -105,13 +105,10 @@
 
 @media (width >= 550px) {
   .offcanvas {
-    height: 57vh !important;
+    height: 400px !important;
   }
   .logoOffcanvas {
-    opacity: unset;
-    width: 150px;
-    left: 75%;
-    bottom: 68%;
+    display: none;
   }
   .socialNavbar {
     position: absolute;    

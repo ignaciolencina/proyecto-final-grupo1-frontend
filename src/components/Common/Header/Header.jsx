@@ -114,7 +114,6 @@ const Header = () => {
                 {!isLoggedIn && (
                   <li className="nav-item">
                     <Link
-                      reloadDocument
                       className="nav-link titleFont"
                       to="/login"
                     >

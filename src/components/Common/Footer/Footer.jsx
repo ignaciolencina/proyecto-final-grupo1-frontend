@@ -43,6 +43,13 @@ const Footer = () => {
                   </Link>
                 </li>
               )}
+              {isLoggedIn && (
+                <li>
+                  <Link className="linkFooter bodyFont" to="/menu">
+                    Ver menú
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link className="linkFooter bodyFont">Sobre Nosotros</Link>
               </li>
