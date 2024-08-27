@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import RegisterForm from "../../components/Register/RegisterForm";
-import "./registerStyle.css";
-import "../../index.css";
+import "./registerViewStyle.css";
 
 const RegisterView = () => {
   return (
