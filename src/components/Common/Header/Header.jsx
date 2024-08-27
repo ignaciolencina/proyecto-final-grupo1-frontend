@@ -139,7 +139,7 @@ const Header = () => {
                       className="nav-link titleFont"
                       to="/admin"
                     >
-                      CARAGAR PRODUCTOS
+                      CARGAR PRODUCTOS
                     </Link>
                   </li>
                 )}
@@ -167,17 +167,17 @@ const Header = () => {
               </div>
               <div className="socialNavbar">
                 <li className="nav-item">
-                  <Link reloadDocument to="*">
+                  <Link reloadDocument to="twitter">
                     <i className="bi bi-twitter-x"></i>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link reloadDocument to="*">
+                  <Link reloadDocument to="instagram">
                     <i className="bi bi-instagram"></i>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link reloadDocument to="*">
+                  <Link reloadDocument to="youtobe">
                     <i className="bi bi-youtube"></i>
                   </Link>
                 </li>
