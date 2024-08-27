@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-
 import "./adminStyles.css";
 import AdminInput from "../ui/Form/AdminInput";
 
-const AdminForm = ({ initialData, onSubmit, onCancel }) => {
+const AdminForm = ({ initialData, onSubmit, onCancel, refreshProducts }) => {
   const [formData, setFormData] = useState({
     name: "",
     imageUrl: "",
@@ -21,30 +20,47 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
     if (initialData) {
       setFormData(initialData);
     } else {
-      setFormData({
-        name: "",
-        imageUrl: "",
-        price: "",
-        description: "",
-        available: true,
-        ingredients: "N/A",
-        category: "burgers",
-      });
+      resetForm();
     }
   }, [initialData]);
 
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      imageUrl: "",
+      price: "",
+      description: "",
+      available: true,
+      ingredients: "N/A",
+      category: "burgers",
+    });
+    setErrors({});
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    if (name === "name" && value.length > 30) {
+      return; 
+    }
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
   };
 
+  const handlePriceChange = (e) => {
+    const { value } = e.target;
+    if (/^\d*\.?\d*$/.test(value)) {
+      setFormData({
+        ...formData,
+        price: value,
+      });
+    }
+  };
+
   const validate = () => {
     const newErrors = {};
 
-    // Validaciones personalizadas que puedes mover a AdminInput si es necesario
     if (!formData.name || formData.name.length > 30) {
       newErrors.name = "El nombre debe tener entre 1 y 30 caracteres";
     }
@@ -74,14 +90,22 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
         "La descripción debe tener entre 3 y 500 caracteres";
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      onSubmit(formData);
+    const newErrors = validate();
+    if (Object.keys(newErrors).length === 0) {
+      try {
+        await onSubmit(formData);
+        resetForm();
+        refreshProducts();
+      } catch (error) {
+        console.error("Error al guardar el producto:", error);
+      }
+    } else {
+      setErrors(newErrors);
     }
   };
 
@@ -90,6 +114,7 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
       <AdminInput
         error={errors.name}
         label="Nombre del Producto"
+        maxLength="30" 
         name="name"
         type="text"
         value={formData.name}
@@ -111,7 +136,7 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
         name="price"
         type="text"
         value={formData.price}
-        onChange={handleChange}
+        onChange={handlePriceChange}
       />
 
       <div className="form-group">
@@ -121,24 +146,6 @@ const AdminForm = ({ initialData, onSubmit, onCancel }) => {
           id="description"
           name="description"
           value={formData.description}
-          onBlur={() => {
-            if (
-              !formData.description ||
-              formData.description.length < 3 ||
-              formData.description.length > 500
-            ) {
-              setErrors((prevErrors) => ({
-                ...prevErrors,
-                description:
-                  "La descripción debe tener entre 3 y 500 caracteres",
-              }));
-            } else {
-              setErrors((prevErrors) => ({
-                ...prevErrors,
-                description: null,
-              }));
-            }
-          }}
           onChange={handleChange}
         />
         {errors.description && (
@@ -208,6 +215,7 @@ AdminForm.propTypes = {
   initialData: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  refreshProducts: PropTypes.func.isRequired,
 };
 
 export default AdminForm;

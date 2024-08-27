@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
 import { getProductsFn, createProduct, updateProduct, deleteProduct } from '../../api/products.js';
 
-import AdminForm from '../../components/Admin/AdminForm'
-import AdminList from '../../components/Admin/AdminList'
+import AdminForm from '../../components/Admin/AdminForm';
+import AdminList from '../../components/Admin/AdminList';
 
-
-import './adminStyle.css'; 
+import './adminStyle.css';
 
 const AdminView = () => {
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
 
-  // Fetch de los productos cuando se monta el componente
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -25,7 +23,6 @@ const AdminView = () => {
     fetchProducts();
   }, []);
 
-  // Manejo del POST para agregar un nuevo producto
   const handleAddProduct = async (product) => {
     try {
       const newProduct = await createProduct(product);
@@ -35,9 +32,9 @@ const AdminView = () => {
     }
   };
 
-  // Manejo del PUT para editar un producto existente
   const handleEditProduct = (product) => {
     setEditingProduct(product);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleUpdateProduct = async (updatedProduct) => {
@@ -46,7 +43,6 @@ const AdminView = () => {
     try {
       const updated = await updateProduct(editingProduct.id, dataProduct);
 
-      console.log(updateProduct);
       if (updated) {
         setProducts(
           products.map((product) =>
@@ -64,7 +60,6 @@ const AdminView = () => {
     }
   };
 
-  // Manejo del DELETE para eliminar un producto
   const handleDeleteProduct = async (productId) => {
     try {
       await deleteProduct(productId);
@@ -74,11 +69,21 @@ const AdminView = () => {
     }
   };
 
+  const refreshProducts = async () => {
+    try {
+      const response = await getProductsFn();
+      setProducts(response.data || []);
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+    }
+  };
+
   return (
     <div className="py-4 adminTitle">
       <h2>Administrador de Productos</h2>
       <AdminForm
         initialData={editingProduct}
+        refreshProducts={refreshProducts}
         onCancel={() => setEditingProduct(null)}
         onSubmit={editingProduct ? handleUpdateProduct : handleAddProduct}
       />
