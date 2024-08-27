@@ -1,0 +1,42 @@
+.error-container {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/Error404.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white;
+  }
+  
+  .error-title {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+    -webkit-text-stroke: 0.5px black;
+  }
+  
+  .error-message {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    -webkit-text-stroke: 0.5px black;
+  }
+  
+  .error-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: var(--color-detalles);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .error-button:hover {
+    background-color: var(--color-detalles-hover);
+  }
+  
