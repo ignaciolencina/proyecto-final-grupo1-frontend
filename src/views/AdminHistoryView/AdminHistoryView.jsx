@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Container, Row, Col, Table } from 'react-bootstrap';
 
 const AdminHistoryView = () => {
@@ -7,7 +7,7 @@ const AdminHistoryView = () => {
       <h1>Pedidos Recibidos</h1>
       <Row>
         <Col>
-          <Table striped bordered hover>
+          <Table  bordered hover striped>
             <thead>
               <tr>
                 <th># Pedido</th>
