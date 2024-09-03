@@ -37,6 +37,7 @@ const Header = () => {
 
     if (action.isConfirmed) {
       logout();
+      triggerClose();
     }
   };
 
@@ -97,6 +98,15 @@ const Header = () => {
           <div className="offStuff">
             <ul className="navbar-nav px-4">
               <div>
+                <li>
+                  <Link
+                    className="nav-link titleFont"
+                    to="/"
+                    onClick={triggerClose}
+                  >
+                    INICIO
+                  </Link>
+                </li>
                 {isLoggedIn && (
                   <li className="nav-item">
                     <Link

@@ -9,6 +9,7 @@ import { postRegisterFn, checkEmailExists } from "../../api/auth";
 import { useState } from "react";
 
 import "./registerFormStyle.css"
+import Swal from "sweetalert2";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +23,7 @@ const RegisterForm = () => {
     setShowRepeatedPassword(!showRepeatedPassword);
   };
 
-  const { login } = useSession();
+  const { login, setTableNumber } = useSession();
 
   const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ const RegisterForm = () => {
 
   const { mutate: postRegister } = useMutation({
     mutationFn: postRegisterFn,
-    onSuccess: (userData) => {
+    onSuccess: async (userData) => {
       toast.dismiss();
       toast.success(
         `Nuevo usuario registrado. Bienvenido, ${userData.firstname}`
@@ -46,9 +47,36 @@ const RegisterForm = () => {
 
       login(userData);
 
-      setTimeout(() => {
+      const userName = userData.firstname;
+
+      const result = await Swal.fire({
+        html: `¡Bienvenido ${userName}! Por favor ingresa tu número de mesa`,
+        background: "#000000",
+        color: "#ffffff",
+        input: "number",
+        inputAttributes: {
+          autocapitalize: "off",
+          min: 0,
+        },
+        showCancelButton: false,
+        confirmButtonText: "Guardar",
+        confirmButtonColor: "#EE2737",
+        preConfirm: (tableNumber) => {
+          if (!tableNumber || tableNumber < 0) {
+            Swal.showValidationMessage(
+              "Debes ingresar un número de mesa válido."
+            );
+          }
+          return tableNumber;
+        },
+        allowOutsideClick: false,
+      });
+
+      if (result.isConfirmed) {
+        const tableNumber = result.value;
+        setTableNumber(tableNumber);
         navigate("/");
-      }, 2000);
+      }
     },
     onError: (e) => {
       toast.dismiss();
