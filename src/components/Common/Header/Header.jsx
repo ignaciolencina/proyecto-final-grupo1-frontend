@@ -1,16 +1,23 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSession } from "../../../stores/useSession";
+import { useCartStore } from "../../../stores/useCartStore";
+
 import Swal from "sweetalert2";
 
-import "./headerStyle.css";
-import "../../../index.css";
-import logoBurgerTuc from "../../../assets/logoBurgerTuc.png";
 import Cart from "../../Cart/Cart";
-import { useCartStore } from "../../../stores/useCartStore";
+import logoBurgerTuc from "../../../assets/logoBurgerTuc.png";
+import "./headerStyle.css";
 
 const Header = () => {
   const { user, isLoggedIn, logout } = useSession();
   const { cartItems = [] } = useCartStore();
+  const targetButtonRef = useRef(null);
+  const triggerClose = () => {
+    if (targetButtonRef.current) {
+      targetButtonRef.current.click();
+    }
+  };
 
   const handleLogout = async () => {
     const action = await Swal.fire({
@@ -83,6 +90,7 @@ const Header = () => {
               aria-label="Close"
               className="btn-close"
               data-bs-dismiss="offcanvas"
+              ref={targetButtonRef}
               type="button"
             ></button>
           </div>
@@ -92,20 +100,9 @@ const Header = () => {
                 {isLoggedIn && (
                   <li className="nav-item">
                     <Link
-                      reloadDocument
                       className="nav-link titleFont"
                       to="/menu"
-                    >
-                      VER MENÚ
-                    </Link>
-                  </li>
-                )}
-                {!isLoggedIn && (
-                  <li className="nav-item">
-                    <Link
-                      reloadDocument
-                      className="nav-link titleFont"
-                      to="/login"
+                      onClick={triggerClose}
                     >
                       VER MENÚ
                     </Link>
@@ -116,6 +113,18 @@ const Header = () => {
                     <Link
                       className="nav-link titleFont"
                       to="/login"
+                      onClick={triggerClose}
+                    >
+                      VER MENÚ
+                    </Link>
+                  </li>
+                )}
+                {!isLoggedIn && (
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link titleFont"
+                      to="/login"
+                      onClick={triggerClose}
                     >
                       INGRESAR
                     </Link>
@@ -124,9 +133,9 @@ const Header = () => {
                 {isLoggedIn && (
                   <li className="nav-item">
                     <Link
-                      reloadDocument
                       className="nav-link titleFont"
                       to="/userProfile"
+                      onClick={triggerClose}
                     >
                       PERFIL
                     </Link>
@@ -135,9 +144,9 @@ const Header = () => {
                 {isLoggedIn && user.isAdmin && (
                   <li className="nav-item">
                     <Link
-                      reloadDocument
                       className="nav-link titleFont"
                       to="/admin"
+                      onClick={triggerClose}
                     >
                       CARGAR PRODUCTOS
                     </Link>
@@ -146,9 +155,9 @@ const Header = () => {
                 {isLoggedIn && user.isAdmin && (
                   <li className="nav-item">
                     <Link
-                      reloadDocument
                       className="nav-link titleFont"
                       to="/user-history"
+                      onClick={triggerClose}
                     >
                       VENTAS
                     </Link>
@@ -167,17 +176,17 @@ const Header = () => {
               </div>
               <div className="socialNavbar">
                 <li className="nav-item">
-                  <Link reloadDocument to="twitter">
+                  <Link to="twitter" onClick={triggerClose}>
                     <i className="bi bi-twitter-x"></i>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link reloadDocument to="instagram">
+                  <Link to="instagram" onClick={triggerClose}>
                     <i className="bi bi-instagram"></i>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link reloadDocument to="youtobe">
+                  <Link to="youtube" onClick={triggerClose}>
                     <i className="bi bi-youtube"></i>
                   </Link>
                 </li>
