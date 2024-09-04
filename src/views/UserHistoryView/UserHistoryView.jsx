@@ -2,7 +2,8 @@ import { Spinner } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
 import { getUserOrdersFn } from "../../api/orders";
 import { useSession } from "../../stores/useSession";
-
+import UserOrdersRow from "../../components/UserOrders/UserOrdersRow";
+import "../../components/UserOrders/tableStyle.css"
 const UserHistoryView = () => {
   const { user } = useSession();
 
@@ -16,6 +17,11 @@ const UserHistoryView = () => {
     queryKey: ["userOrders", userId],
     queryFn: () => getUserOrdersFn(userId),
   });
+
+  if (!userId) {
+    console.error("No se ha proporcionado el id del usuario");
+    return;
+  }
 
   console.log(userOrders);
 
@@ -49,7 +55,27 @@ const UserHistoryView = () => {
     );
   }
 
-  return <section></section>;
+  return (
+    <div className="table-responsive mx-1 mt-3">
+      <table className="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th className="text-center">Fecha</th>
+            <th className="text-center">Total</th>
+            <th className="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userOrders.data.map((orders, index) => {
+            return (
+              <UserOrdersRow index={index} key={orders.id} orders={orders} />
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default UserHistoryView;

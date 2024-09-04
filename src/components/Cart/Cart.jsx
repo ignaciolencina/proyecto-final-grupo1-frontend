@@ -11,7 +11,7 @@ const Cart = () => {
   const { cartItems, clearCart } = useCartStore();
   const { tableNumber, user } = useSession();
 
-  const currentDateTime = new Date().toLocaleDateString();
+  const currentDateTime = new Date().toISOString();
 
   const totalPrice = cartItems.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;

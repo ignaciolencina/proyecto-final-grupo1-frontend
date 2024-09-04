@@ -1,0 +1,18 @@
+table {
+  font-family: var(--fuente-cuerpo);
+}
+
+.detailButton {
+  color: var(--color-claro);
+  background-color: var(--color-detalles);
+  border: solid 2px var(--color-claro);
+  border-radius: 1rem;
+  padding-inline: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-weight: 600;
+}
+
+td{
+    vertical-align: baseline;
+}
