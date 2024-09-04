@@ -53,11 +53,11 @@ export const router = createBrowserRouter([
             element: <UserProfileView />,
           },
           {
-            path: "/user-history",
+            path: "userHistory",
             element: <UserHistoryView />,
           },
           {
-            path: "/admin-history",
+            path: "adminHistory",
             element: <AdminHistoryView />,
           },
         ],

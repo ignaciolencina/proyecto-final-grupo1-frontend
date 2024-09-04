@@ -9,8 +9,10 @@ import { useSession } from "../../stores/useSession";
 
 const Cart = () => {
   const { cartItems, clearCart } = useCartStore();
-  const {tableNumber} = useSession();
-  
+  const { tableNumber, user } = useSession();
+
+  const currentDateTime = new Date().toLocaleDateString();
+
   const totalPrice = cartItems.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
@@ -20,7 +22,7 @@ const Cart = () => {
     onSuccess: () => {
       toast.dismiss();
       toast.success("Tu orden se envió correctamente");
-      
+
       clearCart();
     },
     onError: (e) => {
@@ -31,17 +33,20 @@ const Cart = () => {
 
   const handleSubmit = (cartItems) => {
     const orderData = {
+      dateTime: currentDateTime,
+      userId: user.id,
       tableNumber: tableNumber,
-      totalPrice: totalPrice, 
+      totalPrice: totalPrice,
       products: cartItems.map((item) => ({
         name: item.name,
         quantity: item.quantity,
         price: item.price,
-      })),    
+      })),
     };
 
     toast.loading("Enviando la orden");
     postOrder(orderData);
+    console.log(orderData);
   };
 
   return (

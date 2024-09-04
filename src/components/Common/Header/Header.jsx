@@ -166,7 +166,7 @@ const Header = () => {
                   <li className="nav-item">
                     <Link
                       className="nav-link titleFont"
-                      to="/user-history"
+                      to="/userHistory"
                       onClick={triggerClose}
                     >
                       VENTAS
