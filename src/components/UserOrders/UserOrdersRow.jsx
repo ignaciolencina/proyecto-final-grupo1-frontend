@@ -6,9 +6,8 @@ import "./tableStyle.css";
 const UserOrdersRow = ({ orders, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const dateObject = new Date(orders.dateTime);
-  const formattedDate = dateObject.toDateString().split("T")[0];
-
+  const formattedDate = orders.dateTime.split("T")[0];
+  
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
@@ -18,8 +17,8 @@ const UserOrdersRow = ({ orders, index }) => {
       <tr onClick={toggleExpand}>
         <td>{index + 1}</td>
         <td className="text-center">{formattedDate}</td>
-        <td className="text-end">${orders.totalPrice}</td>
-        <td className="text-end">
+        <td className="text-center">${orders.totalPrice}</td>
+        <td className="text-center">
           <button
             aria-controls={`collapseRow-${index}`}
             aria-expanded={isExpanded ? "true" : "false"}
@@ -43,9 +42,12 @@ const UserOrdersRow = ({ orders, index }) => {
             </p>
             <ul>
               {orders.products.map((product, i) => (
-                <li className="d-flex justify-content-between fst-italic" key={i}>
-                  {product.name} - (${product.price}) <span className="me-4 fst-normal">x {product.quantity}</span>
-                  
+                <li
+                  className="d-flex justify-content-between fst-italic"
+                  key={i}
+                >
+                  {product.name} - (${product.price}){" "}
+                  <span className="me-4 fst-normal">x {product.quantity}</span>
                 </li>
               ))}
             </ul>

@@ -5,7 +5,6 @@ import Input from "../ui/Input/Input";
 import { putRegisterFn } from "../../api/auth";
 import { useSession } from "../../stores/useSession";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 const UserProfileForm = () => {
   const {
@@ -16,7 +15,6 @@ const UserProfileForm = () => {
     updateUser,
     login,
     userData,
-    isLoggedIn,
   } = useSession();
 
   const {
@@ -214,16 +212,6 @@ const UserProfileForm = () => {
           </button>
         </div>
       </form>
-      {isLoggedIn && user.isAdmin && (
-        <div className="mt-4 text-center">
-          <Link
-            className="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover fs-3"
-            to="/user-history"
-          >
-            VER ESTADISTICAS DE PRODUCTOS
-          </Link>
-        </div>
-      )}
     </>
   );
 };
