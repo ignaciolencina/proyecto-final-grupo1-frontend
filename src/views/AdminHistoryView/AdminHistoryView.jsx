@@ -58,46 +58,50 @@ const AdminHistoryView = () => {
   const totalPages = Math.ceil(orders.data.length / rowsPerPage);
 
   return (
-    <section className="table-responsive mx-1 mt-3">
-      <table className="table table-striped table-dark">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th className="text-center">Fecha</th>
-            <th className="text-center">Total</th>
-            <th className="text-center">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentOrders.map((order, index) => {
-            return (
-              <UserOrdersRow
-                index={indexOfFirstRow + index}
-                key={order.id}
-                orders={order}
-              />
-            );
-          })}
-        </tbody>
-      </table>
-      <div className="pagination">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => paginate(currentPage - 1)}
-        >
-          Anterior
-        </button>
-        <span className="text-light bodyFont mx-2">
-          Página {currentPage} de {totalPages}
-        </span>
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() => paginate(currentPage + 1)}
-        >
-          Siguiente
-        </button>
-      </div>
-    </section>
+    <>
+      <section className="table-responsive mx-1 mt-3 tableH">
+        <table className="table table-dark mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th className="text-center">Fecha</th>
+              <th className="text-center">Total</th>
+              <th className="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentOrders.map((order, index) => {
+              return (
+                <UserOrdersRow
+                  index={indexOfFirstRow + index}
+                  key={order.orderId}
+                  orders={order}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
+      <section className="paginationS mt-3">
+        <div className="paginationB">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => paginate(currentPage - 1)}
+          >
+            Anterior
+          </button>
+          <span className="text-light bodyFont px-2">
+            Página {currentPage} de {totalPages}
+          </span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => paginate(currentPage + 1)}
+          >
+            Siguiente
+          </button>
+        </div>
+      </section>
+    </>
   );
 };
 

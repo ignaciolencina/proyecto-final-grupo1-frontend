@@ -7,7 +7,7 @@ const UserOrdersRow = ({ orders, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const formattedDate = orders.dateTime.split("T")[0];
-  
+
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
@@ -36,24 +36,25 @@ const UserOrdersRow = ({ orders, index }) => {
         id={`collapseRow-${index}`}
       >
         <td colSpan="4">
-          <div>
-            <p>
-              <strong>PRODUCTOS:</strong>
-            </p>
-            <ul>
-              {orders.products.map((product, i) => (
-                <li
-                  className="d-flex justify-content-between fst-italic"
-                  key={i}
-                >
-                  {product.name} - (${product.price}){" "}
-                  <span className="me-4 fst-normal">x {product.quantity}</span>
-                </li>
-              ))}
-            </ul>
-            <p>
-              <strong>Número de Mesa:</strong> {orders.tableNumber}
-            </p>
+          <div className="table-container">
+            <table className="table table-dark innerTable mb-0">
+              <thead>
+                <tr>
+                  <th className="ps-4">Producto</th>
+                  <th className="text-center">Precio unitario</th>
+                  <th className="text-end pe-4">Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.products.map((product, i) => (
+                  <tr key={i}>
+                    <td className="ps-4">{product.name}</td>
+                    <td className="text-center">${product.price}</td>
+                    <td className="text-end pe-4">x{product.quantity}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </td>
       </tr>
