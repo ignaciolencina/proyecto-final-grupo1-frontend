@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getOrdersFn } from "../../api/orders";
 import UserOrdersRow from "../../components/UserOrders/UserOrdersRow";
 import { useState } from "react";
+import Graphics from "../../components/AdminOrders/Graphics";
 
 const AdminHistoryView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -100,6 +101,10 @@ const AdminHistoryView = () => {
             Siguiente
           </button>
         </div>
+      </section>
+      <section className="mt-5">
+        <h3 className="bodyFont text-secondary text-center fs-6">Se recomienda ver la gráfica en una pantalla de computadora</h3>
+        <Graphics orders={orders}/>
       </section>
     </>
   );
