@@ -9,8 +9,10 @@ import { useSession } from "../../stores/useSession";
 
 const Cart = () => {
   const { cartItems, clearCart } = useCartStore();
-  const {tableNumber} = useSession();
-  
+  const { tableNumber, user } = useSession();
+
+  const currentDateTime = new Date().toDateString();
+
   const totalPrice = cartItems.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
@@ -20,7 +22,7 @@ const Cart = () => {
     onSuccess: () => {
       toast.dismiss();
       toast.success("Tu orden se envió correctamente");
-      
+
       clearCart();
     },
     onError: (e) => {
@@ -30,18 +32,24 @@ const Cart = () => {
   });
 
   const handleSubmit = (cartItems) => {
-    const orderData = {
-      tableNumber: tableNumber,
-      totalPrice: totalPrice, 
-      products: cartItems.map((item) => ({
-        name: item.name,
-        quantity: item.quantity,
-        price: item.price,
-      })),    
-    };
-
-    toast.loading("Enviando la orden");
-    postOrder(orderData);
+    if (cartItems.length !== 0) {
+      const orderData = {
+        dateTime: currentDateTime,
+        userId: user.id,
+        tableNumber: tableNumber,
+        totalPrice: totalPrice,
+        products: cartItems.map((item) => ({
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+      };
+      toast.loading("Enviando la orden");
+      postOrder(orderData);
+      console.log(orderData);
+    } else{
+      toast.error("No puede enviar ordenes vacías")
+    }
   };
 
   return (
@@ -82,7 +90,7 @@ const Cart = () => {
           <h2>${totalPrice}</h2>
         </div>
         <div className="buttonsResume">
-          <button className="buttonF" onClick={() => handleSubmit(cartItems)}>
+          <button className={`buttonF ${cartItems.length === 0 ? "notAvailable" : ""}`} onClick={() => handleSubmit(cartItems)}>
             FINALIZAR PEDIDO
           </button>
           <button className="buttonC" onClick={() => clearCart(cartItems)}>

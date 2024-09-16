@@ -1,118 +1,90 @@
-import { useState, Fragment } from "react";
-import {
-  Container,
-  Table,
-  Spinner,
-  Alert,
-  Button,
-  Collapse,
-  Card,
-} from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
-import { getOrdersFn } from "../../api/orders";
+import { getUserOrdersFn } from "../../api/orders";
+import { useSession } from "../../stores/useSession";
+import { Link } from "react-router-dom";
+
+import UserOrdersRow from "../../components/UserOrders/UserOrdersRow";
+
+import "../../components/UserOrders/tableStyle.css";
 
 const UserHistoryView = () => {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["orders"],
-    queryFn: getOrdersFn,
+  const { user } = useSession();
+
+  const userId = user.id;
+
+  const {
+    data: userOrders,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["userOrders", userId],
+    queryFn: () => getUserOrdersFn(userId),
   });
 
-  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  if (!userId) {
+    console.error("No se ha proporcionado el id del usuario");
+    return;
+  }
+
+  console.log(userOrders);
 
   if (isLoading) {
     return (
-      <Container className="text-center mt-5">
-        <Spinner animation="border" variant="primary" />
-      </Container>
+      <section className="text-center mt-5">
+        <Spinner animation="border" variant="danger" />
+      </section>
     );
   }
 
   if (isError) {
     return (
-      <Container className="text-center mt-5">
-        <Alert variant="danger">Error: {error.message}</Alert>
-      </Container>
+      <div className="mt-3 mx-2 alert alert-danger">
+        Lo sentimos, tus ordenes no estan disponibles{" "}
+        <span className="fs-2">
+          <i className="bi bi-emoji-frown"></i>
+        </span>
+      </div>
     );
   }
 
-  const orders = data?.data || [];
+  if (userOrders && userOrders.length === 0) {
+    return (
+      <div className="mt-3 mx-2 alert alert-danger">
+        No tienes pedidos por el momento.
+        <span className="fs-2">
+          <i className="bi bi-emoji-frown"></i>
+        </span>
+      </div>
+    );
+  }
 
   return (
-    <Container className="mt-4">
-      <h2 className="mb-4">Historial de Pedidos</h2>
-      {orders.length > 0 ? (
-        <div className="table-responsive">
-          <Table bordered hover striped>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Mesa</th>
-                <th>Precio Total</th>
-                <th>Detalles</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <Fragment key={order.id}>
-                  <tr>
-                    <td>{order.id}</td>
-                    <td>{order.tableNumber}</td>
-                    <td>${order.totalPrice}</td>
-                    <td>
-                      <Button
-                        variant="info"
-                        onClick={() =>
-                          setSelectedOrderId(
-                            order.id === selectedOrderId ? null : order.id
-                          )
-                        }
-                      >
-                        {order.id === selectedOrderId
-                          ? "Ocultar Detalles"
-                          : "Ver Detalles"}
-                      </Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan="5">
-                      <Collapse in={selectedOrderId === order.id}>
-                        <Card>
-                          <Card.Body>
-                            <h5>Detalles del Pedido</h5>
-                            {order.products.map((product, index) => (
-                              <Card className="mb-2" key={index}>
-                                <Card.Body>
-                                  <div className="d-flex justify-content-between">
-                                    <div>
-                                      <strong>Producto:</strong> {product.name}
-                                    </div>
-                                    <div>
-                                      <strong>Precio:</strong> ${product.price}
-                                    </div>
-                                    <div>
-                                      <strong>Cantidad:</strong>{" "}
-                                      {product.quantity}
-                                    </div>
-                                  </div>
-                                </Card.Body>
-                              </Card>
-                            ))}
-                          </Card.Body>
-                        </Card>
-                      </Collapse>
-                    </td>
-                  </tr>
-                </Fragment>
-              ))}
-            </tbody>
-          </Table>
-        </div>
-      ) : (
-        <Container className="text-center mt-5">
-          <Alert variant="info">No se encontraron pedidos.</Alert>
-        </Container>
-      )}
-    </Container>
+    <>
+      <section className="table-responsive mx-1 mt-3">
+        <table className="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th className="text-center">Fecha</th>
+              <th className="text-center">Total</th>
+              <th className="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userOrders.data.map((orders, index) => {
+              return (
+                <UserOrdersRow index={index} key={orders.id} orders={orders} />
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
+      <section className="redirectsButtons">
+        <Link className="button" to="/menu">VOLVER AL MENÚ</Link>
+        <Link className="button" to="/">INICIO</Link>
+      </section>
+    </>
   );
 };
 

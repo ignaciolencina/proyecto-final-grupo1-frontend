@@ -6,29 +6,29 @@ import Swal from "sweetalert2";
 const CardCart = ({ product }) => {
   const { addToTheCart, subFromTheCart, clearItem } = useCartStore();
 
-const handleSub = async (product) =>{
-  if(product.quantity === 1){
-    const action = await Swal.fire({
-      title: "Atención",
-      html: `¿Desea eliminar la última unidad de <b>"${product.name}"</b>?`,
-      background: "#000000",
-      color: "#ffffff",
-      imageUrl: `${product.imageUrl}`,
-      imageWidth: 150,
-      imageHeight: 150,
-      confirmButtonText: "Eliminar",
-      confirmButtonColor: "#EE2737",
-      cancelButtonText: "Cancelar",
-      showCancelButton: true,
-    });
+  const handleSub = async (product) => {
+    if (product.quantity === 1) {
+      const action = await Swal.fire({
+        title: "Atención",
+        html: `¿Desea eliminar la última unidad de <b>"${product.name}"</b>?`,
+        background: "#000000",
+        color: "#ffffff",
+        imageUrl: `${product.imageUrl}`,
+        imageWidth: 150,
+        imageHeight: 150,
+        confirmButtonText: "Eliminar",
+        confirmButtonColor: "#EE2737",
+        cancelButtonText: "Cancelar",
+        showCancelButton: true,
+      });
 
-    if (action.isConfirmed) {
+      if (action.isConfirmed) {
+        subFromTheCart(product);
+      }
+    } else {
       subFromTheCart(product);
     }
-  } else {
-    subFromTheCart(product)
-  }
-}
+  };
 
   const handleClear = async (product) => {
     const action = await Swal.fire({
@@ -71,11 +71,11 @@ const handleSub = async (product) =>{
         </div>
         <div className="cartButtons col-3 p-0">
           <div className="buttonsPM">
-            <button className="me-2" onClick={() => addToTheCart(product)}>
-              <i className="bi bi-plus-lg"></i>
-            </button>
-            <button onClick={() => handleSub(product)}>
+            <button className="me-2" onClick={() => handleSub(product)}>
               <i className="bi bi-dash-lg"></i>
+            </button>
+            <button onClick={() => addToTheCart(product)}>
+              <i className="bi bi-plus-lg"></i>
             </button>
           </div>
           <button className="mt-3 buttonQ" onClick={() => handleClear(product)}>
