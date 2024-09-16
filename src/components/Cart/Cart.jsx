@@ -32,21 +32,24 @@ const Cart = () => {
   });
 
   const handleSubmit = (cartItems) => {
-    const orderData = {
-      dateTime: currentDateTime,
-      userId: user.id,
-      tableNumber: tableNumber,
-      totalPrice: totalPrice,
-      products: cartItems.map((item) => ({
-        name: item.name,
-        quantity: item.quantity,
-        price: item.price,
-      })),
-    };
-
-    toast.loading("Enviando la orden");
-    postOrder(orderData);
-    console.log(orderData);
+    if (cartItems.length !== 0) {
+      const orderData = {
+        dateTime: currentDateTime,
+        userId: user.id,
+        tableNumber: tableNumber,
+        totalPrice: totalPrice,
+        products: cartItems.map((item) => ({
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+      };
+      toast.loading("Enviando la orden");
+      postOrder(orderData);
+      console.log(orderData);
+    } else{
+      toast.error("No puede enviar ordenes vacías")
+    }
   };
 
   return (
@@ -87,7 +90,7 @@ const Cart = () => {
           <h2>${totalPrice}</h2>
         </div>
         <div className="buttonsResume">
-          <button className="buttonF" onClick={() => handleSubmit(cartItems)}>
+          <button className={`buttonF ${cartItems.length === 0 ? "notAvailable" : ""}`} onClick={() => handleSubmit(cartItems)}>
             FINALIZAR PEDIDO
           </button>
           <button className="buttonC" onClick={() => clearCart(cartItems)}>
