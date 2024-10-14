@@ -6,12 +6,14 @@ const RailingText = (props) => {
   return (
     <div className="railing-container">
       <div className="railing-text text-light titleFont">
-        <span>{text1}</span>
-        <span className="textoRojo">{text2}</span>
-        <span>{text1}</span>
-        <span className="textoRojo">{text2}</span>
-        <span>{text1}</span>
-        <span className="textoRojo">{text2}</span>
+        {[...Array(10)].map((_, i) => (
+          <>
+            <span key={`text1-${i}`}>{text1}</span>
+            <span className="textoRojo" key={`text2-${i}`}>
+              {text2}
+            </span>
+          </>
+        ))}
       </div>
     </div>
   );

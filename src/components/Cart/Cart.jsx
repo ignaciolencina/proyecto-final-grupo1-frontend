@@ -46,7 +46,6 @@ const Cart = () => {
       };
       toast.loading("Enviando la orden");
       postOrder(orderData);
-      console.log(orderData);
     } else{
       toast.error("No puede enviar ordenes vacías")
     }

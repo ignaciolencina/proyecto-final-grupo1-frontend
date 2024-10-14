@@ -25,7 +25,7 @@ const Carousel = () => {
           <img
             alt="Bebidas"
             className="d-block w-100 carouselImage"
-            src="https://alafresca.com.ar/wp-content/uploads/2023/06/cerveza-negra.jpg"
+            src="https://s1.1zoom.me/big3/645/Beer_Black_background_Stemware_Foam_587332_3840x5760.jpg"
           />
           <div className="carousel-caption">
             <h5>HAPPY HOUR</h5>

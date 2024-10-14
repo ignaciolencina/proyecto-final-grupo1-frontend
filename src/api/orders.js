@@ -52,7 +52,6 @@ export const getUserOrdersFn = async (userId) => {
       },
     });
     const data = await res.json();
-    console.log(data)
 
     if (!res.ok) {
       throw new Error("Ocurrió un error leyendo las órdenes del usuario");
