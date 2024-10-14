@@ -69,9 +69,9 @@ const UserProfileForm = () => {
         lastname: data.lastname || "",
         email: data.email || "",
       };
-      console.log("Payload:", payload);
 
       putRegister([userToEdit.id, data]);
+      return payload;
     } else {
       console.error("No se encontró userToEdit o el id es invalido");
       toast.dismiss();

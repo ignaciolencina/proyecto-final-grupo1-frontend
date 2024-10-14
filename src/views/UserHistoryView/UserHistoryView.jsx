@@ -27,7 +27,6 @@ const UserHistoryView = () => {
     return;
   }
 
-  console.log(userOrders);
 
   if (isLoading) {
     return (

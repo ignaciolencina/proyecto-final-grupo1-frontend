@@ -7,8 +7,9 @@
   .railing-text {
     border: solid 2px;
     display: inline-block;
-    animation: scroll-text 15s linear infinite;
+    animation: scroll-text 10s linear infinite;
     font-size: 2rem;
+    white-space: nowrap;
   }
   
   .railing-text span {
@@ -20,7 +21,7 @@
       transform: translateX(0%);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-20vw);
     }
   }
   
@@ -31,14 +32,5 @@
 @media (width >= 550px) {
   .railing-text{
     font-size: 3rem;
-  }
-
-  @keyframes scroll-text {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-15%);
-    }
   }
 }
